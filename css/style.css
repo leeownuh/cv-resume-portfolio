@@ -54,6 +54,21 @@
 	--neutral-color :#f7f6f6;
 	--neutral-color2 :#2d2e36;
 }
+@keyframes slideInLeft {
+	from {
+	  transform: translateX(-100%);
+	  opacity: 0;
+	}
+	to {
+	  transform: translateX(0);
+	  opacity: 1;
+	}
+  }
+  
+  .slide-in-left {
+	animation: slideInLeft 1s ease-out forwards;
+  }
+  
 body {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
