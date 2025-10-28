@@ -1,1363 +1,619 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
+    <!-- Basic Page Needs -->
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Leona Kokerai | Jr. Penetration Tester </title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if IE ]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><![endif]-->
+    <title>© Leona Kokerai - “You can’t protect what you don’t understand.”</title>
+    <meta name="description"
+        content="Leona Kokerai ">
+    <meta name="keywords"
+        content="Portfolio, Leona Kokerai">
 
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <meta name="author" content="...">
 
-    <!-- Google fonts link here -->
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Open+Sans:ital,wght@0,400;0,500;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Oswald:wght@300;400;500;700&amp;family=Roboto+Condensed:wght@300;400;700&amp;display=swap"
-        rel="stylesheet">
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- All css here -->
-    <link rel="stylesheet" href="css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/all-animations.css">
-    <link rel="stylesheet" href="css/reset.min.css">
-    <link rel="stylesheet" href="css/leaflet.css">
-    <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Theme Style -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="css/odometer.min.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 
+    <!-- Font -->
+    <link rel="stylesheet" href="font/fonts.css">
 
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="icons/icomoon/style.css">
+
+    <!-- Favicon and Touch Icons  -->
+    <link rel="shortcut icon" href="images/favicon.svg">
+    <link rel="apple-touch-icon-precomposed" href="images/favicon.svg">
 </head>
 
 <body>
-    <div id="preloader">
-        <div id="loading">
-            <div id="loading-center">
-                <div id="loading-center-absolute">
-                    <div class="object" id="object_one"></div>
-                    <div class="object" id="object_two"></div>
-                    <div class="object" id="object_three"></div>
-                </div>
+    <!-- Cursor Animation -->
+    <div class="cursor1"></div>
+    <div class="cursor2"></div>
+
+    <div class="preloader overflow-hidden">
+        <div class="site-name"><span>Leona Kokerai - Jr. Penetration Tester</span></div>
+        <div class="preloader-gutters">
+            <div class="bar">
+                <div class="inner-bar"></div>
+            </div>
+            <div class="bar">
+                <div class="inner-bar"></div>
+            </div>
+            <div class="bar">
+                <div class="inner-bar"></div>
+            </div>
+            <div class="bar">
+                <div class="inner-bar"></div>
+            </div>
+            <div class="bar">
+                <div class="inner-bar"></div>
+            </div>
+            <div class="bar">
+                <div class="inner-bar"></div>
+            </div>
+            <div class="bar">
+                <div class="inner-bar"></div>
+            </div>
+            <div class="bar">
+                <div class="inner-bar"></div>
             </div>
         </div>
-    </div><!-- /preloader -->
+    </div>
 
-    <div class="body-wrapper over-hidden position-relative dsigner-bg">
+    <!-- wrapper -->
+    <div id="wrapper" class="bg-color-secondary counter-scroll">
 
-        <div class="container p-0">
+        <!-- header -->
+        <Header class="header-2 header-fixed">
+            <div class="container-2 d-flex justify-content-between">
+                <div class="header-left logo">
+                    <a href="#" class="text-white">
+                        <img src="images/logo/logo-2.png" alt="">
+                    </a>
+                </div>
 
-            <!--  ====== header-area-start
-            ===================================================  -->
-            <header class="header-padding">
-                <div class="row align-items-center">
+                <div class="header-right d-flex gap_8">
 
-                    <!-- Left Side: TryHackMe Badge -->
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 text-left">
-                        <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3063434"
-                            style="border:none; width:100%; height:120px;"></iframe>
+                    <div class="tag-title  d-inline-flex align-items-center gap_8 md-hide">
+                        <span class="point"></span>
+                        <p class="text-body-2 text_white">Available for work</p>
                     </div>
+                    <a href="#" class="link-no-action side-toggle  link-no-action">
+                        <div class="icon">
+                            <span class="top"></span>
+                            <span class="middle"></span>
+                            <span class="bottom"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </Header>
+        <!-- /header -->
 
-                    <!-- Right Side: Download CV -->
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 text-right">
-                        <div class="my-btn d-inline-block">
-                            <a href="images/resume/resume_leona_kokerai.pdf"
-                                class="btn theme-bg text-capitalize f-700 mb-0"
-                                download="resume_leona_kokerai.pdf">Download My CV</a>
+        <!-- header -->
+        <div class="page-title">
+            <div class="tf-container">
+                <div class="hero-banner">
+                    <div class="image">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto tf-animate-1">
+                                <img loading="lazy" width="695" height="854" src="images/hero/hero-4.jpg" alt="Image">
+                            </div>
                         </div>
                     </div>
 
-                </div><!-- /row -->
-            </header>
-
-            <div id="content">
-
-                <!-- profile 
-                ================================================== -->
-                <div id="profile"
-                    class="hero-area hero-area-height border-radius12 over-hidden bg-cover position-relative"
-                    data-background="images/hero/hero-bg-img.jpg">
-
-                    <div id="scene" class="parallax position-absolute w-100 h-100 z-index11">
-                        <img data-depth="0.20" class="hero-shape hero-shape1 position-absolute d-none d-md-inline-block"
-                            src="images/hero/shape1.png" alt="#"><!-- /hero-shape1 -->
-                        <img data-depth="0.20" class="hero-shape hero-shape2 position-absolute d-none d-md-inline-block"
-                            src="images/hero/shape2.png" alt="#"><!-- /hero-shape2 -->
-                    </div><!-- /parallax -->
-
-                    <div
-                        class="d-flex align-items-center justify-content-center w-100 h-100 z-index11 position-relative">
-                        <div class="row align-items-center justify-content-center py-md-3 w-100">
-
-                            <div
-                                class="col-xl-6 col-lg-5 col-md-6 col-sm-11 col-11 d-flex justify-content-center pr-xl-0">
-                                <div
-                                    class="hero-img-wrapper w-100 d-flex align-items-center justify-content-center position-relative">
-                                    <div class="hero-img w-100 text-center">
-                                        <img class="rounded-circle" src="images/hero/hero-img1.jpg" alt="hero img">
-                                    </div>
-                                </div><!-- /hero-left -->
-                            </div><!-- /col -->
-
-                            <div class="col-xl-6 col-lg-7 col-md-12 col-sm-12 col-12">
-                                <div class="hero-content mt--20 position-relative">
-                                    <h1 class="text-white font-family-CircularStdBold mb-22 slide-in-left" style="animation-delay: 0.2s;">
-                                        Leona <span class="d-block"> Kokerai</span>
-                                      </h1>
-                                      
-                                      <div class="d-flex align-items-center justify-content-center hero-text-bottom">
-                                        <h3 class="text-white slide-in-left" style="animation-delay: 0.5s;">
-                                          Web Application Security <br> Linux & Windows System Administration<br> Digital Forensics
-                                        </h3>
-                                        <div
-                                            class="circular-btn-wrapper d-inline-block position-relative cursor-pointer transition5">
-                                            <img class="circular-btn-text rotate-animation d-inline-block"
-                                                src="images/hero/circular-btn.png" alt="about image 2">
-                                            <a href="#" class="circular-btn-icon position-absolute transition5">
-                                                <img class="d-icon d-print-inline-block transition5"
-                                                    src="images/hero/right-up.png" alt="about image 3">
-                                            </a>
-                                        </div><!-- /my-btn -->
-                                    </div>
-                                </div><!-- /hero-right -->
-                            </div><!-- /col -->
-
-                        </div><!-- /row -->
+                    <div class="content-wrap">
+                        <div class="content">
+                            <div class="hero-title text_white split-text split-lines-rotation-x">
+                                I'm Leona Kokerai
+                                <div class="item text-button d-none d-sm-flex animateFade" data-fade-from="right"
+                                    data-delay="1">
+                                    Final Year Cybersecurity Student </div>
+                            </div>
+                            <p class="desc font2 split-text split-lines-transform   ">
+                                I’m an aspiring Ethical Hacker passionate about learning how systems can be tested,
+                                broken, and ultimately secured. </p>
+                            <a href="#" class="tf-btn btn-bg-primary btn-hover-animation-fill animateFade">
+                                <span>
+                                    <i class="icon-ArrowRight arr-1"></i>
+                                    <span class="btn-text h5 text_secondary-color">Hire Me</span>
+                                    <i class="icon-ArrowRight arr-2"></i>
+                                </span>
+                                <span class="bg-effect"></span>
+                            </a>
+                        </div>
                     </div>
+                    <div class="content-wrap-2">
+                        <div class="box-title-2">
+                            <div class="hero-title-2 text-clip split-text split-lines-rotation-x">
+                                Jr. Penetration<br>
+                                Tester
+                            </div>
+                            <p class="sub text-white   split-text split-lines-transform">
+                                Digital Forensics Enthusiast
+                            </p>
+                        </div>
+                    </div>
+                    <div class="btn_wrapper animateFade">
+                        <a href="#project" class="btn-view-all md-hide btn-item btn-hover btn-hover-animation-fill">
 
-                </div><!-- /profile -->
+                            <span class="text h5 text-center">
+                                View all <br>
+                                PROJECT
+                            </span>
+                            <i class="icon icon-ArrowDown"></i>
+                            <span class="bg-effect"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-partner-infinity ">
+                <div class="wrap-marquee bg-primary-color marquee-1">
+                    <div class="infiniteslide " data-clone="2" data-style="left">
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text-border-2">Jr. Penetration Tester</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">2025 portfolio</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text-border-2">Jr. Penetration Tester</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">2025 portfolio</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
+                        </div>
+                        <div class="marquee-item ">
+                            <h1 class="text-border-2">Jr. Penetration Tester</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">2025 portfolio</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrap-marquee bg-white-color marquee-2">
+                    <div class="infiniteslide " data-clone="2" data-style="right">
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text-border-2">Jr. Penetration Tester</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">2025 portfolio</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text-border-2">Jr. Penetration Tester</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">2025 portfolio</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
+                        </div>
+                        <div class="marquee-item ">
+                            <h1 class="text-border-2">Jr. Penetration Tester</h1>
+                        </div>
+                        <div class="marquee-item">
+                            <h1 class="text_secondary-color">2025 portfolio</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /header -->
 
+        <!-- main-content -->
+        <div class="main-content section-onepage">
 
-                <!--  ====== menu-start
-                ===================================================  -->
-                <nav class="menu">
-                    <ul class="tabs d-flex align-items-center justify-content-center">
-                        <li class="tmenu">
-                            <a href="#profile" class="profile tabs-home">
-                                <span>Home</span>
-                            </a>
-                        </li>
-                        <li class="tmenu">
-                            <a href="#about" class="about">
-                                <span>About</span>
-                            </a>
-                        </li>
-                        <li class="tmenu">
-                            <a href="#resume" class="resume">
-                                <span>Resume</span>
-                            </a>
-                        </li>
+            <!-- section-about -->
+            <div id="about" class="section-about-2 section">
+                <div class="tf-container">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="heading-title-2">
+                                <div class="d-flex align-items-center gap_7">
+                                    <div class="text-title text_white text-uppercase">about me</div>
+                                    <i class="icon-ArrowUpRight"></i>
+                                </div>
+                                <div class="cycle-line"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="scroll-effect mb_35">
+                                <h3 class="text-change-color reveal-type">Driven by curiosity and continuous learning, I
+                                    aim to bridge the gap between system performance and security assurance — ensuring
+                                    reliability, compliance, and resilience in every environment I manage.</h3>
+                                <div class="line">
+                                    <img src="images/section/line.png" alt="line">
+                                </div>
+                                <p class="font2 desc">I know that every organization needs someone like me ; a
+                                    professional who not only understands technical concepts but can communicate
+                                    them clearly. With strong adaptability, a relentless zeal to learn, and a
+                                    problem-solving mindset, I bring both technical excellence and human connection
+                                    to the teams I join. My goal is to add value, inspire growth, and leave a
+                                    measurable impact wherever I go.</p>
+                            </div>
+                            <div>
+                                <p class="text_white text-uppercase">“You can’t protect what you don’t understand.”</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-xxl-10">
+                            <div class="box-about">
+                                <div class="thumbs scale-img">
+                                    <img loading="lazy" decoding="async" width="325" height="436"
+                                        src="images/section/about-2.jpg" alt="about">
+                                </div>
+                                <div class="content">
 
-                        <li class="tmenu">
-                            <a href="#contact" class="contact">
-                                <span>Contact</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav><!-- /menu --> <!-- about-page 
-                ================================================== -->
-                <div id="about" class="page-margin-top">
-                    <div class="container p-0">
+                                    <h2 class="text-4xl font-bold text-cyan-400 mb-3">
+                                        Certifications & Professional Qualifications
+                                    </h2>
+                                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                                        Proof of my commitment to continuous learning and hands-on expertise.
+                                        Every certification I earn reflects persistence, curiosity, and a passion for
+                                        mastering cybersecurity.
+                                    </p>
+                                    <p class="italic text-cyan-300 mt-3">“Learning is my weapon. Persistence is my
+                                        advantage.”</p>
+                                    <div class="wrap-couter d-flex">
 
-                        <div class="content-wrapper-padding white-bg border-radius12 position-relative">
-
-                            <!-- about-area -->
-                            <div class="about-content-area section-border-bottom pb-65">
-
-                                <div class="row justify-content-between title-margin mb-45">
-                                    <div class="col-xl-6 col-lg-5  col-md-4 col-sm-12 col-12 d-flex align-items-center">
-                                        <div class="title">
-                                            <h2 class="position-relative pl-25">About Me</h2>
-                                        </div><!-- /title -->
-                                    </div><!-- /col -->
-                                    <div class="col-xl-6  col-lg-7 col-md-8  col-sm-12 col-12 text-right">
-                                        <div class="title-content text-right">
-                                            
-                                                
-                                        </div><!-- /title-content -->
-                                    </div><!-- /col -->
-                                </div><!-- /row -->
-
-                                <div class="row mt-lg-0">
-
-                                    <div class="col-xl-4  col-lg-5  col-md-6 col-sm- col-">
-                                        <div class="about-img" data-tilt data-tilt-max="10">
-                                            <img src="images/about/personal-img.jpg" alt="Leona Kokerai">
-                                        </div><!-- /about img -->
-                                    </div><!-- /col -->
-
-                                    <div class="col-xl-6  col-lg-6  col-md-6  col-sm- col- d-none d-md-block d-xl-none">
-                                        <div class="about-info pl-40">
-                                            <ul class="d-flex align-items-center mb-35">
-                                                <li class="pr-20">
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Name</span>
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Email</span>
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Phone</span>
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Address</span>
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Education</span>
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Languages</span>
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Nationality</span>
-                                                    <span
-                                                        class="font-family-CircularStdBold primary-color d-block mb-20">Freelance</span>
-                                                </li>
-                                                <li>
-                                                    <span class="d-block mb-20">Leona Kokerai</span>
-                                                    <span class="d-block mb-20">leonakokerai@outlook.com</span>
-                                                    <span class="d-block mb-20">+91-8699758198</span>
-                                                    <span class="d-block mb-20">Punjab, India</span>
-                                                    <span class="d-block mb-20">B.Sc Hons in Computer Science
-                                                        (Cybersecurity)</span>
-                                                    <span class="d-block mb-20">English, Shona</span>
-                                                    <span class="d-block mb-20">Zimbabwean</span>
-                                                    <span class="d-block mb-20">Available</span>
-                                                </li>
-                                            </ul>
-                                            <div class="my-btn d-inline-block">
-                                                <a href="#contact" class="btn theme-bg text-capitalize f-700">Contact
-                                                    Me</a>
-                                            </div><!-- /btn -->
-                                        </div><!-- /about info -->
-                                    </div><!-- /col -->
-
-                                    <div class="col-xl-8  col-lg-12  col-md-12  col-sm- col-">
-                                        <div class="row">
-                                            <div class="col-xl-6  col-lg-12  col-md-  col-sm- col- pr-lg-0">
-                                                <div class="about-content mt--5"><p class="text-left"><strong>Cybersecurity-Focused Computer Science Undergraduate</strong> passionate about offensive and defensive security, with hands-on experience across multiple domains of cybersecurity with objective of growing into a cybersecurity professional who builds resilient systems, solves security challenges, and contributes to both blue and red team efforts.<br>
-                                                    <strong>Core Skills:</strong><br>
-                                                    Penetration Testing & Vulnerability Assessment (Kali Linux, Metasploit, Burp Suite),
-                                                    Network Scanning & Reconnaissance (<code>Nmap</code>, <code>Netcat</code>, <code>Wireshark</code>),
-                                                    Password Cracking & Enumeration (Hydra, John the Ripper, Gobuster),
-                                                    Scripting & Automation (<code>Python</code>, <code>Bash</code>)
-                                                    <strong>Defensive Security:</strong> Log Analysis, Threat Detection, SIEM (Splunk, Logwatch), Network Hardening & Firewall Configuration (<code>iptables</code>, <code>ufw</code>)<br>
-                                                    <strong>Active Learner:</strong><br>
-                                                    Practices on <code>TryHackMe</code>, <code>Hack The Box</code>, and <code>CTF platforms</code>, applies real-world attack/defense strategies in labs and projects.<br>
-                                                    </p>
-                                                </div><!-- /about-content -->
-                                            </div><!-- /col -->
-
-                                            <div class="col-xl-6  col-lg-  col-md-  col-sm- col- d-md-none d-xl-block">
-                                                <div class="about-info pl-40">
-                                                    <ul class="d-flex align-items-center mb-35">
-                                                        <li class="pr-20">
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Name</span>
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Email</span>
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Phone</span>
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Address</span>
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Education</span>
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Languages</span>
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Nationality</span>
-                                                            <span
-                                                                class="font-family-CircularStdBold primary-color d-block mb-20">Freelance</span>
-                                                        </li>
-                                                        <li class="info-details">
-                                                            <span class="d-block mb-20">Leona Kokerai</span>
-                                                            <span class="d-block mb-20">leonakokerai@outlook.com</span>
-                                                            <span class="d-block mb-20">+91-8699758198</span>
-                                                            <span class="d-block mb-20">India</span>
-                                                            <span class="d-block mb-20">B.Sc Hons in Computer Science
-                                                                (Cybersecurity)</span>
-                                                            <span class="d-block mb-20">Zimbabwean</span>
-                                                            <span class="d-block mb-20">Available</span>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="my-btn d-inline-block">
-                                                        <a href="#contact"
-                                                            class="btn theme-bg text-capitalize f-700">Contact Me</a>
-                                                    </div><!-- /btn -->
-                                                </div><!-- /about info -->
-                                            </div><!-- /col -->
-                                        </div><!-- /row -->
-                                    </div><!-- /container -->
-
-                                </div><!-- /row -->
-
-                            </div><!-- /about-area -->
-
-                            <!-- service-area -->
-                            <div class="service-content-area section-border-bottom mt-60 pb-25">
-
-                                <div class="row justify-content-between title-margin mb-45">
-                                    <div class="col-xl-6 col-lg-5 col-md-4 col-sm-12 col-12 d-flex align-items-center">
-                                        <div class="title">
-                                            <h2 class="position-relative pl-25">What I Do</h2>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-7 col-md-8 col-sm-12 col-12 text-right">
-                                        <div class="title-content text-right">
-                                            <p class="text-left">
-                                                As a Computer Science (Cybersecurity) student and TryHackMe explorer, I
-                                                provide services and develop skills across cybersecurity, ethical
-                                                hacking, secure web development, and digital content creation—grounded
-                                                in continuous learning and hands-on practice.
+                                        <div class="counter-item style-3 counter-1">
+                                            <h3 class="text-xl font-semibold text-cyan-400 mb-3">Formal Education</h3>
+                                            <p class="text-gray-300">
+                                                <span class="font-medium">BSc Hons. Computer
+                                                    Science-Cyber Security
+                                                    2026,</span>LPU
                                             </p>
+                                        </div>
+                                        <div class="counter-item style-3 counter-2">
+                                            <h3 class="text-xl font-semibold text-cyan-400 mb-3">TryHackMe
+                                                Certifications</h3>
+                                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                                <li>
+                                                    Jr Penetration Tester Certificate</li>
+                                                <li>
+                                                    Cyber Security 101 Certificate</li>
+                                                <li>
+                                                    Pre Security Certificate</li>
+                                            </ul>
+                                        </div>
+                                        <div class="counter-item style-3 counter-3">
+                                            <h3 class="text-xl font-semibold text-cyan-400 mb-3">Professional
+                                                Development</h3>
+                                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                                <li>CompTIA Security+ (In Progress)</li>
+                                                <li>CompTIA Network+ (In Progress)</li>
+                                                <li>QuickHeal Digital Forensics</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row mt-1 mt-md-0">
-
-                                    <!-- Cybersecurity & Ethical Hacking -->
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm- col-">
-                                        <div
-                                            class="single-service neutral-bg border-radius12 pl-50 pr-50 pt-60 pb-45 mb-45 mr-8">
-                                            <div class="service-ser-icon pl-15 position-relative mb-40">
-                                                <img class="position-relative z-index1"
-                                                    src="images/about/service-icon2.png" alt="Cybersecurity">
-                                            </div>
-                                            <div class="service-text">
-                                                <h4 class="mb-30">Cybersecurity & Ethical Hacking</h4>
-                                                <p class="mb-0">Conducting security assessments, penetration testing,
-                                                    and vulnerability analysis using tools like Nmap, Burp Suite, and
-                                                    Metasploit. Cybersecurity 101 certified on TryHackMe with a focus on
-                                                    real-world attack simulation.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Secure Web Development -->
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm- col-">
-                                        <div
-                                            class="single-service neutral-bg border-radius12 pl-50 pr-50 pt-60 pb-45 mb-45 ml-8">
-                                            <div class="service-ser-icon pl-15 position-relative mb-40">
-                                                <img class="position-relative z-index1"
-                                                    src="images/about/service-icon1.png" alt="Web Development">
-                                            </div>
-                                            <div class="service-text">
-                                                <h4 class="mb-30">Secure Web Development</h4>
-                                                <p class="mb-0">Building and securing dynamic websites using Laravel,
-                                                    MySQL, and Tailwind CSS, with a security-first approach to
-                                                    authentication, input validation, and session management.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Network Monitoring & IT Support -->
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm- col-">
-                                        <div
-                                            class="single-service neutral-bg border-radius12 pl-50 pr-50 pt-60 pb-45 mb-45 ml-8">
-                                            <div class="service-ser-icon pl-15 position-relative mb-40">
-                                                <img class="position-relative z-index1"
-                                                    src="images/about/service-icon4.png" alt="Networking">
-                                            </div>
-                                            <div class="service-text">
-                                                <h4 class="mb-30">Network Monitoring & IT Support</h4>
-                                                <p class="mb-0">Providing system diagnostics and network troubleshooting
-                                                    with tools like Wireshark and Packet Tracer, supporting reliable
-                                                    connectivity and detecting suspicious activity in real time.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Linux & System Hardening -->
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm- col-">
-                                        <div
-                                            class="single-service neutral-bg border-radius12 pl-50 pr-50 pt-60 pb-45 mb-45 mr-8">
-                                            <div class="service-ser-icon pl-15 position-relative mb-40">
-                                                <img class="position-relative z-index1"
-                                                    src="images/about/service-icon5.png" alt="Linux Security">
-                                            </div>
-                                            <div class="service-text">
-                                                <h4 class="mb-30">Linux & System Hardening</h4>
-                                                <p class="mb-0">Securing Linux systems through firewall configuration,
-                                                    user permissions, and scripting automation. Practicing system
-                                                    monitoring and log analysis with Bash scripting and audit tools.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Digital Forensics & Analysis -->
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm- col-">
-                                        <div
-                                            class="single-service neutral-bg border-radius12 pl-50 pr-50 pt-60 pb-45 mb-45 ml-8">
-                                            <div class="service-ser-icon pl-15 position-relative mb-40">
-                                                <img class="position-relative z-index1"
-                                                    src="images/about/service-icon6.png" alt="Forensics">
-                                            </div>
-                                            <div class="service-text">
-                                                <h4 class="mb-30">Digital Forensics & Analysis</h4>
-                                                <p class="mb-0">Exploring forensic tools like Autopsy and Volatility for
-                                                    evidence extraction and memory analysis. Learning to trace digital
-                                                    footprints and conduct incident response investigations.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Tech Content Creation -->
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm- col-">
-                                        <div
-                                            class="single-service neutral-bg border-radius12 pl-50 pr-50 pt-60 pb-45 mb-45 ml-8">
-                                            <div class="service-ser-icon pl-15 position-relative mb-40">
-                                                <img class="position-relative z-index1"
-                                                    src="images/about/service-icon3.png" alt="Content Creation">
-                                            </div>
-                                            <div class="service-text">
-                                                <h4 class="mb-30">Tech Content Creation</h4>
-                                                <p class="mb-0">Writing technical blogs and creating educational
-                                                    graphics to explain cybersecurity topics, helping others understand
-                                                    concepts like network scanning, brute force attacks, and protocol
-                                                    security.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div><!-- /row -->
-
-                            </div><!-- /service-area -->
-
-
-
-
-                        </div><!-- /content-wrapper-padding -->
-
-                    </div><!-- /container -->
-                </div><!-- /about-page -->
-
-
-                <!-- resume-page 
-                ================================================== -->
-                <div id="resume" class="page-margin-top">
-                    <div class="container p-0">
-
-                        <div
-                            class="content-wrapper-padding white-bg content-wrapper-padding white-bg border-radius12 position-relative">
-
-                            <!-- experience-education-area -->
-                            <div class="experience-education-content-area section-border-bottom pb-65">
-
-                                <div class="row justify-content-between title-margin mb-45">
-                                    <div class="col-xl-6 col-lg-5 col-md-4 col-sm-12 col-12 d-flex align-items-center">
-                                        <div class="title">
-                                            <h2 class="position-relative pl-25">Resume</h2>
-                                        </div><!-- /title -->
-                                    </div><!-- /col -->
-                                    <div class="col-xl-6 col-lg-7 col-md-8 col-sm-12 col-12 text-right">
-                                        <div class="title-content text-right">
-                                            <p class="text-left">A summary of my professional experience and academic
-                                                background, showcasing my expertise and achievements.</p>
-                                        </div><!-- /title-content -->
-                                    </div><!-- /col -->
-                                </div><!-- /row -->
-
-                                <div class="row">
-                                    <!-- Work Experience -->
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                        <div class="experience-wrapper over-hidden pr-35">
-                                            <h3 class="mb-30">Work Experience</h3>
-                                            <ul>
-                                                <li class="single-experience position-relative pl-35 mb-25">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-start flex-column-reverse flex-md-row mb-20">
-                                                        <div class="experience-info">
-                                                            <h4 class="mb-12">Information Communication Technology
-                                                                Administrator</h4>
-                                                            <span class="mb-12"><span
-                                                                    class="secondary-color pr-05 d-inline-block">Eduflex
-                                                                    Academy</span> (2024 - Present)</span>
-                                                        </div>
-                                                        <img src="images/resume/eduflex.png" alt="Eduflex"
-                                                            class="d-inline-block">
-                                                    </div>
-                                                    <p>Managing website design, social media content creation,
-                                                        marketing, and company branding. Applied network and web
-                                                        security methodologies to ensure system integrity.</p>
-                                                </li>
-
-                                                <li class="single-experience position-relative pl-35 mb-25">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-start flex-column-reverse flex-md-row mb-20">
-                                                        <div class="experience-info">
-                                                            <h4 class="mb-12">Lead Graphic Designer</h4>
-                                                            <span class="mb-12"><span
-                                                                    class="secondary-color d-inline-block pr-05">Agri-Avenir</span>
-                                                                (2021 - 2024)</span>
-                                                        </div>
-                                                        <img style="width:250px;Height:80px;"
-                                                            src="https://www.agriavenir.com/assets/images/logo.png"
-                                                            alt="Agri-Avenir" class="d-inline-block">
-                                                    </div>
-                                                    <p>Designed and executed digital marketing campaigns while managing
-                                                        multiple digital accounts. Participated in technical discussions
-                                                        to aid system design and troubleshooting.</p>
-                                                </li>
-
-                                                <li class="single-experience position-relative pl-35">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-start flex-column-reverse flex-md-row mb-20">
-                                                        <div class="experience-info">
-                                                            <h4 class="mb-12">Junior Web Developer</h4>
-                                                            <span class="mb-12"><span
-                                                                    class="secondary-color pr-05 d-inline-block">Oyannah
-                                                                    Academy</span> (2021 - 2024)</span>
-                                                        </div>
-                                                        <img src="images/resume/oyannah.png" alt="Oyannah"
-                                                            class="d-inline-block">
-                                                    </div>
-                                                    <p>Collaborated with senior developers to update and maintain the
-                                                        company website. Managed website design, created content,
-                                                        handled SEO marketing, and company branding.</p>
-                                                </li>
-                                            </ul>
-                                        </div><!-- /experience img -->
-                                    </div><!-- /col -->
-
-                                    <!-- Education -->
-                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                        <div class="education-wrapper over-hidden pl-35">
-                                            <h3 class="mb-30">Education</h3>
-                                            <ul>
-                                                <li class="single-experience position-relative pl-35 mb-25">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-start flex-column-reverse flex-md-row mb-20">
-                                                        <div class="experience-info">
-                                                            <h4 class="mb-12">Bachelor of Science Honours in Computer
-                                                                Science (Cyber Security)</h4>
-                                                            <span class="secondary-color mb-12"><span
-                                                                    class="d-inline-block pr-05">Lovely Professional
-                                                                    University</span> (Aug, 2020 - Present)</span>
-                                                        </div>
-                                                        <img src="https://www.lpu.in/landing-pages/lp-resources/img/lpu-logo/lpu-logo.svg"
-                                                            alt="LPU" class="d-inline-block">
-                                                    </div>
-                                                    <p>Currently pursuing with a CGPA of 9.22, specializing in Cyber
-                                                        Security.</p>
-                                                </li>
-
-                                                <li class="single-experience position-relative pl-35 mb-25">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-start flex-column-reverse flex-md-row mb-20">
-                                                        <div class="experience-info">
-                                                            <h4 class="mb-12">Matriculation</h4>
-                                                            <span class="mb-12"><span
-                                                                    class="secondary-color pr-05 d-inline-block">Hoerskool
-                                                                    Ben Viljoen</span> (April, 2018 - March,
-                                                                2020)</span>
-                                                        </div>
-                                                        <img src="https://th.bing.com/th/id/OIP.ozEekDaOveZfQ0lDv8zLogAAAA?rs=1&pid=ImgDetMain"
-                                                            alt="Ben Viljoen" class="d-inline-block">
-                                                    </div>
-                                                    <p>Achieved 75%, recognized as the Best Information Technology
-                                                        Student and part of the Sekhukhune District Top 100.</p>
-                                                </li>
-
-                                                <li class="single-experience position-relative pl-35">
-                                                    <div
-                                                        class="d-flex justify-content-between align-items-start flex-column-reverse flex-md-row mb-20">
-                                                        <div class="experience-info">
-                                                            <h4 class="mb-12">Intermediate</h4>
-                                                            <span class="mb-12"><span
-                                                                    class="secondary-color pr-05 d-inline-block">Laerskool
-                                                                    Marble Hall</span> (Jan, 2016 - Dec, 2017)</span>
-                                                        </div>
-                                                        <img style="width:80px;Height:87px;"
-                                                            src="https://www.dreamanddraw.co.za/wp-content/uploads/2023/05/skoolwapen.jpg"
-                                                            alt="Marble Hall" class="d-inline-block">
-                                                    </div>
-                                                    <p>Achieved 85%, excelling in academics and extracurricular
-                                                        activities.</p>
-                                                </li>
-                                            </ul>
-                                        </div><!-- /education img -->
-                                    </div><!-- /col -->
-                                </div><!-- /row -->
-
-                            </div><!-- /experience-education-area -->
-
-                            <!-- awards-area -->
-                            <div class="awards-area section-border-bottom mt-65 pb-25">
-
-                                <div class="row justify-content-between title-margin mb-45">
-                                    <div class="col-xl-6 col-lg-5  col-md-4 col-sm-12 col-12 d-flex align-items-center">
-                                        <div class="title">
-                                            <h2 class="position-relative pl-25">Certificates and Certifications</h2>
-                                        </div><!-- /title -->
-                                    </div><!-- /col -->
-                                    <div class="col-xl-6  col-lg-7 col-md-8  col-sm-12 col-12 text-right">
-                                        <div class="title-content text-right">
-                                            <p class="text-left">A collection of my completed certifications showcasing
-                                                my continuous learning, hands-on experience, and dedication to mastering
-                                                cybersecurity and technology skills.</p>
-                                        </div><!-- /title-content -->
-                                    </div><!-- /col -->
-                                </div><!-- /row -->
-
-                                <div class="award-wrapper">
-                                    <div class="row align-items-start theme-border-top award-margin pb-1">
-                                        <div class="col-xl-2  col-lg-2  col-md-2  col-sm-11 col-12 pr-md-2">
-                                            <div class="award-logo mt-1 mb-20">
-                                                <a href="#" class="d-block">
-                                                    <img src="images\resume\THM-JRZP2A2XPE_page-0001.jpg"
-                                                        alt="award logo 1">
-                                                </a>
-                                            </div><!-- /award-logo -->
-                                        </div><!-- /col -->
-                                        <div class="col-xl-3  col-lg-3  col-md-3  col-sm-6 col-12 pr-0">
-                                            <div class="award-content">
-                                                <h4 class="mb-10 f-400">Pre Security</h4>
-                                                <span>2025</span>
-                                            </div><!-- /award-content -->
-                                        </div><!-- /col -->
-                                        <div class="col-xl-3  col-lg-3  col-md-3  col-sm-6 col-12 pr-0">
-                                            <div class="award-content">
-                                                <h4 class="mb-10 f-400">TryHackMe </h4>
-                                                <span>#CyberSecurity #TryHackMe #PreSecurity #LearningJourney
-                                                    #CyberSecBeginner #Infosec #Linux #Networking #EthicalHacking</span>
-                                            </div><!-- /award-content -->
-                                        </div><!-- /col -->
-                                        <div class="col-xl-4  col-lg-4  col-md-4  col-sm-12 col-12">
-                                            <div class="award-content mt--10">
-
-                                                <p class="text-left">Completed the Pre-Security Learning Path on
-                                                    TryHackMe!<br>
-                                                    From networking to Linux & Windows fundamentals, this path laid a
-                                                    strong foundation in cybersecurity.
-                                                    5 Modules | 18 Hands-on Labs | Beginner-friendly and incredibly
-                                                    practical!
-
-                                                </p>
-                                            </div><!-- /award-content -->
-                                        </div><!-- /col -->
-                                    </div><!-- /row -->
-
-                                </div><!-- /award-wrapper -->
-
-                            </div><!-- /awards-area -->
-
-                            <!-- skill-area -->
-                            <div class="skill-content-area section-border-bottom mt-65 pb-35">
-
-                                <div class="row justify-content-between title-margin mb-45">
-                                    <div class="col-xl-6 col-lg-5 col-md-4 col-sm-12 col-12 d-flex align-items-center">
-                                        <div class="title">
-                                            <h2 class="position-relative pl-25">My Skills</h2>
-                                        </div><!-- /title -->
-                                    </div><!-- /col -->
-                                    <div class="col-xl-6 col-lg-7 col-md-8 col-sm-12 col-12 text-right">
-                                        <div class="title-content text-right">
-                                            <p class="text-left">A comprehensive overview of my technical,
-                                                cybersecurity, creative, and business skills that showcase my expertise
-                                                and professional capabilities.</p>
-                                        </div><!-- /title-content -->
-                                    </div><!-- /col -->
-                                </div><!-- /row -->
-
-                                <div class="row">
-                                    <!-- Technical Skills -->
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 skill-bar-left pr-xl-5">
-                                        <h3 class="mb-30">Technical Skills</h3>
-                                        <div class="skill-bar-area over-hidden pb-70">
-                                            <div class="progess-wrapper">
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Python</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 95%;" aria-valuenow="95" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>95%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">C & C++</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 95%;" aria-valuenow="95" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>95%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Delphi (Rapid Application Development)</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 90%;" aria-valuenow="90" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>90%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">HTML & CSS</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 95%;" aria-valuenow="95" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>95%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Prolog (Logical Programming)</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 85%;" aria-valuenow="85" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>85%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">MySQL (Database Management)</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 95%;" aria-valuenow="95" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>95%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">PHP & Laravel</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 87%;" aria-valuenow="87" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>87%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Kali Linux (Penetration Testing)</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>80%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Burp Suite (Web Security Testing)</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>80%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Wireshark (Packet Sniffing)</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 82%;" aria-valuenow="82" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>88%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Metasploit (Exploit Framework)</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 75%;" aria-valuenow="82" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>82%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Bash Scripting</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 83%;" aria-valuenow="83" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>83%</span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- skill-bar-area -->
-
-                                        <div class="skill-round-bar-area over-hidden">
-                                            <h3 class="mb-35">Language Skills</h3>
-                                            <div class="row justify-content-center mt-10">
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-9 mb-20">
-                                                    <div class="single-skill mb-15 text-center text-lg-left">
-                                                        <div class="progress-circular over-hidden">
-                                                            <div>
-                                                                <input type="text" class="knob" value="0" data-rel="98"
-                                                                    data-linecap="" data-width="160" data-height="160"
-                                                                    data-bgcolor="#e2e2e2" data-fgcolor="#f7a5a0"
-                                                                    data-thickness=".06" data-readonly="true"
-                                                                    disabled="">
-                                                            </div>
-                                                            <h4 class="mt-25 text-center">English</h4>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-9 mb-20">
-                                                    <div class="single-skill mb-15 text-center">
-                                                        <div class="progress-circular over-hidden">
-                                                            <div>
-                                                                <input type="text" class="knob" value="0" data-rel="80"
-                                                                    data-linecap="" data-width="160" data-height="160"
-                                                                    data-bgcolor="#e2e2e2" data-fgcolor="#f7a5a0"
-                                                                    data-thickness=".06" data-readonly="true"
-                                                                    disabled="">
-                                                            </div>
-                                                            <h4 class="mt-25 text-center">Ndebele</h4>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-9 mb-20">
-                                                    <div class="single-skill mb-15 text-center">
-                                                        <div class="progress-circular over-hidden">
-                                                            <div>
-                                                                <input type="text" class="knob" value="0" data-rel="85"
-                                                                    data-linecap="" data-width="160" data-height="160"
-                                                                    data-bgcolor="#e2e2e2" data-fgcolor="#f7a5a0"
-                                                                    data-thickness=".06" data-readonly="true"
-                                                                    disabled="">
-                                                            </div>
-                                                            <h4 class="mt-25 text-center">Afrikaans</h4>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-9 mb-20">
-                                                    <div class="single-skill text-center text-lg-right">
-                                                        <div class="progress-circular over-hidden">
-                                                            <div>
-                                                                <input type="text" class="knob" value="0" data-rel="98"
-                                                                    data-linecap="" data-width="160" data-height="160"
-                                                                    data-bgcolor="#e2e2e2" data-fgcolor="#f7a5a0"
-                                                                    data-thickness=".06" data-readonly="true"
-                                                                    disabled="">
-                                                            </div>
-                                                            <h4 class="mt-25 text-center">Shona</h4>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /col -->
-                                            </div><!-- /row -->
-                                        </div><!-- /skill-round-bar-area -->
-                                    </div><!-- /col -->
-
-                                    <!-- Creative & Business Skills -->
-                                    <div
-                                        class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 skill-bar-left pl-xl-5 d-flex flex-column-reverse flex-md-column">
-                                        <div class="skill-round-bar-area over-hidden mb-md-4">
-                                            <h3 class="mb-35">Creative & Work Skills</h3>
-                                            <div class="row justify-content-center mt-10">
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-9 mb-20">
-                                                    <div class="single-skill mb-15 text-center text-lg-left">
-                                                        <div class="progress-circular over-hidden">
-                                                            <div>
-                                                                <input type="text" class="knob" value="0" data-rel="90"
-                                                                    data-linecap="" data-width="160" data-height="160"
-                                                                    data-bgcolor="#e2e2e2" data-fgcolor="#f7a5a0"
-                                                                    data-thickness=".06" data-readonly="true"
-                                                                    disabled="">
-                                                            </div>
-                                                            <h4 class="mt-25 text-center">Graphic Design</h4>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-9 mb-20">
-                                                    <div class="single-skill mb-15 text-center">
-                                                        <div class="progress-circular over-hidden">
-                                                            <div>
-                                                                <input type="text" class="knob" value="0" data-rel="85"
-                                                                    data-linecap="" data-width="160" data-height="160"
-                                                                    data-bgcolor="#e2e2e2" data-fgcolor="#f7a5a0"
-                                                                    data-thickness=".06" data-readonly="true"
-                                                                    disabled="">
-                                                            </div>
-                                                            <h4 class="mt-25 text-center">Video Editing</h4>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-9 mb-20">
-                                                    <div class="single-skill text-center text-lg-right">
-                                                        <div class="progress-circular over-hidden">
-                                                            <div>
-                                                                <input type="text" class="knob" value="0" data-rel="83"
-                                                                    data-linecap="" data-width="160" data-height="160"
-                                                                    data-bgcolor="#e2e2e2" data-fgcolor="#f7a5a0"
-                                                                    data-thickness=".06" data-readonly="true"
-                                                                    disabled="">
-                                                            </div>
-                                                            <h4 class="mt-25 text-center">UI/UX Design</h4>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /col -->
-                                            </div><!-- /row -->
-                                        </div><!-- /skill-round-bar-area -->
-
-                                        <div class="skill-bar-area over-hidden pb-50">
-                                            <h3 class="mb-30 mt-15">Soft Skills</h3>
-                                            <div class="progess-wrapper">
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Project Management</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 92%;" aria-valuenow="92" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>92%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Problem solving</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 88%;" aria-valuenow="88" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>88%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill mb-20">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Public Speaking</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 85%;" aria-valuenow="85" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>85%</span></div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-skill">
-                                                    <div class="bar-title">
-                                                        <h4 class="mb-12">Teamwork & Collaboration</h4>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar theme-color" role="progressbar"
-                                                            style="width: 78%;" aria-valuenow="78" aria-valuemin="0"
-                                                            aria-valuemax="100"><span>78%</span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- skill-bar-area -->
-                                    </div><!-- /col -->
-                                </div><!-- /row -->
-
-                            </div><!-- /skill-area -->
-                            <!-- more-about-area -->
-                            <div class="more-about-area section-border-bottom mt-65 pb-15">
-
-                                <div class="row justify-content-between title-margin mb-45">
-                                    <div
-                                        class="col-xl-6 col-lg-5 col-md-4 col-sm-12 col-12 pr-0 d-flex align-items-center">
-                                        <div class="title">
-                                            <h2 class="position-relative pl-25">More About Me</h2>
-                                        </div><!-- /title -->
-                                    </div><!-- /col -->
-                                    <div class="col-xl-6 col-lg-7 col-md-8 col-sm-12 col-12 text-right">
-                                        <div class="title-content text-right">
-                                            <p class="text-left">A versatile professional with expertise in
-                                                cybersecurity, software development, and creative fields. I enjoy
-                                                learning and continuously growing in various domains.</p>
-                                        </div><!-- /title-content -->
-                                    </div><!-- /col -->
-                                </div><!-- /row -->
-
-                                <div class="more-about-wrapper">
-                                    <div class="row align-items-start theme-border-top award-margin pb-35">
-
-                                        <!-- Knowledge Section -->
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 pr-md-0">
-                                            <h3 class="f-400 mb-30">Knowledge</h3>
-                                            <ul class="single-more-about mb-20">
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                    Cybersecurity & Ethical Hacking
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                    Software Development
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                    Digital Marketing
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                    Creative & Content Creation
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                    Article Writing & Content Creation
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                    Game Development
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                   Data Visualisation
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="far fa-check"></i></span>
-                                                    Internet Of Things
-                                                </li>
-                                            </ul><!-- /knowledge-section -->
-                                        </div><!-- /col -->
-
-                                        <!-- Tools & Software Section -->
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 pr-md-0">
-                                            <h3 class="f-400 mb-30">Tools & Software</h3>
-                                            <ul class="single-more-about mb-20">
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    ChatGPT
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    Google Collab
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    Microsoft Office Suite
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    Google Workspace (Business Suite)
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    AWS Cloud & Services
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    Slack & Team Collaboration Tools
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    Kali Linux & Pen Testing Tools
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i
-                                                            class="far fa-long-arrow-right"></i></span>
-                                                    Wireshark & Network Analysis
-                                                </li>
-                                            </ul><!-- /tools-software-section -->
-                                        </div><!-- /col -->
-
-                                        <!-- Hobby & Interests Section -->
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 pr-md-0">
-                                            <h3 class="f-400 mb-30">Hobbies & Interests</h3>
-                                            <ul class="single-more-about mb-20">
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Music
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Travelling
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Fitness & Adventure
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Continuous Learning & Mentorship
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Skill Development
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Singing
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Sustainable farming
-                                                </li>
-                                                <li class="mb-15 font-family-CircularStdBold primary-color">
-                                                    <span class="theme-color pr-10"><i class="fas fa-heart"></i></span>
-                                                    Teaching & Mentoring
-                                                </li>
-                                            </ul><!-- /hobbies-interests-section -->
-                                        </div><!-- /col -->
-
-                                    </div><!-- /row -->
-                                </div><!-- /more-about-wrapper -->
-
-                            </div><!-- /more-about-area -->
-
-
-
-
-
-
-                        </div><!-- /content-wrapper-padding -->
-
-                    </div><!-- /container -->
-                </div><!-- /resume-page -->
-
-
-
-
-
-                <!-- contact-page 
-================================================== -->
-                <div id="contact" class="page-margin-top">
-                    <div class="container p-0">
-                        <div class="content-wrapper-padding white-bg border-radius12 position-relative">
-
-                            <div class="row contact-info-content mt-2">
-                                <!-- Address Section -->
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 pr-sm-0">
-                                    <div
-                                        class="contact-location text-md-center text-lg-left mb-25 transition-3 d-lg-flex d-flex d-md-block align-items-center">
-                                        <div class="contact-icon d-inline-block text-center neutral-bg mr-25">
-                                            <span class="theme-color d-inline-block"><i
-                                                    class="fas fa-map-marker-alt"></i></span>
-                                        </div><!-- /contact-icon -->
-                                        <div class="contact-text">
-                                            <h4 class="f-700 mb-2">Address</h4>
-                                            <p class="secondary-color mb-0">Cape Town, South Africa</p>
-                                        </div>
-                                    </div><!-- /contact-location -->
-                                </div><!-- /col -->
-
-                                <!-- Phone Section -->
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                                    <div
-                                        class="contact-phone s-contact text-md-center text-lg-left mb-25 transition-3 d-lg-flex d-flex d-md-block align-items-center">
-                                        <div class="contact-icon d-inline-block text-center neutral-bg mr-25">
-                                            <span class="theme-color d-inline-block"><i class="fas fa-phone"></i></span>
-                                        </div><!-- /contact-icon -->
-                                        <div class="contact-text">
-                                            <h4 class="f-700 mb-2">Phone</h4>
-                                            <p class="mb-0">
-                                                <a class="secondary-color2 primary-hover d-block"
-                                                    href="tel:+9186997581988">+91 86 997 581988</a>
-                                            </p>
-                                        </div>
-                                    </div><!-- /contact-phone -->
-                                </div><!-- /col -->
-
-                                <!-- Email Section -->
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                                    <div
-                                        class="contact-email s-contact text-md-center text-lg-left mb-25 transition-3 d-lg-flex d-flex d-md-block align-items-center">
-                                        <div class="contact-icon d-inline-block text-center neutral-bg mr-25">
-                                            <span class="theme-color d-inline-block"><i
-                                                    class="fas fa-envelope"></i></span>
-                                        </div><!-- /contact-icon -->
-                                        <div class="contact-text">
-                                            <h4 class="f-700 mb-2">Email</h4>
-                                            <p class="mb-0">
-                                                <a class="secondary-color2 primary-hover d-block"
-                                                    href="mailto:leonakokerai@outlook.com">leonakokerai@outlook.com</a>
-                                            </p>
-                                        </div>
-                                    </div><!-- /contact-email -->
-                                </div><!-- /col -->
-                            </div><!-- /row -->
-
-                            <!-- Contact Form Section -->
-                            <div class="row justify-content-center">
-                                <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12 col-12">
-                                    <div class="contact-form-wrapper text-center mt-25 mb-lg-5 mb-md-4">
-                                        <h2 class="mb-55">Send me a message</h2>
-                                        <!-- The form will now redirect to WhatsApp -->
-                                        <form id="contact-form" onsubmit="redirectToWhatsApp(event)">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pr6 mb-12">
-                                                    <input
-                                                        class="name w-100 primary-border pl-20 pt-15 pb-15 pr-10 bg-white border-radius5"
-                                                        type="text" name="inputName" id="inputName"
-                                                        placeholder="Your Name" required>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pl6 pr-12 mb-12">
-                                                    <input
-                                                        class="email w-100 primary-border pl-20 pt-15 pb-15 pr-10 bg-white border-radius5"
-                                                        type="email" name="inputEmail" id="inputEmail"
-                                                        placeholder="Your Email" required>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pr6 mb-12">
-                                                    <input
-                                                        class="phone w-100 primary-border pl-20 pt-15 pb-15 pr-10 bg-white border-radius5"
-                                                        type="text" name="inputPhone" id="inputPhone"
-                                                        placeholder="Your Phone" required>
-                                                </div><!-- /col -->
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pl6 pr-12 mb-12">
-                                                    <input
-                                                        class="subject w-100 primary-border pl-20 pt-20 pb-15 pr-10 bg-white border-radius5"
-                                                        type="text" name="inputSubject" id="inputSubject"
-                                                        placeholder="Your Subject" required>
-                                                </div><!-- /col -->
-                                            </div><!-- /row -->
-                                            <div class="row">
-                                                <div
-                                                    class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pl-12 pr-12 mb-12">
-                                                    <textarea
-                                                        class="massage w-100 primary-border pl-20 pt-20 pr-10 bg-white border-radius5"
-                                                        name="inputMessage" id="inputMessage"
-                                                        placeholder="Write your message here" required></textarea>
-                                                </div><!-- /col -->
-                                            </div><!-- /row -->
-                                            <div class="my-btn">
-                                                <button class="btn w-100 d-inline-block theme-bg" type="submit"
-                                                    name="submit">Send Message</button>
-                                            </div>
-                                        </form>
-                                    </div><!-- /contact-form -->
-                                </div><!-- /col -->
-                            </div><!-- /row -->
-
-                            <script>
-                                function redirectToWhatsApp(event) {
-                                    event.preventDefault(); // Prevent the default form submission
-
-                                    // Capture form data
-                                    const name = document.getElementById("inputName").value;
-                                    const email = document.getElementById("inputEmail").value;
-                                    const phone = document.getElementById("inputPhone").value;
-                                    const subject = document.getElementById("inputSubject").value;
-                                    const message = document.getElementById("inputMessage").value;
-
-                                    // Create the WhatsApp message
-                                    const whatsappMessage = encodeURIComponent(`
-        Name: ${name}
-        Email: ${email}
-        Phone: ${phone}
-        Subject: ${subject}
-        Message: ${message}
-    `);
-
-                                    // WhatsApp link (replace with your number)
-                                    const whatsappLink = `https://wa.me/+918699758198?text=${whatsappMessage}`;
-
-                                    // Redirect to WhatsApp
-                                    window.location.href = whatsappLink;
-                                }
-                            </script>
-
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-
-                    <!-- Map Section -->
-                    <div class="row no-gutters over-hidden neutral-bg mt-30 mb-10">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="map-wrapper" id="mapwrapper">
-                                <!-- Embed Google Map -->
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.6040174509577!2d18.423300515209344!3d-33.9188618806486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc6766a61edb23%3A0x7f0c8bb65d01e7f1!2sCape%20Town%2C%20South%20Africa!5e0!3m2!1sen!2sin!4v1632820108934!5m2!1sen!2sin"
-                                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
-                                </iframe>
-                            </div><!-- /map-wrapper -->
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-                </div><!-- /content-wrapper-padding -->
-            </div><!-- /container -->
-        </div><!-- /contact-page -->
-
-
-    </div><!-- /content -->
-
-    <!--  ====== footer-start
-            ===================================================  -->
-    <footer class="footer-area pb-20 pt-30">
-        <div class="row align-items-center justify-content-between">
-            <!-- Copyright Section -->
-            <div class="col-xl-6 col-lg-5 col-md-6 col-sm-12 col-12">
-                <div class="copyright-text text-center text-lg-left mb-10">
-                    <p class="mb-0 primary-color">
-                        All rights reserved © <span id="currentYear"></span>
-                        <a href="https://ownuh.com" class="primary-color c-theme f-700">Ownuh</a>
-                    </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div><!-- /col -->
-
-            <!-- Social Media Links Section -->
-            <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12 col-12">
-                <ul class="useful-link text-center text-lg-right">
-                    <li class="d-inline-block mb-15">
-                        <a href="https://www.facebook.com/leonakokerai" target="_blank"
-                            class="primary-color d-inline-block text-uppercase">
-                            Facebook
-                        </a>
-                    </li>
-                    <li class="d-inline-block pl-45 mb-15">
-                        <a href="https://www.linkedin.com/in/leona-kokerai/" target="_blank"
-                            class="primary-color d-inline-block text-uppercase">
-                            LinkedIn
-                        </a>
-                    </li>
-                    <li class="d-inline-block pl-45 mb-15">
-                        <a href="https://www.instagram.com/lee_ow_nuhh" target="_blank"
-                            class="primary-color d-inline-block text-uppercase">
-                            Instagram
-                        </a>
-                    </li>
-                    <li class="d-inline-block pl-45 mb-15">
-                        <a href="https://github.com/leeownuh/" target="_blank"
-                            class="primary-color d-inline-block text-uppercase">
-                            GitHub
-                        </a>
-                    </li>
-                </ul><!-- social -->
-            </div><!-- /col -->
-        </div><!-- /row -->
-    </footer><!-- /footer area -->
-
-    <!-- JavaScript to Update Year Dynamically -->
-    <script>
-        document.getElementById("currentYear").textContent = new Date().getFullYear();
-    </script>
-
-
-    </div><!-- /container -->
-
-    <!-- back top start-->
-    <div id="scroll" class="scroll-up">
-        <div class="top text-center"><span class="white-bg theme-color d-block"><i
-                    class="fa fa-arrow-alt-up"></i></span></div>
-    </div><!-- /scroll-up -->
-
-    </div><!-- /body-wrapper -->
+            </div>
+            <!-- /section-about -->
 
 
 
-    <!-- All js here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
+
+            <!-- banner-image -->
+            <div class="banner-image tf-spacing-4  container-3 ">
+                <div class="parallaxie parallax-img" style='background: url("images/section/banner-1.jpg")'>
+                </div>
+            </div>
+            <!-- /banner-image -->
+
+            <!-- section-services -->
+            <div id="service" class="section-services section">
+                <div class="tf-container">
+                    <div class="heading-title-2 has-border mb_80">
+                        <div class="d-flex align-items-center gap_10 text-uppercase">
+                            <div class="text-title text_white">Technical Skills</div>
+                            <i class="icon-ArrowUpRight"></i>
+                        </div>
+                        <div class="cycle-line"></div>
+                    </div>
+
+                    <div class="wrap-services">
+
+                        <!-- CYBERSECURITY & PENTESTING -->
+                        <div class="service-item wow animate__animated animate__fadeInUp" data-wow-duration="2s"
+                            data-wow-delay="0s">
+                            <div class="box-left">
+                                <div class="heading">
+                                    <a href="#" class="h1 link text_white">Cybersecurity & Penetration Testing</a>
+                                    <ul class="category">
+                                        <li><a href="#" class="text-caption-1 text_white">Web & Network Penetration
+                                                Testing</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Vulnerability Assessment &
+                                                Exploitation (OWASP Top 10)</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Burp Suite, Nmap, Nikto,
+                                                Metasploit Framework</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">TryHackMe & Hack The Box
+                                                Practice Labs</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Scripting & Automation:
+                                                Python, Bash, C/C++</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn_wrapper">
+                                    <a href="#" class="tf-btn-2 btn-item btn-hover">
+                                        <span class="h5">View SERVICES</span>
+                                        <i class="icon-ArrowUpRight"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-right">
+                                <div class="number">01</div>
+                                <div class="img-style scale-img">
+                                    <img loading="lazy" decoding="async" src="images/section/service-1.jpg" width="448"
+                                        height="490" alt="Cybersecurity Service">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECURE WEB APP DEVELOPMENT -->
+                        <div class="service-item wow animate__animated animate__fadeInUp" data-wow-duration="2s"
+                            data-wow-delay="0s">
+                            <div class="box-left">
+                                <div class="heading">
+                                    <a href="#" class="h1 link text_white">Secure Web Application Development</a>
+                                    <ul class="category">
+                                        <li><a href="#" class="text-caption-1 text_white">Full-Stack Development with
+                                                PHP (Laravel)</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Frontend: HTML5, CSS3,
+                                                JavaScript, Tailwind CSS</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Secure Authentication &
+                                                Role-Based Access Control</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Input Validation, SQL
+                                                Injection & XSS Prevention</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">API Security & HTTPS
+                                                Implementation</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn_wrapper">
+                                    <a href="#" class="tf-btn-2 btn-item btn-hover">
+                                        <span class="h5">View SERVICES</span>
+                                        <i class="icon-ArrowUpRight"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-right">
+                                <div class="number">02</div>
+                                <div class="img-style scale-img">
+                                    <img loading="lazy" decoding="async" src="images/section/service-2.jpg" width="448"
+                                        height="490" alt="Secure Web Development">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NETWORKING -->
+                        <div class="service-item wow animate__animated animate__fadeInUp" data-wow-duration="2s"
+                            data-wow-delay="0s">
+                            <div class="box-left">
+                                <div class="heading">
+                                    <a href="#" class="h1 link text_white">Networking & Infrastructure</a>
+                                    <ul class="category">
+                                        <li><a href="#" class="text-caption-1 text_white">TCP/IP, DNS, Routing, and
+                                                Subnetting</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Cisco Packet Tracer Network
+                                                Simulation</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Wireshark for Traffic Capture
+                                                & Packet Analysis</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">Network Configuration,
+                                                Troubleshooting & Security</a></li>
+                                        <li><a href="#" class="text-caption-1 text_white">VPN, Firewalls, and Access
+                                                Control Implementation</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn_wrapper">
+                                    <a href="#" class="tf-btn-2 btn-item btn-hover">
+                                        <span class="h5">View SERVICES</span>
+                                        <i class="icon-ArrowUpRight"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-right">
+                                <div class="number">03</div>
+                                <div class="img-style scale-img">
+                                    <img loading="lazy" decoding="async" src="images/section/service-3.jpg" width="448"
+                                        height="490" alt="Networking Service">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /section-services -->
+
+
+            
+        </div>
+        <!-- /main-content -->
+
+        <!-- footer -->
+        <div class="footer style-2">
+            <div class="footer-body">
+                <div class="tf-container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-tes">
+                            <div class="tes-footer">
+                                <h6 class="desc">Adaptable. Communicative. Driven to learn and secure.
+A valuable addition to every team I join.</h6>
+                                <div class="author d-flex align-items-center gap_16">
+                                    <div class="avatar">
+                                        <img src="images/logo/logo-2.png" width="64" height="64" alt="avatar">
+                                    </div>
+                                    <div class="info">
+                                        <h6 class="name text_white mb_2">Leona Kokerai</h6>
+                                        <div class="text-title font2 text-color-1">Jr. Penetration Tester</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-contact">
+                            <div class="footer-contact">
+                                <div class="item mb_32">
+                                    <p class="font2 mb_12">Please send me an email to</p>
+                                    <a href="#" class="h4 link text_white hover-underline-link">leonakokerai@outlook.com</a>
+                                </div>
+                                <div class="item">
+                                    <p class="font2 mb_12">Let's talk!</p>
+                                    <a href="#" class="h4 link text_white ">(00) 000-000</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-social">
+                            <div class="footer-social">
+                                <div class="wrap-quick-link">
+                                    <div class="text-title font2 text-color-1 mb_12">Quick link</div>
+                                    <ul class="d-grid gap_5">
+                                        <li><a href="#" class="text-title text_white link hover-line-text">About
+                                                us</a>
+                                        </li>
+                                        <li><a href="#" class="text-title text_white link hover-line-text">Experience &
+                                                Education</a></li>
+                                        <li><a href="#" class="text-title text_white link hover-line-text">Our
+                                                Services
+                                            </a>
+                                        </li>
+                                        <li><a href="#" class="text-title text_white link hover-line-text">Latest
+                                                Work</a>
+                                        </li>
+                                        <li><a href="#" class="text-title text_white link hover-line-text">Client
+                                                Reviews</a></li>
+                                    </ul>
+                                </div>
+                                <div class="wrap-social">
+                                    <div class="text-title font2 text-color-1 mb_12">Social</div>
+                                    <ul class="tf-social">
+                                        <li><a href="#" class="icon-Dribbble"></a></li>
+                                        <li><a href="#" class="icon-Behance"></a></li>
+                                        <li><a href="#" class="icon-Instagram"></a></li>
+                                        <li><a href="#" class="icon-FaceBook"></a></li>
+                                        <li><a href="#" class="icon-X"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="tf-container">
+                    <div class="mb_30 wow animate__animated animate__fadeInUp" data-wow-duration="2s"
+                        data-wow-delay="0s">
+                        <img src="images/section/banner-1.jpg" alt="footer">
+                    </div>
+                    <div class="bot d-flex justify-content-between align-items-center">
+                        <p class="font2 text_white wow animate__animated animate__fadeInUp" data-wow-duration="2s"
+                            data-wow-delay="0s">© 2025 Leona Kokerai. All rights reserved.</p>
+                        <span class="line"></span>
+                        <p class="font2 text_white wow animate__animated animate__fadeInUp" data-wow-duration="2s"
+                            data-wow-delay="0.2s">2025 Leona Kokerai - Cybersecurity & Penetration Testing</p>
+                        <span class="line"></span>
+                        <p class="font2 text_white wow animate__animated animate__fadeInUp" data-wow-duration="2s"
+                            data-wow-delay="0.4s">Created by <a href="#" class="link">Ownuh</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /footer -->
+
+    </div>
+    <!-- /wrapper -->
+
+    <!-- prograss
+            ============================================== -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+                style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+            </path>
+        </svg>
+    </div>
+    <!-- End prograss -->
+
+
+    <!-- side-menu-mobile -->
+    <div class="side-menu-mobile">
+        <div class="tf-container h-100">
+            <div class="menu-content h-100">
+                <div class="menu-body">
+                    <ul class="nav-menu-list text-center">
+                        <li><a href="#about" class="menu-link link nav_link hover-line-text">About us</a></li>
+                        <li><a href="#service" class="menu-link link nav_link hover-line-text">Our Services</a></li>
+                        <li><a href="#work" class="menu-link link nav_link hover-line-text">Latest Work</a></li>
+                        <li><a href="#testimonial" class="menu-link link nav_link hover-line-text">Client Reviews</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu-footer d-flex justify-content-between ">
+                    <div class="menu-bot_left flex-wrap">
+                        <a class="h6 text-white link" href="mailto:leonakokerai@outlook.com">leonakokerai@outlook.com</a>
+                        <span class="br-dot"></span>
+                        <a class="h6 text-white link" href="tel:000000000">(000) 000-0000</a>
+                    </div>
+                    <div class="menu-bot_right">
+                        <ul class="tf-social-icon">
+                            <li><a href="#" class="social-dribbble"><i class="icon icon-Dribbble"></i></a></li>
+                            <li><a href="#" class="social-behance"><i class="icon icon-Behance"></i></a></li>
+                            <li><a href="#" class="social-instagram"><i class="icon icon-Instagram"></i></a></li>
+                            <li><a href="#" class="social-facebook"><i class="icon icon-FaceBook"></i></a></li>
+                            <li><a href="#" class="social-x"><i class="icon icon-X"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /side-menu-mobile  -->
+
+    <!-- Javascript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/parallax.js"></script>
-    <script src="js/typer.js"></script>
-    <script src="js/waypoint.js"></script>
-    <script src="js/counterup-min.js"></script>
-    <script src="js/vanilla-tilt.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/jquery-appear.js"></script>
-    <script src="js/jquery-knob.js"></script>
-    <script src="js/leaflet.js"></script>
-    <script src="js/jquery.easytabs.min.js"></script>
-    <script src="js/jquery.carouFredSel.packed.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/magic-mouse.js"></script>
-    <script src="js/menu.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/infinityslide.js"></script>
+    <script src="js/gsap.min.js"></script>
+    <script src="js/ScrollTrigger.min.js"></script>
+    <script src="js/SplitText.min.js"></script>
+    <script src="js/gsapAnimate.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/ukiyo.min.js"></script>
+    <script src="js/ScrollSmooth.js"></script>
     <script src="js/main.js"></script>
-
+    <!-- /Javascript -->
 
 </body>
 
