@@ -1,598 +1,526 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<!--<![endif]-->
-
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-
+<html lang="en">
 <head>
-    <!-- Basic Page Needs -->
-    <meta charset="utf-8">
-    <!--[if IE ]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><![endif]-->
-    <title>© Leona Kokerai | Find me before they find you.</title>
-    <meta name="description"
-        content="Leona Kokerai ">
-    <meta name="keywords"
-        content="Portfolio, Leona Kokerai">
-
-    <meta name="author" content="...">
-
-    <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!-- Theme Style -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="css/odometer.min.css">
-    <link rel="stylesheet" type="text/css" href="css/swiper-bundle.min.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-
-    <!-- Font -->
-    <link rel="stylesheet" href="font/fonts.css">
-
-    <!-- Icon -->
-    <link rel="stylesheet" type="text/css" href="icons/icomoon/style.css">
-
-    <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="images/favicon.svg">
-    <link rel="apple-touch-icon-precomposed" href="images/favicon.svg">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leona Kokerai — Find Me Before They Find You</title>
+  <meta name="description" content="Leona Kokerai | BSc Cybersecurity | SOC Analyst | Jr. Penetration Tester | Top 3% TryHackMe"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg:#050810;--surface:#0b1120;--card:#0f1829;--border:#1a2a45;
+      --accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;--gold:#f59e0b;
+      --text:#e2e8f0;--muted:#64748b;--white:#ffffff;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
+    #cursor-dot,#cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%)}
+    #cursor-dot{width:6px;height:6px;background:var(--accent);transition:transform .1s}
+    #cursor-ring{width:32px;height:32px;border:1.5px solid var(--accent);opacity:.5;transition:transform .15s ease,width .2s,height .2s}
+    #preloader{position:fixed;inset:0;background:var(--bg);z-index:9998;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}
+    .pre-name{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;color:var(--white);letter-spacing:-2px}
+    .pre-name span{color:var(--accent)}
+    .pre-bar-wrap{width:300px;height:2px;background:var(--border);overflow:hidden}
+    .pre-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));animation:preLoad 1.8s ease forwards}
+    @keyframes preLoad{to{width:100%}}
+    .pre-tag{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase}
+    nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(5,8,16,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all .3s}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none;letter-spacing:-1px}
+    .nav-logo span{color:var(--accent)}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent);color:var(--bg);font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;padding:.5rem 1.2rem;border-radius:4px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+    .nav-cta:hover{background:var(--white)}
+    #hero{min-height:100vh;position:relative;overflow:hidden;display:grid;place-items:center;padding:120px 5% 80px}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;width:100%}
+    .hero-eyebrow{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+    .hero-eyebrow::before{content:'';display:block;width:30px;height:1px;background:var(--accent)}
+    .hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.5rem,7vw,6.5rem);line-height:.95;color:var(--white);letter-spacing:-3px;margin-bottom:1.2rem}
+    .hero-name .line2{color:transparent;-webkit-text-stroke:1px rgba(0,212,255,.4)}
+    .hero-roles{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
+    .hero-role-tag{font-family:'Space Mono',monospace;font-size:.68rem;padding:.35rem .9rem;border:1px solid var(--border);border-radius:100px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+    .hero-role-tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,.05)}
+    .hero-desc{font-size:1.05rem;line-height:1.8;color:var(--muted);max-width:480px;margin-bottom:2.5rem}
+    .hero-desc strong{color:var(--text)}
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-primary{background:var(--accent);color:var(--bg);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;padding:.9rem 2rem;border-radius:6px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-primary:hover{background:var(--white);transform:translateY(-2px)}
+    .btn-outline{border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;padding:.9rem 2rem;border-radius:6px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+    .hero-visual{position:relative}
+    .hero-avatar-frame{width:100%;max-width:420px;aspect-ratio:3/4;margin:0 auto;background:linear-gradient(135deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:flex-end;justify-content:center}
+    .hero-avatar-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.08) 0%,rgba(124,58,237,.08) 100%)}
+    .avatar-svg-art{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;position:relative}
+    .avatar-initials-circle{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:var(--white);position:relative;margin-bottom:1.5rem;box-shadow:0 0 60px rgba(0,212,255,.3),0 0 120px rgba(124,58,237,.2)}
+    .avatar-initials-circle::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--accent),var(--accent2)) border-box;animation:rotateBorder 4s linear infinite}
+    @keyframes rotateBorder{to{transform:rotate(360deg)}}
+    .avatar-name-tag{text-align:center}
+    .avatar-name-tag h3{font-family:'Syne',sans-serif;font-weight:700;color:var(--white);font-size:1.3rem}
+    .avatar-name-tag p{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:2px;margin-top:.3rem}
+    .floating-badge{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.6rem 1rem;display:flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,.4);white-space:nowrap}
+    .floating-badge.b1{top:60px;right:-20px;animation:floatBadge 3s ease-in-out infinite}
+    .floating-badge.b2{bottom:120px;left:-20px;animation:floatBadge 3s ease-in-out infinite 1s}
+    .floating-badge.b3{top:200px;right:-30px;animation:floatBadge 3s ease-in-out infinite .5s}
+    .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);flex-shrink:0}
+    .badge-dot.gold{background:var(--gold)}
+    .badge-dot.purple{background:var(--accent2)}
+    @keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:2.5rem}
+    .stat-item{background:var(--card);padding:1.2rem;text-align:center}
+    .stat-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:var(--accent)}
+    .stat-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-top:.2rem;letter-spacing:1px;text-transform:uppercase}
+    .marquee-strip{background:var(--accent);overflow:hidden;padding:14px 0;margin:0}
+    .marquee-inner{display:flex;animation:marqueeScroll 25s linear infinite;white-space:nowrap}
+    .marquee-item{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--bg);padding:0 2.5rem;letter-spacing:-.5px}
+    .marquee-item.outline{color:transparent;-webkit-text-stroke:1px var(--bg)}
+    @keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    section{padding:100px 5%;position:relative;z-index:2}
+    .section-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+    .section-label::before{content:'';display:block;width:30px;height:1px;background:var(--accent)}
+    .section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.05;color:var(--white);letter-spacing:-2px;margin-bottom:1.5rem}
+    .section-divider{height:1px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:4rem}
+    #about .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+    .about-quote{font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;line-height:1.4;color:var(--white);border-left:3px solid var(--accent);padding-left:1.5rem;margin-bottom:2rem}
+    .about-body{font-size:.97rem;line-height:1.85;color:var(--muted)}
+    .about-body p{margin-bottom:1.2rem}
+    .about-body strong{color:var(--text)}
+    .about-facts{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0}
+    .fact-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem}
+    .fact-label{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:.4rem}
+    .fact-val{font-family:'Syne',sans-serif;font-weight:600;font-size:.9rem;color:var(--text)}
+    .lang-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem}
+    .lang-tag{font-family:'Space Mono',monospace;font-size:.65rem;padding:.3rem .8rem;border:1px solid var(--border);border-radius:100px;color:var(--muted)}
+    #skills{background:var(--surface)}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+    .skill-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;transition:all .3s}
+    .skill-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,212,255,.08)}
+    .skill-card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+    .skill-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+    .skill-icon.cyan{background:rgba(0,212,255,.1);color:var(--accent)}
+    .skill-icon.purple{background:rgba(124,58,237,.1);color:var(--accent2)}
+    .skill-icon.green{background:rgba(16,185,129,.1);color:var(--accent3)}
+    .skill-icon.gold{background:rgba(245,158,11,.1);color:var(--gold)}
+    .skill-card h4{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--white)}
+    .skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+    .skill-tag{font-size:.72rem;padding:.28rem .7rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;color:var(--muted);transition:all .2s}
+    .skill-tag:hover{background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.3);color:var(--accent)}
+    .timeline{position:relative;padding-left:2rem}
+    .timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:1px;background:var(--border)}
+    .timeline-item{position:relative;padding-bottom:3rem}
+    .timeline-item::before{content:'';position:absolute;left:-2.4rem;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);border:2px solid var(--bg)}
+    .timeline-item:last-child{padding-bottom:0}
+    .tl-meta{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);margin-bottom:.5rem;letter-spacing:1px}
+    .tl-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.2rem}
+    .tl-org{font-size:.9rem;color:var(--accent);margin-bottom:.8rem}
+    .tl-bullets{list-style:none}
+    .tl-bullets li{font-size:.88rem;color:var(--muted);line-height:1.7;padding-left:1rem;position:relative;margin-bottom:.3rem}
+    .tl-bullets li::before{content:'—';position:absolute;left:0;color:var(--accent);font-size:.7rem}
+    #projects{background:var(--surface)}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;margin-top:3rem}
+    .project-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all .3s;position:relative;overflow:hidden}
+    .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity .3s}
+    .project-card:hover{border-color:rgba(0,212,255,.3);transform:translateY(-5px);box-shadow:0 25px 80px rgba(0,0,0,.4)}
+    .project-card:hover::before{opacity:1}
+    .project-card.highlight::before{opacity:1;background:linear-gradient(90deg,var(--accent3),var(--accent))}
+    .project-card.highlight{border-color:rgba(16,185,129,.2)}
+    .project-num{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);letter-spacing:2px;margin-bottom:.8rem}
+    .project-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:.8rem;line-height:1.3}
+    .project-desc{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem}
+    .project-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+    .project-tag{font-size:.63rem;padding:.25rem .65rem;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);border-radius:4px;color:var(--accent);font-family:'Space Mono',monospace}
+    .project-tag.g{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.2);color:var(--accent3)}
+    .certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:2rem}
+    .cert-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:1rem;transition:all .2s}
+    .cert-item:hover{border-color:var(--accent);background:rgba(0,212,255,.03)}
+    .cert-check{width:32px;height:32px;border-radius:8px;background:rgba(0,212,255,.1);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;font-size:.85rem}
+    .cert-name{font-size:.88rem;color:var(--text);font-weight:500;line-height:1.4}
+    .cert-issuer{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);margin-top:.2rem}
+    #achievements{background:var(--surface)}
+    .achievements-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:2rem}
+    .achievement-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:flex;align-items:flex-start;gap:1rem}
+    .ach-icon{font-size:1.5rem;flex-shrink:0}
+    .ach-text{font-size:.9rem;color:var(--text);line-height:1.5}
+    .ach-year{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);margin-top:.3rem}
+    .available-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:100px;padding:.4rem 1rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--accent3);letter-spacing:1px;margin-bottom:1.5rem}
+    .available-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s ease infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+    .contact-email{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.5rem,4vw,2.8rem);color:var(--white);text-decoration:none;display:inline-block;margin:2rem 0;transition:color .2s}
+    .contact-email:hover{color:var(--accent)}
+    .social-links{display:flex;justify-content:center;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+    .social-link{display:flex;align-items:center;gap:.6rem;padding:.65rem 1.3rem;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:1px;transition:all .2s}
+    .social-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+    footer{border-top:1px solid var(--border);padding:2rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .footer-copy{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1px}
+    .footer-tagline{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:1px}
+    .glow-orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+    .glow-1{width:400px;height:400px;background:rgba(0,212,255,.06);top:-100px;right:-100px}
+    .glow-2{width:350px;height:350px;background:rgba(124,58,237,.06);bottom:0;left:-80px}
+    .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+    .scroll-cue{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem}
+    .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s ease-in-out infinite}
+    @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:bottom}}
+    .scroll-text{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:2px;writing-mode:vertical-rl}
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr;gap:3rem}
+      .hero-visual{order:-1}
+      .hero-avatar-frame{max-width:280px}
+      .floating-badge.b1,.floating-badge.b3{right:-10px}
+      .floating-badge.b2{left:-10px}
+      #about .about-grid{grid-template-columns:1fr;gap:3rem}
+      .nav-links{display:none}
+      footer{flex-direction:column;text-align:center}
+      #experience .exp-grid{grid-template-columns:1fr}
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Cursor Animation -->
-    <div class="cursor1"></div>
-    <div class="cursor2"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div id="preloader">
+  <div class="pre-tag">Initializing Portfolio</div>
+  <div class="pre-name">Leona <span>Kokerai</span></div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div></div>
+  <div class="pre-tag">Cybersecurity Specialist · 2026</div>
+</div>
 
-    <div class="preloader overflow-hidden">
-        <div class="site-name"><span>Leona Kokerai - Cybersecurity </span></div>
-        <div class="preloader-gutters">
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-            <div class="bar">
-                <div class="inner-bar"></div>
-            </div>
-        </div>
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">L<span>.</span>K</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:leonakokerai@outlook.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="glow-orb glow-1"></div>
+  <div class="glow-orb glow-2"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="available-badge">
+        <div class="available-dot"></div>
+        Available for work · Open to relocation
+      </div>
+      <div class="hero-eyebrow">Cybersecurity Specialist · Class of 2026</div>
+      <h1 class="hero-name">Leona<br><span class="line2">Kokerai</span></h1>
+      <div class="hero-roles">
+        <span class="hero-role-tag">SOC Analyst T1</span>
+        <span class="hero-role-tag">Jr. Penetration Tester</span>
+        <span class="hero-role-tag">Cybersecurity Analyst</span>
+        <span class="hero-role-tag">DFIR Analyst</span>
+        <span class="hero-role-tag">Security Engineer I</span>
+      </div>
+      <p class="hero-desc"><strong>Top 3% globally on TryHackMe.</strong> Real black-box penetration test on a live production system. 9.22 CGPA · First Class. Multiple industry certifications. I don't just study cybersecurity — I practise it.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary"><i class="fa-solid fa-shield-halved"></i> View Projects</a>
+        <a href="mailto:leonakokerai@outlook.com" class="btn-outline"><i class="fa-solid fa-envelope"></i> Get In Touch</a>
+      </div>
+      <div class="hero-stats fade-up">
+        <div class="stat-item"><div class="stat-val">Top 3%</div><div class="stat-label">TryHackMe Global</div></div>
+        <div class="stat-item"><div class="stat-val">9.22</div><div class="stat-label">CGPA · <BR> First Class</div></div>
+        <div class="stat-item"><div class="stat-val">12+</div><div class="stat-label">Vulns Found <BR> (Live)</div></div>
+      </div>
     </div>
-
-    <!-- wrapper -->
-    <div id="wrapper" class="bg-color-secondary counter-scroll">
-
-        <!-- header -->
-        <Header class="header-2 header-fixed">
-            <div class="container-2 d-flex justify-content-between">
-                <div class="header-left logo">
-                    <a href="#" class="text-white">
-                        <img src="images/logo/logo-2.png" alt="">
-                    </a>
-                </div>
-
-                <div class="header-right d-flex gap_8">
-
-                    <div class="tag-title  d-inline-flex align-items-center gap_8 md-hide">
-                        <span class="point"></span>
-                        <p class="text-body-2 text_white">Available for work</p>
-                    </div>
-                    <a href="#" class="link-no-action side-toggle  link-no-action">
-                        <div class="icon">
-                            <span class="top"></span>
-                            <span class="middle"></span>
-                            <span class="bottom"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </Header>
-        <!-- /header -->
-
-        <!-- header -->
-        <div class="page-title">
-            <div class="tf-container">
-                <div class="hero-banner">
-                    <div class="image">
-                        <div class="row">
-                            <div class="col-md-6 mx-auto tf-animate-1">
-                                <img loading="lazy" width="695" height="854" src="images/hero/hero-4.jpg" alt="Image">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="content-wrap">
-                        <div class="content">
-                            <div class="hero-title text_white split-text split-lines-rotation-x">
-                                I'm Leona Kokerai
-                                <div class="item text-button d-none d-sm-flex animateFade" data-fade-from="right"
-                                    data-delay="1">
-                                    Final Year Cybersecurity Student </div>
-                            </div>
-                            <p class="desc font2 split-text split-lines-transform   ">
-                                I’m an aspiring Ethical Hacker passionate about learning how systems can be tested,
-                                broken, and ultimately secured. </p>
-                            <a href="#" class="tf-btn btn-bg-primary btn-hover-animation-fill animateFade">
-                                <span>
-                                    <i class="icon-ArrowRight arr-1"></i>
-                                    <span class="btn-text h5 text_secondary-color">Hire Me</span>
-                                    <i class="icon-ArrowRight arr-2"></i>
-                                </span>
-                                <span class="bg-effect"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="content-wrap-2">
-                        <div class="box-title-2">
-                            <div class="hero-title-2 text-clip split-text split-lines-rotation-x">
-                                Jr. Penetration<br>
-                                Tester
-                            </div>
-                            <p class="sub text-white   split-text split-lines-transform">
-                                Certified Digital Forensic Investigator
-                            </p>
-                        </div>
-                    </div>
-                    <div class="btn_wrapper animateFade">
-                        <a href="#project" class="btn-view-all md-hide btn-item btn-hover btn-hover-animation-fill">
-
-                            <span class="text h5 text-center">
-                                View all <br>
-                                PROJECT
-                            </span>
-                            <i class="icon icon-ArrowDown"></i>
-                            <span class="bg-effect"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="wrap-partner-infinity ">
-                <div class="wrap-marquee bg-primary-color marquee-1">
-                    <div class="infiniteslide " data-clone="2" data-style="left">
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text-border-2">Cybersecurity</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">2026 portfolio</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text-border-2">Cybersecurity</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">2026 portfolio</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
-                        </div>
-                        <div class="marquee-item ">
-                            <h1 class="text-border-2">Cybersecurity</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">2026 portfolio</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="wrap-marquee bg-white-color marquee-2">
-                    <div class="infiniteslide " data-clone="2" data-style="right">
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text-border-2">Cybersecurity</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">2026 portfolio</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text-border-2">Cybersecurity</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">2026 portfolio</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">© Leona Kokerai</h1>
-                        </div>
-                        <div class="marquee-item ">
-                            <h1 class="text-border-2">Cybersecurity</h1>
-                        </div>
-                        <div class="marquee-item">
-                            <h1 class="text_secondary-color">2026 portfolio</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="hero-visual">
+      <div class="hero-avatar-frame">
+        <div class="avatar-svg-art">
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.12" viewBox="0 0 400 520">
+            <line x1="50" y1="0" x2="50" y2="520" stroke="#00d4ff" stroke-width=".5"/>
+            <line x1="350" y1="0" x2="350" y2="520" stroke="#7c3aed" stroke-width=".5"/>
+            <line x1="0" y1="200" x2="400" y2="200" stroke="#00d4ff" stroke-width=".5"/>
+            <line x1="0" y1="380" x2="400" y2="380" stroke="#7c3aed" stroke-width=".5"/>
+            <circle cx="50" cy="200" r="4" fill="#00d4ff"/>
+            <circle cx="350" cy="380" r="4" fill="#7c3aed"/>
+            <circle cx="200" cy="200" r="70" fill="none" stroke="#00d4ff" stroke-width=".5" stroke-dasharray="6 4"/>
+            <circle cx="200" cy="200" r="95" fill="none" stroke="#7c3aed" stroke-width=".3" stroke-dasharray="3 6"/>
+          </svg>
+          <div class="avatar-initials-circle">LK</div>
+          <div class="avatar-name-tag">
+            <h3>Leona Kokerai</h3>
+            <p>Find me before they find you.</p>
+          </div>
         </div>
-        <!-- /header -->
-
-        <!-- main-content -->
-        <div class="main-content section-onepage">
-
-            <!-- section-about -->
-            <div id="about" class="section-about-2 section">
-                <div class="tf-container">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="heading-title-2">
-                                <div class="d-flex align-items-center gap_7">
-                                    <div class="text-title text_white text-uppercase">about me</div>
-                                    <i class="icon-ArrowUpRight"></i>
-                                </div>
-                                <div class="cycle-line"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="scroll-effect mb_35">
-                                <h3 class="text-change-color reveal-type">Driven by curiosity and continuous learning, I
-                                    aim to bridge the gap between system performance and security assurance — ensuring
-                                    reliability, compliance, and resilience in every environment I manage.</h3>
-                                <div class="line">
-                                    <img src="images/section/line.png" alt="line">
-                                </div>
-                                <p class="font2 desc">I know that every organization needs someone like me ; a
-                                    professional who not only understands technical concepts but can communicate
-                                    them clearly. With strong adaptability, a relentless zeal to learn, and a
-                                    problem-solving mindset, I bring both technical excellence and human connection
-                                    to the teams I join. My goal is to add value, inspire growth, and leave a
-                                    measurable impact wherever I go.</p>
-                            </div>
-                            <div>
-                                <p class="text_white text-uppercase">“You can’t protect what you don’t understand.”</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="col-xxl-10">
-                            <div class="box-about">
-                                <div class="thumbs scale-img">
-                                    <img loading="lazy" decoding="async" width="325" height="436"
-                                        src="images/section/about-2.jpg" alt="about">
-                                </div>
-                                <div class="content">
-
-                                    <h2 class="text-4xl font-bold text-cyan-400 mb-3">
-                                       
-                                    </h2>
-                                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                                         These certifications & professional qualifications are proof of my commitment to continuous learning and hands-on expertise.
-                                        Every certification I earn reflects persistence, curiosity, and a passion for
-                                        mastering cybersecurity.
-                                    </p>
-                                    <p class="italic text-cyan-300 mt-3">“Learning is my weapon. Persistence is my
-                                        advantage.”</p>
-                                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">Formal Education</h3>
-                                            <p class="text-gray-300">
-                                                <span class="font-medium">BSc Hons. Computer
-                                                    Science-Cyber Security
-                                                    2026,</span>LPU
-                                            </p>
-                                        <div class="counter-item style-3 counter-2">
-                                            <h3 class="text-xl font-semibold text-cyan-400 mb-3">
-                                                Certifications</h3>
-                                            <ul class="list-disc list-inside text-gray-300 space-y-1">
-                                                <li>
-                                                    THM-Web Application Pentesting</li>
-                                                <li>
-                                                   THM- Web Fundamentals</li>
-                                                <li>
-                                                   THM- Jr Penetration Tester Certificate</li>
-                                                <li>
-                                                   THM- Cyber Security 101 Certificate</li>
-                                                <li>
-                                                   THM - Pre Security Certificate</li>
-                                            </ul>
-                                        </div>
-                                        <div class="counter-item style-3 counter-2">
-                                            <ul class="list-disc list-inside text-gray-300 space-y-1">
-                                                
-                                                <li>QuickHeal-Certified Digital Forensic Investigator</li>
-                                                <li>QuickHeal-Securing Computing Systems</li>
-                                                                                        </ul>
-                                                <li>
-                                                    CISSP -INFOSEC</li>
-                                                <li>
-                                                    IBM Cyber Security Analyst</li>
-                                                <li>
-                                                    Google IT Support</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /section-about -->
-
-
-
-
-            <!-- banner-image -->
-            <div class="banner-image tf-spacing-4  container-3 ">
-                <div class="parallaxie parallax-img" style='background: url("images/section/banner-1.jpg")'>
-                </div>
-            </div>
-            <!-- /banner-image -->
-
-            <!-- section-services -->
-            <div id="service" class="section-services section">
-                <div class="tf-container">
-                    <div class="heading-title-2 has-border mb_80">
-                        <div class="d-flex align-items-center gap_10 text-uppercase">
-                            <div class="text-title text_white">Technical Skills</div>
-                            <i class="icon-ArrowUpRight"></i>
-                        </div>
-                        <div class="cycle-line"></div>
-                    </div>
-
-                    <div class="wrap-services">
-
-                        <!-- CYBERSECURITY & PENTESTING -->
-                        <div class="service-item wow animate__animated animate__fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="0s">
-                            <div class="box-left">
-                                <div class="heading">
-                                    <a href="#" class="h1 link text_white">Cybersecurity & Penetration Testing</a>
-                                    <ul class="category">
-                                        <li><a href="#" class="text-caption-1 text_white">Web & Network Penetration
-                                                Testing</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Vulnerability Assessment &
-                                                Exploitation (OWASP Top 10)</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Burp Suite, Nmap, Nikto,
-                                                Metasploit Framework</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">TryHackMe & Hack The Box
-                                                Practice Labs</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Scripting & Automation:
-                                                Python, Bash, C/C++</a></li>
-                                    </ul>
-                                </div>
-                                <div class="btn_wrapper">
-                                    <a href="#" class="tf-btn-2 btn-item btn-hover">
-                                        <span class="h5">View SERVICES</span>
-                                        <i class="icon-ArrowUpRight"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="box-right">
-                                <div class="number">01</div>
-                                <div class="img-style scale-img">
-                                    <img loading="lazy" decoding="async" src="images/section/service-1.jpg" width="448"
-                                        height="490" alt="Cybersecurity Service">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- SECURE WEB APP DEVELOPMENT -->
-                        <div class="service-item wow animate__animated animate__fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="0s">
-                            <div class="box-left">
-                                <div class="heading">
-                                    <a href="#" class="h1 link text_white">Secure Web Application Development</a>
-                                    <ul class="category">
-                                        <li><a href="#" class="text-caption-1 text_white">Full-Stack Development with
-                                                PHP (Laravel)</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Frontend: HTML5, CSS3,
-                                                JavaScript, Tailwind CSS</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Secure Authentication &
-                                                Role-Based Access Control</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Input Validation, SQL
-                                                Injection & XSS Prevention</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">API Security & HTTPS
-                                                Implementation</a></li>
-                                    </ul>
-                                </div>
-                                <div class="btn_wrapper">
-                                    <a href="#" class="tf-btn-2 btn-item btn-hover">
-                                        <span class="h5">View SERVICES</span>
-                                        <i class="icon-ArrowUpRight"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="box-right">
-                                <div class="number">02</div>
-                                <div class="img-style scale-img">
-                                    <img loading="lazy" decoding="async" src="images/section/service-2.jpg" width="448"
-                                        height="490" alt="Secure Web Development">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- NETWORKING -->
-                        <div class="service-item wow animate__animated animate__fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="0s">
-                            <div class="box-left">
-                                <div class="heading">
-                                    <a href="#" class="h1 link text_white">Networking & Infrastructure</a>
-                                    <ul class="category">
-                                        <li><a href="#" class="text-caption-1 text_white">TCP/IP, DNS, Routing, and
-                                                Subnetting</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Cisco Packet Tracer Network
-                                                Simulation</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Wireshark for Traffic Capture
-                                                & Packet Analysis</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">Network Configuration,
-                                                Troubleshooting & Security</a></li>
-                                        <li><a href="#" class="text-caption-1 text_white">VPN, Firewalls, and Access
-                                                Control Implementation</a></li>
-                                    </ul>
-                                </div>
-                                <div class="btn_wrapper">
-                                    <a href="#" class="tf-btn-2 btn-item btn-hover">
-                                        <span class="h5">View SERVICES</span>
-                                        <i class="icon-ArrowUpRight"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="box-right">
-                                <div class="number">03</div>
-                                <div class="img-style scale-img">
-                                    <img loading="lazy" decoding="async" src="images/section/service-3.jpg" width="448"
-                                        height="490" alt="Networking Service">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- /section-services -->
-
-
-            
-        </div>
-        <!-- /main-content -->
-
-        <!-- footer -->
-        <div class="footer style-2">
-            <div class="footer-body">
-                <div class="tf-container">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-tes">
-                            <div class="tes-footer">
-                                <h6 class="desc">Adaptable. Communicative. Driven to learn and secure.
-A valuable addition to every team I join.</h6>
-                                <div class="author d-flex align-items-center gap_16">
-                                    <div class="avatar">
-                                        <img src="images/logo/logo-2.png" width="64" height="64" alt="avatar">
-                                    </div>
-                                    <div class="info">
-                                        <h6 class="name text_white mb_2">Leona Kokerai</h6>
-                                        <div class="text-title font2 text-color-1">Jr. Penetration Tester</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-contact">
-                            <div class="footer-contact">
-                                <div class="item mb_32">
-                                    <p class="font2 mb_12">Please send me an email to</p>
-                                    <a href="#" class="h4 link text_white hover-underline-link">leonakokerai@outlook.com</a>
-                                </div>
-                                <div class="item">
-                                    <p class="font2 mb_12">Let's talk!</p>
-                                    <a href="#" class="h4 link text_white "></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-social">
-                            <div class="footer-social">
-                                <div class="wrap-quick-link">
-                                    <div class="text-title font2 text-color-1 mb_12">Quick link</div>
-                                    <ul class="d-grid gap_5">
-                                        <li><a href="#" class="text-title text_white link hover-line-text">About
-                                                us</a>
-                                        </li>
-                                        <li><a href="#" class="text-title text_white link hover-line-text">Experience &
-                                                Education</a></li>
-                                        <li><a href="#" class="text-title text_white link hover-line-text">Our
-                                                Services
-                                            </a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="tf-container">
-                    <div class="mb_30 wow animate__animated animate__fadeInUp" data-wow-duration="2s"
-                        data-wow-delay="0s">
-                        <img src="images/section/banner-1.jpg" alt="footer">
-                    </div>
-                    <div class="bot d-flex justify-content-between align-items-center">
-                        <p class="font2 text_white wow animate__animated animate__fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="0s">© 2026 Leona Kokerai. All rights reserved.</p>
-                        <span class="line"></span>
-                        <p class="font2 text_white wow animate__animated animate__fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="0.2s">2026 Leona Kokerai - Cybersecurity & Penetration Testing</p>
-                        <span class="line"></span>
-                        <p class="font2 text_white wow animate__animated animate__fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="0.4s">Created by <a href="#" class="link">Ownuh</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /footer -->
-
+      </div>
+      <div class="floating-badge b1"><div class="badge-dot"></div><span>TryHackMe · Top 3%</span></div>
+      <div class="floating-badge b3"><div class="badge-dot purple"></div><span>LPU · Top 1% Cohort</span></div>
+      <div class="floating-badge b2"><div class="badge-dot gold"></div><span>9.22 CGPA · First Class</span></div>
     </div>
-    <!-- /wrapper -->
+  </div>
+  <div class="scroll-cue"><div class="scroll-line"></div><span class="scroll-text">scroll</span></div>
+</section>
 
-    <!-- prograss
-            ============================================== -->
-    <div class="progress-wrap">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
-                style="transition: stroke-dashoffset 10ms linear; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
-            </path>
-        </svg>
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Leona Kokerai</span><span class="marquee-item outline">Cybersecurity</span>
+    <span class="marquee-item">Penetration Testing</span><span class="marquee-item outline">SOC Analyst</span>
+    <span class="marquee-item">DFIR</span><span class="marquee-item outline">Top 3% TryHackMe</span>
+    <span class="marquee-item">Find Me Before They Find You</span><span class="marquee-item outline">2026</span>
+    <span class="marquee-item">Leona Kokerai</span><span class="marquee-item outline">Cybersecurity</span>
+    <span class="marquee-item">Penetration Testing</span><span class="marquee-item outline">SOC Analyst</span>
+    <span class="marquee-item">DFIR</span><span class="marquee-item outline">Top 3% TryHackMe</span>
+    <span class="marquee-item">Find Me Before They Find You</span><span class="marquee-item outline">2026</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-up">
+    <div>
+      <div class="section-label">About Me</div>
+      <div class="section-divider"></div>
+      <div class="about-quote">"You can't protect what you don't understand — and I make it my business to understand everything."</div>
+      <div class="about-body">
+        <p>I'm a <strong>final-year BSc (Hons) Computer Science – Cyber Security</strong> student at Lovely Professional University, graduating 2026 with an 9.22 CGPA (First Class), concurrently completing the Google Cybersecurity Professional Certificate.</p>
+        <p>I didn't just learn cybersecurity in a classroom. I ran a <strong>real black-box penetration test on a live production system</strong>, uncovered 12 critical vulnerabilities, and delivered a professional pentest report with remediation adopted by the client. I built and secured AWS infrastructure handling <strong>5,000+ concurrent users</strong>. I ranked <strong>Top 3% globally on TryHackMe</strong>.</p>
+        <p>Zimbabwean, raised across southern Africa and India, fluent in six languages. I bring rare technical depth combined with cross-cultural communication and an uncompromising drive to grow.</p>
+      </div>
+      <div class="lang-tags">
+        <span class="lang-tag">🇬🇧 English</span><span class="lang-tag">🇿🇦 Afrikaans</span>
+        <span class="lang-tag">🇩🇪 German</span><span class="lang-tag">🇿🇼 Ndebele</span>
+        <span class="lang-tag">🇿🇼 Shona</span><span class="lang-tag">🇿🇦 sePedi</span>
+      </div>
     </div>
-    <!-- End prograss -->
-
-
-    <!-- side-menu-mobile -->
-    <div class="side-menu-mobile">
-        <div class="tf-container h-100">
-            <div class="menu-content h-100">
-                <div class="menu-body">
-                    <ul class="nav-menu-list text-center">
-                        <li><a href="#about" class="menu-link link nav_link hover-line-text">About us</a></li>
-                        <li><a href="#service" class="menu-link link nav_link hover-line-text">Our Services</a></li>
-                        </li>
-                    </ul>
-                </div>
-                <div class="menu-footer d-flex justify-content-between ">
-                    <div class="menu-bot_left flex-wrap">
-                        <a class="h6 text-white link" href="mailto:leonakokerai@outlook.com">leonakokerai@outlook.com</a>
-                        <span class="br-dot"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="about-facts">
+      <div class="fact-item"><div class="fact-label">Degree</div><div class="fact-val">BSc Hons CS – Cyber Security</div></div>
+      <div class="fact-item"><div class="fact-label">University</div><div class="fact-val">Lovely Professional University, India</div></div>
+      <div class="fact-item"><div class="fact-label">CGPA</div><div class="fact-val">9.22 / 10 · First Class</div></div>
+      <div class="fact-item"><div class="fact-label">Cohort Rank</div><div class="fact-val">Top 1% – Cybersecurity Cohort</div></div>
+      <div class="fact-item"><div class="fact-label">TryHackMe</div><div class="fact-val">Top 3% Global</div></div>
+      <div class="fact-item"><div class="fact-label">Nationality</div><div class="fact-val">Zimbabwean · Open to Relocation</div></div>
+      <div class="fact-item"><div class="fact-label">GitHub</div><div class="fact-val"><a href="https://github.com/leeownuh" style="color:var(--accent);text-decoration:none">github.com/leeownuh</a></div></div>
+      <div class="fact-item"><div class="fact-label">Portfolio Live</div><div class="fact-val"><a href="https://leeownuh.github.io/cv-resume-portfolio/" style="color:var(--accent);text-decoration:none">leeownuh.github.io</a></div></div>
     </div>
-    <!-- /side-menu-mobile  -->
+  </div>
+</section>
 
-    <!-- Javascript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/infinityslide.js"></script>
-    <script src="js/gsap.min.js"></script>
-    <script src="js/ScrollTrigger.min.js"></script>
-    <script src="js/SplitText.min.js"></script>
-    <script src="js/gsapAnimate.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/ukiyo.min.js"></script>
-    <script src="js/ScrollSmooth.js"></script>
-    <script src="js/main.js"></script>
-    <!-- /Javascript -->
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Expertise</div>
+  <h2 class="section-title fade-up">The Stack Behind<br>the Shield</h2>
+  <div class="section-divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-card-header"><div class="skill-icon cyan"><i class="fa-solid fa-bug"></i></div><h4>Penetration Testing</h4></div>
+      <div class="skill-tags"><span class="skill-tag">Burp Suite</span><span class="skill-tag">Metasploit</span><span class="skill-tag">Nmap</span><span class="skill-tag">Nikto</span><span class="skill-tag">Gobuster</span><span class="skill-tag">SQLMap</span><span class="skill-tag">OWASP Top 10</span><span class="skill-tag">DAST/SAST</span></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-card-header"><div class="skill-icon purple"><i class="fa-solid fa-tower-broadcast"></i></div><h4>SOC & Threat Detection</h4></div>
+      <div class="skill-tags"><span class="skill-tag">Splunk</span><span class="skill-tag">SIEM</span><span class="skill-tag">Log Analysis</span><span class="skill-tag">Incident Response</span><span class="skill-tag">MITRE ATT&amp;CK</span><span class="skill-tag">Threat Detection</span><span class="skill-tag">NIST CSF</span></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-card-header"><div class="skill-icon green"><i class="fa-solid fa-magnifying-glass"></i></div><h4>Digital Forensics (DFIR)</h4></div>
+      <div class="skill-tags"><span class="skill-tag">Autopsy</span><span class="skill-tag">Volatility</span><span class="skill-tag">Magic Numbers</span><span class="skill-tag">Steghide</span><span class="skill-tag">Memory Analysis</span><span class="skill-tag">IR Planning</span></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-card-header"><div class="skill-icon cyan"><i class="fa-solid fa-code"></i></div><h4>Programming & Scripting</h4></div>
+      <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">Bash</span><span class="skill-tag">C/C++</span><span class="skill-tag">PowerShell</span><span class="skill-tag">PHP (Laravel)</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Assembly</span></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-card-header"><div class="skill-icon gold"><i class="fa-brands fa-aws"></i></div><h4>Cloud & Infrastructure</h4></div>
+      <div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">Docker</span><span class="skill-tag">Linux Admin</span><span class="skill-tag">Windows Systems</span><span class="skill-tag">Cisco Packet Tracer</span><span class="skill-tag">Wireshark</span><span class="skill-tag">GitHub CI/CD</span></div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-card-header"><div class="skill-icon purple"><i class="fa-solid fa-scroll"></i></div><h4>GRC & Compliance</h4></div>
+      <div class="skill-tags"><span class="skill-tag">ISO 27001</span><span class="skill-tag">PCI DSS</span><span class="skill-tag">HIPAA</span><span class="skill-tag">NIST 800-53</span><span class="skill-tag">NIST 800-115</span><span class="skill-tag">GDPR</span><span class="skill-tag">SOC 2</span></div>
+    </div>
+  </div>
+</section>
 
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work History</div>
+  <h2 class="section-title fade-up">Where I've Left<br>My Mark</h2>
+  <div class="section-divider"></div>
+  <div class="exp-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="tl-meta">2024 – Present</div>
+        <div class="tl-title">Full-Stack Engineer & Cybersecurity Specialist</div>
+        <div class="tl-org">The African Apostolic Church GBEAAA · Volunteer</div>
+        <ul class="tl-bullets">
+          <li>Developing full-stack React/Node.js provincial management platform</li>
+          <li>Designed NIST CSF-aligned incident response plan</li>
+          <li>Optimised AWS infrastructure for 5,000+ concurrent users</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-meta">2024 – 2025</div>
+        <div class="tl-title">ICT Administrator & Penetration Tester</div>
+        <div class="tl-org">Eduflex Academy</div>
+        <ul class="tl-bullets">
+          <li>Built entire school IT infrastructure (systems, network, software)</li>
+          <li>Conducted authorised black-box pentest — 12 critical vulns identified</li>
+          <li>Maintained secure digital records dashboard for 50+ users</li>
+          <li>Drove 35% revenue growth in 3 months via digital transformation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="tl-meta">2023 – 2026</div>
+        <div class="tl-title">Cambridge A & O-Level CS Tutor</div>
+        <div class="tl-org">Sunshine Private Tutors</div>
+        <ul class="tl-bullets">
+          <li>Tutored 20+ international students</li>
+          <li>Improved test pass rates by 15% over two years</li>
+          <li>Curriculum covering algorithms, programming & security fundamentals</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-meta">2021 – 2023</div>
+        <div class="tl-title">Junior Web Developer</div>
+        <div class="tl-org">Oyannah Academy</div>
+        <ul class="tl-bullets">
+          <li>Built and maintained PHP Laravel / MySQL web applications</li>
+          <li>Implemented secure authentication and access control</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-meta">2021 – 2023</div>
+        <div class="tl-title">Lead Graphic Designer</div>
+        <div class="tl-org">Agri-Avenir</div>
+        <ul class="tl-bullets">
+          <li>Designed digital campaigns reaching 10,000+ potential customers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title fade-up">Built. Broken.<br>Secured.</h2>
+  <div class="section-divider"></div>
+  <div class="projects-grid">
+    <div class="project-card highlight fade-up">
+      <div class="project-num">01 · PENTEST · LIVE PRODUCTION SYSTEM</div>
+      <div class="project-title">Eduflex Academy — Authorised Black Box Penetration Test</div>
+      <div class="project-desc">Authorised black-box pentest against a live Laravel/MySQL application serving 50+ active users. Zero prior knowledge. Identified 12 critical vulnerabilities across authentication, session management, and access control — posing direct risk to student and staff PII. Full professional report mapped to OWASP Top 10 and NIST SP 800-115. Remediation adopted by client.</div>
+      <div class="project-tags"><span class="project-tag g">Live Production</span><span class="project-tag g">12 Critical Vulns</span><span class="project-tag">Burp Suite</span><span class="project-tag">Nmap</span><span class="project-tag">SQLMap</span><span class="project-tag">OWASP Top 10</span><span class="project-tag">NIST 800-115</span></div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">02 · FULL-STACK + CLOUD</div>
+      <div class="project-title">GBEAAA Church — Secure Platform & AWS Infrastructure</div>
+      <div class="project-desc">Full-stack React/Node.js provincial management platform with NIST CSF-aligned incident response planning. AWS infrastructure optimised to handle 5,000+ concurrent users.</div>
+      <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Node.js</span><span class="project-tag">AWS</span><span class="project-tag">NIST CSF</span><span class="project-tag">Incident Response</span></div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">03 · SECURITY TOOL · PYTHON</div>
+      <div class="project-title">Ownuh SecurePass Analyzer</div>
+      <div class="project-desc">Password strength analysis tool evaluating credentials via complexity scoring and Shannon Entropy. Full CI/CD pipeline via GitHub Actions — auto-building binaries for Windows, macOS, and Linux.</div>
+      <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Shannon Entropy</span><span class="project-tag">Tkinter</span><span class="project-tag">PyInstaller</span><span class="project-tag">GitHub Actions</span><span class="project-tag">CI/CD</span></div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">04 · DFIR · PYTHON</div>
+      <div class="project-title">File Type Identification System</div>
+      <div class="project-desc">Forensic tool identifying file types using magic number signatures, MIME types, and extensions — demonstrating core DFIR investigation techniques.</div>
+      <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Magic Numbers</span><span class="project-tag">MIME Types</span><span class="project-tag">DFIR</span></div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">05 · SECURITY RESEARCH · C++</div>
+      <div class="project-title">Brute Force Attack Simulator</div>
+      <div class="project-desc">Multithreaded C++ brute-force simulator using pthreads to benchmark password-cracking attempts-per-second and analyse keyspace complexity — illustrating real attack surfaces for security training.</div>
+      <div class="project-tags"><span class="project-tag">C++</span><span class="project-tag">Multithreading</span><span class="project-tag">pthreads</span><span class="project-tag">Password Security</span></div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">06 · TRYHACKME · TOP 3% GLOBAL</div>
+      <div class="project-title">TryHackMe — 5 Completed Learning Paths</div>
+      <div class="project-desc">Completed Pre-Security, Cyber Security 101, Jr. Penetration Tester, Web Fundamentals, and Web Application Pentesting. Ranked globally Top 3% from millions of practitioners worldwide.</div>
+      <div class="project-tags"><span class="project-tag">Web App Pentesting</span><span class="project-tag">Jr. Pentest Path</span><span class="project-tag">SOC Fundamentals</span><span class="project-tag">Enumeration</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title fade-up">Verified. Earned.<br>Proven.</h2>
+  <div class="section-divider"></div>
+  <div class="certs-grid fade-up">
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Certified in Cybersecurity (CC)</div><div class="cert-issuer">ISC2</div></div></div>
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Google Cybersecurity Professional Certificate</div><div class="cert-issuer">Google · Coursera</div></div></div>
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Google IT Support Professional Certificate</div><div class="cert-issuer">Google · Coursera</div></div></div>
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">IBM Cybersecurity Analyst</div><div class="cert-issuer">IBM · Coursera</div></div></div>
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Certified Digital Forensic Investigator</div><div class="cert-issuer">Quick Heal</div></div></div>
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Securing Computer Systems</div><div class="cert-issuer">Quick Heal</div></div></div>
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Cybersecurity Analyst Job Simulation</div><div class="cert-issuer">Tata · Forage</div></div></div>
+    <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Introduction to Ethical Hacking</div><div class="cert-issuer">CompTIA</div></div></div>
+    <div class="cert-item"><div class="cert-check" style="background:rgba(245,158,11,.1);color:var(--gold)"><i class="fa-solid fa-graduation-cap"></i></div><div><div class="cert-name">BSc Hons CS – Cyber Security (CompTIA tie-up)</div><div class="cert-issuer">Lovely Professional University · 2026</div></div></div>
+    <div class="cert-item"><div class="cert-check" style="background:rgba(16,185,129,.1);color:var(--accent3)"><i class="fa-solid fa-flag"></i></div><div><div class="cert-name">TryHackMe — 5 Completed Learning Paths</div><div class="cert-issuer">Jr. Pentest · Web App Pentesting · CS 101 · and more</div></div></div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Recognition</div>
+  <h2 class="section-title fade-up">Why I Stand Out</h2>
+  <div class="section-divider"></div>
+  <div class="achievements-grid fade-up">
+    <div class="achievement-item"><div class="ach-icon">🥇</div><div><div class="ach-text">Top 1% of the Cybersecurity cohort at Lovely Professional University</div><div class="ach-year">2023 – 2026</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">🎯</div><div><div class="ach-text">Ranked Top 3% globally on TryHackMe — millions of practitioners worldwide</div><div class="ach-year">2025</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">💡</div><div><div class="ach-text">12 critical vulnerabilities identified on a live production system — real pentest, not a simulation</div><div class="ach-year">2024 – 2025</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">🏆</div><div><div class="ach-text">Best Information Technology Student — Hoërskool Ben Viljoen</div><div class="ach-year">2020 – 2022</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">📈</div><div><div class="ach-text">35% revenue growth in 3 months at Eduflex Academy through digital transformation</div><div class="ach-year">2024</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">🌍</div><div><div class="ach-text">Grade 11 Sekhukhune District Top 100 · Academic Top 10% nationally</div><div class="ach-year">2021</div></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="text-align:center;padding-top:80px;padding-bottom:60px">
+  <div class="section-label" style="justify-content:center">Contact</div>
+  <h2 class="section-title fade-up" style="text-align:center">Let's Work Together</h2>
+  <p style="font-size:1rem;color:var(--muted);max-width:540px;margin:0 auto 1rem;line-height:1.7">Actively seeking junior roles in SOC, penetration testing, DFIR, and security engineering. Visa sponsorship required. Open to relocation worldwide.</p>
+  <a href="mailto:leonakokerai@outlook.com" class="contact-email">leonakokerai@outlook.com</a>
+  <div class="social-links">
+    <a href="https://www.linkedin.com/in/leona-kokerai-a4862b220/" class="social-link" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/leeownuh" class="social-link" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+    <a href="https://tryhackme.com/p/leeownuh" class="social-link" target="_blank"><i class="fa-solid fa-shield-halved"></i> TryHackMe</a>
+    <a href="https://leeownuh.github.io/cv-resume-portfolio/" class="social-link" target="_blank"><i class="fa-solid fa-globe"></i> Live Site</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Leona Kokerai. All rights reserved.</div>
+  <div class="footer-tagline">Find me before they find you.</div>
+</footer>
+
+<script>
+  // CURSOR
+  const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='50px';ring.style.height='50px';ring.style.opacity='.8'});
+    el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.opacity='.5'});
+  });
+  // PRELOADER
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{
+      const pre=document.getElementById('preloader');
+      pre.style.transition='opacity .6s';pre.style.opacity='0';
+      setTimeout(()=>pre.style.display='none',600);
+    },2000);
+  });
+  // FADE IN
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+  // NAV SHADOW
+  window.addEventListener('scroll',()=>{
+    document.getElementById('navbar').style.borderBottomColor=window.scrollY>50?'rgba(0,212,255,.15)':'var(--border)';
+  });
+</script>
 </body>
-
-
 </html>
