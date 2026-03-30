@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leeownuh.github.io/cv-resume-portfolio/sitemap.xml
