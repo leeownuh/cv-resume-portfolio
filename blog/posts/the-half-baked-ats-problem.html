@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Half-Baked ATS Problem</title>
+  <meta
+    name="description"
+    content="An opinion essay on AI hiring tools, ATS filters, and the digital divide they can deepen when deployed without accountability."
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+    :root {
+      --ink: #1a1208;
+      --cream: #f5f0e8;
+      --burnt: #c44b1a;
+      --golden: #e8a020;
+      --char: #2d2018;
+      --smoke: #8a7a68;
+      --highlight: #fff3c4;
+      --link: #7d2503;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    .article-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 32px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .return-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .return-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--link);
+      border: 1px solid rgba(196, 75, 26, 0.2);
+      background: rgba(255, 255, 255, 0.55);
+      padding: 10px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .return-links a:hover {
+      background: white;
+    }
+
+    .meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      flex-wrap: wrap;
+    }
+
+    .meta-bar .tag {
+      background: var(--burnt);
+      color: white;
+      padding: 3px 10px;
+      font-weight: 500;
+    }
+
+    .meta-bar .dot {
+      color: var(--golden);
+      font-size: 14px;
+    }
+
+    .headline-block {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .overline {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--burnt);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--char);
+      position: relative;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--burnt);
+    }
+
+    .bun-icon {
+      display: inline-block;
+      font-size: 0.85em;
+      animation: wobble 3s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    @keyframes wobble {
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+      20% {
+        transform: rotate(-4deg);
+      }
+      40% {
+        transform: rotate(3deg);
+      }
+      60% {
+        transform: rotate(-2deg);
+      }
+    }
+
+    .subhead {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--smoke);
+      max-width: 600px;
+      line-height: 1.6;
+      border-left: 3px solid var(--golden);
+      padding-left: 20px;
+    }
+
+    .hook-box {
+      background: var(--char);
+      color: var(--cream);
+      padding: 32px 36px;
+      margin: 48px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hook-box::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 140px;
+      color: var(--golden);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .hook-box p {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hook-box .attribution {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--golden);
+      margin-top: 16px;
+      display: block;
+    }
+
+    .body-text {
+      font-size: 17px;
+      font-weight: 300;
+      color: #2d2018;
+      line-height: 1.8;
+    }
+
+    .body-text p {
+      margin-bottom: 24px;
+    }
+
+    .body-text strong {
+      font-weight: 500;
+      color: var(--char);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--char);
+      margin: 48px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    h2::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 3px;
+      background: var(--burnt);
+      flex-shrink: 0;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2px;
+      margin: 40px 0;
+    }
+
+    .stat-box {
+      background: white;
+      padding: 24px 20px;
+      border-top: 4px solid var(--golden);
+      text-align: center;
+      box-shadow: 2px 2px 0 var(--char);
+    }
+
+    .stat-box .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--burnt);
+      line-height: 1;
+    }
+
+    .stat-box .label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--smoke);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .highlight-box {
+      background: var(--highlight);
+      border-left: 5px solid var(--golden);
+      padding: 24px 28px;
+      margin: 36px 0;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .highlight-box .emoji-lead {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .recipe-card {
+      background: white;
+      border: 2px solid var(--char);
+      padding: 32px;
+      margin: 40px 0;
+      box-shadow: 6px 6px 0 var(--char);
+      position: relative;
+    }
+
+    .recipe-card::before {
+      content: 'THE RECIPE FOR DISASTER';
+      position: absolute;
+      top: -14px;
+      left: 24px;
+      background: var(--burnt);
+      color: white;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      padding: 4px 12px;
+      font-weight: 500;
+    }
+
+    .recipe-steps {
+      list-style: none;
+      counter-reset: recipe-counter;
+    }
+
+    .recipe-steps li {
+      counter-increment: recipe-counter;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px dashed #ddd;
+      font-size: 15px;
+    }
+
+    .recipe-steps li:last-child {
+      border-bottom: none;
+    }
+
+    .recipe-steps li::before {
+      content: counter(recipe-counter);
+      background: var(--golden);
+      color: var(--char);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .debate-section {
+      background: var(--char);
+      color: var(--cream);
+      padding: 40px;
+      margin: 48px 0;
+      position: relative;
+    }
+
+    .debate-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      margin-bottom: 24px;
+      color: var(--golden);
+    }
+
+    .debate-questions {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .debate-questions li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border-left: 3px solid var(--burnt);
+      transition: background 0.2s;
+    }
+
+    .debate-questions li:hover {
+      background: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    .debate-questions li .q-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--golden);
+      line-height: 1;
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    .verdict {
+      border: 3px solid var(--burnt);
+      padding: 36px;
+      margin: 48px 0 32px;
+      position: relative;
+      text-align: center;
+    }
+
+    .verdict-label {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--burnt);
+      color: white;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      padding: 4px 16px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .verdict p {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--char);
+    }
+
+    .cta-block {
+      margin-top: 48px;
+      padding: 28px 0;
+      border-top: 1px solid #d4c9b4;
+      font-size: 14px;
+      color: var(--smoke);
+    }
+
+    .cta-block strong {
+      color: var(--burnt);
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hashtags {
+      margin-top: 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--burnt);
+      letter-spacing: 0.05em;
+      line-height: 2;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 40px 0;
+      color: var(--smoke);
+      font-size: 20px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #d4c9b4;
+    }
+
+    .divide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3px;
+      margin: 36px 0;
+    }
+
+    .divide-stat {
+      background: var(--char);
+      padding: 28px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .divide-stat::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--burnt);
+    }
+
+    .divide-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      font-weight: 900;
+      color: var(--golden);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .divide-label {
+      font-size: 12px;
+      color: rgba(245, 240, 232, 0.7);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 540px) {
+      .article-wrapper {
+        padding: 28px 20px 80px;
+      }
+
+      .hook-box {
+        padding: 24px 20px;
+      }
+
+      .hook-box p {
+        font-size: 18px;
+      }
+
+      .recipe-card {
+        padding: 28px 20px;
+      }
+
+      .debate-section {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="article-wrapper">
+    <div class="return-links">
+      <a href="../index.html">All Posts</a>
+      <a href="../../index.html">Portfolio Home</a>
+    </div>
+
+    <div class="meta-bar">
+      <span class="tag">Opinion / For Builders</span>
+      <span class="dot">&#9679;</span>
+      <span>AI Ethics</span>
+      <span class="dot">&#9679;</span>
+      <span>Recruitment Tech &amp; The Digital Divide</span>
+    </div>
+
+    <div class="headline-block">
+      <span class="overline">The Question No One's Asking Loudly Enough</span>
+      <h1>
+        Was The ATS <em>Ever</em><br/>
+        Fully Baked? <span class="bun-icon">&#129360;</span>
+      </h1>
+      <p class="subhead">
+        When half-cooked AI tools meet AI-generated job descriptions, you do not get innovation.
+        You get a perfectly automated system that widens the gap between those who know how to
+        speak machine and everyone else. Builders, this one's for you.
+      </p>
+    </div>
+
+    <div class="hook-box">
+      <p>
+        The oven timer went off. We pulled it out. We called it done. But the centre? Still raw
+        and now it is being served to millions of job seekers every single day.
+      </p>
+      <span class="attribution">The ATS problem, in plain bread-and-butter terms</span>
+    </div>
+
+    <div class="body-text">
+      <p>
+        Let's talk about the <strong>Applicant Tracking System</strong> ; that invisible
+        gatekeeper quietly deciding whether your resume even reaches human eyes. It was supposed to
+        make hiring smarter, faster, fairer. Instead, a growing number of professionals,
+        researchers, and frustrated hiring managers are asking a sharper question:
+      </p>
+
+      <p>
+        <strong>
+          Was the ATS ever actually ready for prime time? Or was it an unfinished product, taken
+          out of the oven too soon, served too hot, and scaled too wide before anyone checked if it
+          actually worked?
+        </strong>
+      </p>
+
+      <h2>The Bread Analogy That Actually Holds</h2>
+
+      <p>
+        Think about baking a dense sourdough loaf. Pull it out ten minutes early and it looks fine
+        on the outside ; golden crust, satisfying thump. But slice it open and you find a gummy,
+        underdeveloped centre. That is not bread. That is a liability wrapped in a convincing
+        exterior.
+      </p>
+
+      <p>
+        ATS technology, for many organisations, is that loaf. Developed under commercial pressure,
+        scaled before the edge cases were solved, and now so deeply embedded in hiring
+        infrastructure that questioning it feels almost heretical.
+      </p>
+
+      <p>But someone has to ask.</p>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="num">75%</div>
+          <div class="label">of qualified candidates filtered out before a human sees them</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">99%</div>
+          <div class="label">of Fortune 500 companies rely on ATS systems</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">~6 sec</div>
+          <div class="label">average human recruiter scan time, if the resume even arrives</div>
+        </div>
+      </div>
+
+      <h2>Enter the AI Job Description ; And Things Get Worse</h2>
+
+      <p>
+        Now layer something newer and shinier on top: the <strong>AI-generated job description</strong>.
+        Companies, under pressure to hire fast and at scale, are using generative AI tools to
+        produce job postings in seconds. Keywords, requirements, buzzwords ; all machine-selected,
+        all optimised for what, exactly?
+      </p>
+
+      <p>
+        Here is the brutal irony: an AI writes the job description, stuffed with specific keyword
+        patterns. The ATS then filters candidates based on those same keyword patterns. And
+        candidates ; the smart ones ; are now using <em>their own AI</em> to reverse-engineer the
+        keywords and stuff their resumes accordingly.
+      </p>
+
+      <div class="highlight-box">
+        <span class="emoji-lead">&#9888;</span>
+        <strong>What we have built is a closed loop of machines talking to machines</strong> ; a
+        game of algorithmic telephone where the actual human being, with their actual skills,
+        actual potential, and actual lived experience, is the one who gets lost in translation.
+      </div>
+
+      <p>
+        The job description no longer reflects a real human need written by someone who understands
+        the role. The resume no longer reflects the real person who wrote it. And the filter in
+        between does not understand either. This is not a hiring pipeline.
+        <strong>It is a hallucination factory.</strong>
+      </p>
+    </div>
+
+    <div class="recipe-card">
+      <ul class="recipe-steps">
+        <li>
+          <div>
+            Use AI to generate a job description loaded with industry buzzwords that sound
+            impressive but reflect no actual operational nuance
+          </div>
+        </li>
+        <li>
+          <div>
+            Feed that description into an ATS that scores candidates on keyword density, not
+            demonstrated competence
+          </div>
+        </li>
+        <li>
+          <div>
+            Watch genuinely skilled candidates ; career changers, non-traditional backgrounds,
+            people who speak "human" instead of "LinkedIn SEO" ; get auto-rejected
+          </div>
+        </li>
+        <li>
+          <div>
+            Watch less-qualified candidates who know how to game the system sail through to
+            interview stage
+          </div>
+        </li>
+        <li>
+          <div>Complain that "there's no talent in the market" and repeat indefinitely</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="body-text">
+      <h2>The Fairness Problem Nobody Wants to Own</h2>
+
+      <p>
+        ATS systems were also sold, in part, as tools to <strong>remove human bias</strong> from
+        hiring. Let algorithms decide, the argument went, and you remove the manager who
+        subconsciously favours people who went to the same university. Noble in theory.
+      </p>
+
+      <p>
+        In practice? The bias does not disappear ; it gets <em>encoded</em>. If the training data
+        or keyword logic reflects historical hiring patterns, which it does, then the algorithm
+        does not remove bias. It launders it. It makes discrimination look like data.
+      </p>
+
+      <p>
+        Research has consistently shown that certain groups ; people with non-Western names, those
+        with employment gaps, career changers, people with disabilities whose resume formatting
+        differs ; are filtered out at disproportionate rates. Not because of their ability. Because
+        of how their story does not fit the template.
+      </p>
+
+      <h2>So What's the Actual Argument Here?</h2>
+
+      <p>
+        This is not a call to burn the technology down. ATS tools, in mature, thoughtfully
+        implemented forms, can genuinely assist high-volume hiring. The problem is not the concept.
+        <strong>The problem is deployment without accountability.</strong>
+      </p>
+
+      <p>
+        When AI products ; ATS engines, job description generators, resume scoring tools ; are
+        released into consequential environments like employment before they have been stress-tested
+        for real-world failure modes, real people pay the price. Not in buggy software. In missed
+        job opportunities. In careers stunted. In brilliant candidates who simply did not know how
+        to speak machine.
+      </p>
+
+      <p>The bun was pulled out early. And we are all eating it.</p>
+    </div>
+
+    <div class="body-text">
+      <h2>The Digital Divide Nobody Put in the Spec</h2>
+
+      <p>
+        Here is the part that should make every engineer and product manager uncomfortable:
+        <strong>the people most harmed by a half-baked ATS are not randomly distributed.</strong>
+        They follow a very predictable map, and that map looks a lot like existing inequality.
+      </p>
+
+      <p>
+        ATS optimisation is now a skill. Knowing to use "managed cross-functional teams" instead of
+        "led a group," knowing to mirror the job description's exact phrasing, knowing to use a
+        clean single-column layout that parses cleanly ; this is knowledge. And like most knowledge
+        in a digital economy, it is not evenly distributed.
+      </p>
+    </div>
+
+    <div class="divide-grid">
+      <div class="divide-stat">
+        <div class="divide-num">43%</div>
+        <div class="divide-label">
+          of adults in low-income countries lack basic digital literacy skills needed to navigate
+          modern job platforms
+        </div>
+      </div>
+      <div class="divide-stat">
+        <div class="divide-num">2x</div>
+        <div class="divide-label">
+          Black and Hispanic applicants are up to twice as likely to be screened out by
+          keyword-matching ATS logic compared to white counterparts with equivalent qualifications
+        </div>
+      </div>
+      <div class="divide-stat">
+        <div class="divide-num">60%</div>
+        <div class="divide-label">
+          of job seekers in emerging markets apply via mobile, where most ATS-friendly resume
+          formatting tools simply do not work
+        </div>
+      </div>
+      <div class="divide-stat">
+        <div class="divide-num">$0</div>
+        <div class="divide-label">
+          cost to corporations when their ATS rejects qualified candidates from under-resourced
+          backgrounds ; there is no feedback loop, no accountability, no metric for this failure
+        </div>
+      </div>
+    </div>
+
+    <div class="body-text">
+      <p>
+        Think about what ATS optimisation actually requires: access to resume review tools, often
+        paywalled, knowledge of how parsing engines work, technical literacy, time to iterate on
+        applications, not available to someone working two jobs, and ideally a network of people
+        who have been through the process before, which means social capital.
+      </p>
+
+      <p>
+        The candidate from a well-resourced background with a LinkedIn Premium subscription and a
+        career coach? They know the game. The first-generation graduate in Nairobi, Lagos, or
+        rural India applying for a remote tech role? They are playing a game they do not even know
+        exists, against a system that was never designed with them in mind.
+      </p>
+
+      <div class="highlight-box" style="border-left-color: var(--burnt);">
+        <span class="emoji-lead">&#127757;</span>
+        <strong>The cruelest irony:</strong> AI hiring tools were explicitly marketed as
+        bias-reduction technology. Instead, they have created a new layer of structural
+        disadvantage ; one that is harder to see, harder to challenge, and invisible in the
+        metrics companies use to measure "fairness."
+      </div>
+
+      <p>
+        When you ship a product that filters humans at scale and the failure modes fall
+        disproportionately on people who are already marginalised, that is not a bug you can patch
+        in v2. <strong>That is a design choice you made by not asking the question in v1.</strong>
+      </p>
+
+      <h2>A Direct Word to the Builders in the Room</h2>
+
+      <p>
+        If you are an AI developer, an ML engineer, a product manager at an HR tech company, or a
+        founder building the next generation of recruitment tooling, this section is specifically
+        for you.
+      </p>
+
+      <p>
+        You are not building neutral infrastructure. Every threshold you set, every feature you
+        weight, every edge case you decide is "out of scope for this sprint" ; those are decisions
+        with human consequences. The candidate who does not make it through your pipeline because
+        their resume came from a free template with two columns? That is a real person. The system
+        did not fail them neutrally. <strong>The system failed them in the exact direction you did
+        not test for.</strong>
+      </p>
+
+      <p>
+        The questions worth asking before you ship are not just "does it work?" They are: <em>Who
+        does it work for? Who does it fail? And are the people it fails already disadvantaged?</em>
+        If you cannot answer those three questions with data before deployment, the product is not
+        ready.
+      </p>
+
+      <p>
+        That is not idealism. That is engineering rigour applied to the full problem space, not
+        just the comfortable parts.
+      </p>
+    </div>
+
+    <div class="debate-section">
+      <h3>Let's put some real questions on the table &#128071;</h3>
+      <ul class="debate-questions">
+        <li>
+          <span class="q-mark">?</span>
+          <span>
+            If your ATS disproportionately filters out candidates from low-income countries,
+            non-Western educational backgrounds, or mobile-only applicants, is that a bug, or a
+            feature you never bothered to check for?
+          </span>
+        </li>
+        <li>
+          <span class="q-mark">?</span>
+          <span>
+            If an AI writes the job description and an AI filters the applications, who is actually
+            responsible when the wrong person gets hired, or the right person gets missed?
+          </span>
+        </li>
+        <li>
+          <span class="q-mark">?</span>
+          <span>
+            Should companies be legally required to disclose when an ATS or AI tool was used in any
+            stage of candidate filtering?
+          </span>
+        </li>
+        <li>
+          <span class="q-mark">?</span>
+          <span>
+            Is "ATS optimisation" now a prerequisite skill for employment, and what does it say
+            about us that we accept this?
+          </span>
+        </li>
+        <li>
+          <span class="q-mark">?</span>
+          <span>Are we heading toward a future where the best candidates are simply the best prompt engineers?</span>
+        </li>
+        <li>
+          <span class="q-mark">?</span>
+          <span>
+            At what point does deploying an insufficiently tested AI tool in a high-stakes domain,
+            like hiring, become an ethical violation, not just a product shortcoming?
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="body-text">
+      <p>
+        The hiring industry is at an inflection point. Organisations that figure out how to use AI
+        as a <em>complement</em> to human judgment, rather than a replacement for it, will build
+        better teams. Those who keep serving half-baked loaves and wondering why their talent
+        pipeline tastes wrong? They will keep having the same conversation in 2030 that they are
+        having today.
+      </p>
+
+      <p>The oven is a tool. Knowing <strong>when the bread is actually ready</strong> ; that is still a human job.</p>
+    </div>
+
+    <div class="verdict">
+      <span class="verdict-label">The Take</span>
+      <p>
+        AI in hiring is not inherently broken ; but releasing AI tools into consequential human
+        systems before they are genuinely ready is. The ATS, as widely deployed today, is a case
+        study in what happens when we optimise for speed-to-market over fitness for purpose. Pair
+        it with an AI job description, and you have a self-sealing system that is excellent at one
+        thing: finding candidates who are good at gaming systems, not necessarily good at the job.
+      </p>
+    </div>
+
+    <div class="divider">&#128293;</div>
+
+    <div class="cta-block">
+      <strong>Builders ; the comments are yours.</strong>
+      Are you building ATS or HR tech? Have you run equity audits on your filtering logic? Have you
+      tested your system against candidates applying from a mobile device in a developing market?
+      Or is that still "on the roadmap"? Job seekers and recruiters, your stories matter here too.
+      Let's make this visible.
+
+      <div class="hashtags">
+        #AIEthics #ResponsibleAI #HRTech #ATS #DigitalDivide #FutureOfWork #MachineLearning
+        #AIBias #TechForGood #ProductEthics #AIResponsibility #TalentAcquisition #InclusiveTech
+        #SoftwareEngineering
+      </div>
+    </div>
+  </div>
+</body>
+</html>

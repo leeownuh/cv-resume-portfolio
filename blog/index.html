@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leona Kokerai | Blog</title>
+  <meta
+    name="description"
+    content="Long-form writing from Leona Kokerai on cybersecurity, AI ethics, digital inequality, and responsible engineering."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #050810;
+      --surface: #0b1120;
+      --card: #0f1829;
+      --border: #1a2a45;
+      --accent: #00d4ff;
+      --accent2: #7c3aed;
+      --accent3: #10b981;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(124, 58, 237, 0.14), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(0, 212, 255, 0.1), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    code {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85em;
+      color: var(--accent);
+    }
+
+    .archive-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 42px 5% 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .home-link:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: var(--white);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 3rem;
+    }
+
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      line-height: 0.96;
+      color: var(--white);
+      letter-spacing: -2px;
+      max-width: 11ch;
+    }
+
+    .hero p {
+      margin-top: 1.4rem;
+      max-width: 58ch;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .info-card {
+      background: rgba(15, 24, 41, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .info-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    .info-value {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .info-card p {
+      font-size: 0.94rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .blog-card {
+      background: linear-gradient(180deg, rgba(15, 24, 41, 0.96), rgba(7, 12, 24, 0.98));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.7rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .blog-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      opacity: 0.9;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 212, 255, 0.28);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    .blog-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .blog-chip {
+      padding: 0.28rem 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .blog-chip.featured {
+      border-color: rgba(16, 185, 129, 0.25);
+      color: var(--accent3);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .blog-card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1.2;
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-bottom: 0.9rem;
+    }
+
+    .blog-card-summary {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: auto;
+    }
+
+    .blog-card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .blog-card-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .blog-card-topic {
+      font-size: 0.78rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .blog-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .blog-card-link:hover {
+      color: var(--accent);
+    }
+
+    .blog-empty {
+      grid-column: 1 / -1;
+      background: var(--card);
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      padding: 1.8rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    footer strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .archive-wrap {
+        padding-top: 28px;
+      }
+
+      .hero h1 {
+        max-width: 100%;
+      }
+
+      .blog-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .blog-card-link {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="archive-wrap">
+    <header class="topbar">
+      <a class="home-link" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+      <a class="btn btn-primary" href="../index.html#contact"><i class="fa-solid fa-envelope"></i> Work With Me</a>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Leona Kokerai / Blog</div>
+        <h1>Research, field notes, and opinionated writing.</h1>
+        <p>
+          This archive holds standalone HTML essays, which means every post can have its own visual
+          treatment while still living inside the portfolio. The homepage highlights the latest
+          writing, and this page keeps the full list in one place.
+        </p>
+      </div>
+
+      <aside class="info-card">
+        <div class="info-label">Archive Status</div>
+        <div class="info-value"><span id="archive-count">0</span> posts live</div>
+        <p>
+          Add a new HTML file to <code>blog/posts/</code>, then register it in
+          <code>blog/posts.js</code>. It will automatically appear here and on the homepage blog
+          section.
+        </p>
+      </aside>
+    </section>
+
+    <section>
+      <div class="section-label">Latest Writing</div>
+      <div class="archive-grid" id="archive-grid">
+        <article class="blog-empty">Loading posts...</article>
+      </div>
+    </section>
+
+    <footer>
+      <div>&copy; 2026 Leona Kokerai. All rights reserved.</div>
+      <div><strong>Find me before they find you.</strong></div>
+    </footer>
+  </main>
+
+  <script src="./posts.js"></script>
+  <script src="./render.js"></script>
+  <script>
+    if (window.blogRenderer) {
+      window.blogRenderer.renderFeed({
+        targetId: 'archive-grid',
+        basePath: './',
+        count: Infinity,
+        emptyMessage: 'No posts are live yet.'
+      });
+      window.blogRenderer.renderCount('archive-count');
+    }
+  </script>
+</body>
+</html>
