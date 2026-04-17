@@ -1,6 +1,19 @@
 // Add future posts to this array after uploading the matching HTML file to blog/posts/<slug>.html.
 window.blogPosts = [
   {
+    slug: 'ice',
+    title: 'ICE: Breaking a Windows Machine (Icecast Exploit)',
+    format: 'Walkthrough',
+    category: 'Walkthroughs',
+    topic: 'TryHackMe / Windows Exploitation',
+    summary:
+      'A Windows-focused CTF writeup chaining service discovery (Icecast on 8000), CVE research (CVE-2004-9091), Metasploit exploitation, and post-exploitation steps like UAC bypass and credential dumping.',
+    displayDate: 'April 15, 2026',
+    published: '2026-04-15',
+    readTime: '10 min read',
+    featured: false
+  },
+  {
     slug: 'blue',
     title: 'Blue: EternalBlue MS17-010 from Recon to SYSTEM',
     format: 'Walkthrough',

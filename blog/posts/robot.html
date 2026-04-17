@@ -394,7 +394,7 @@
   </header>
 
   <div class="intro-block">
-    <strong>Why I chose this room:</strong> Mr. Robot isn't just a CTF — it's a love letter to realistic attack chains. No abstract puzzles. The path from unauthenticated visitor to root mirrors real-world engagements: public info disclosure → credential brute-force → web shell → privilege escalation. I wanted to document not just <em>what</em> I did, but <em>why each step follows from the last</em>.
+    <strong>Why I chose this room:</strong> Mr. Robot isn't just a CTF - it's a love letter to realistic attack chains. No abstract puzzles. The path from unauthenticated visitor to root mirrors real-world engagements: public info disclosure → credential brute-force → web shell → privilege escalation. I wanted to document not just <em>what</em> I did, but <em>why each step follows from the last</em>.
   </div>
 
   <div class="flags-summary">
@@ -415,10 +415,10 @@
   <!-- PHASE 1 -->
   <div class="phase">
     <div class="phase-num">Phase 01</div>
-    <h2>Reconnaissance — Know Before You Touch</h2>
+    <h2>Reconnaissance - Know Before You Touch</h2>
   </div>
 
-  <p>My first instinct with any new target is always the same: resist the urge to immediately fire tools and instead build a mental model of what the application is. A web server is running — what does it serve, and what does it <em>accidentally</em> expose?</p>
+  <p>My first instinct with any new target is always the same: resist the urge to immediately fire tools and instead build a mental model of what the application is. A web server is running - what does it serve, and what does it <em>accidentally</em> expose - </p>
 
   <p><code>nmap</code> is the starting gun for that question.</p>
 
@@ -439,18 +439,18 @@
 
   <div class="insight">
     <div class="insight-icon">💡</div>
-    <p class="insight-text">I always save output with <code>-oA</code> — even when I think I won't need it. On a real engagement, that file becomes your evidence log. Good habits start in practice environments. The <code>-T4</code> flag assumes a reliable network; on a flaky connection, <code>-T3</code> prevents false negatives.</p>
+    <p class="insight-text">I always save output with <code>-oA</code> - even when I think I won't need it. On a real engagement, that file becomes your evidence log. Good habits start in practice environments. The <code>-T4</code> flag assumes a reliable network; on a flaky connection, <code>-T3</code> prevents false negatives.</p>
   </div>
 
-  <p>Two open ports, both serving HTTP/HTTPS. Standard web server setup. No SSH, no FTP — this machine wants me focused on the web surface. Let's oblige.</p>
+  <p>Two open ports, both serving HTTP/HTTPS. Standard web server setup. No SSH, no FTP - this machine wants me focused on the web surface. Let's oblige.</p>
 
   <!-- PHASE 2 -->
   <div class="phase">
     <div class="phase-num">Phase 02</div>
-    <h2>Directory Enumeration — Finding What Wasn't Meant to Be Found</h2>
+    <h2>Directory Enumeration - Finding What Wasn't Meant to Be Found</h2>
   </div>
 
-  <p>The homepage is theatrical but informationally empty. Before poking at it manually, I want a map. <code>gobuster</code> lets me brute-force directory names against a wordlist — the equivalent of trying every door in a building.</p>
+  <p>The homepage is theatrical but informationally empty. Before poking at it manually, I want a map. <code>gobuster</code> lets me brute-force directory names against a wordlist - the equivalent of trying every door in a building.</p>
 
   <div class="terminal">
     <div class="terminal-bar">
@@ -465,11 +465,11 @@
     </div>
   </div>
 
-  <p>Two immediate hits. WordPress is a significant surface area — admin panels, plugin vulnerabilities, XML-RPC abuse. But before I get ahead of myself: <code>/robots.txt</code>.</p>
+  <p>Two immediate hits. WordPress is a significant surface area - admin panels, plugin vulnerabilities, XML-RPC abuse. But before I get ahead of myself: <code>/robots.txt</code>.</p>
 
   <div class="warning">
     <div class="insight-icon">⚠️</div>
-    <p class="insight-text"><strong>Robots.txt is not a security control.</strong> Developers use it to tell search crawlers what <em>not</em> to index. But listing a path there doesn't prevent access — it just asks nicely. Attackers read it like a treasure map.</p>
+    <p class="insight-text"><strong>Robots.txt is not a security control.</strong> Developers use it to tell search crawlers what <em>not</em> to index. But listing a path there doesn't prevent access - it just asks nicely. Attackers read it like a treasure map.</p>
   </div>
 
   <div class="terminal">
@@ -487,17 +487,17 @@
   <div class="key-found">
     <div class="key-icon">🗝️</div>
     <div>
-      <div class="key-label">Key 1 of 3 — Retrieved</div>
-      <div class="key-text">Visit /key-1-of-3.txt directly — it's world-readable.</div>
+      <div class="key-label">Key 1 of 3 - Retrieved</div>
+      <div class="key-text">Visit /key-1-of-3.txt directly - it's world-readable.</div>
     </div>
   </div>
 
-  <p><code>fsocity.dic</code> downloads as a raw wordlist. At first glance it looks like noise — 858,160 entries. But the naming convention (<em>fsociety</em>, the hacker group from the show) suggests it's themed. These will be our credential candidates.</p>
+  <p><code>fsocity.dic</code> downloads as a raw wordlist. At first glance it looks like noise - 858,160 entries. But the naming convention (<em>fsociety</em>, the hacker group from the show) suggests it's themed. These will be our credential candidates.</p>
 
   <!-- PHASE 3 -->
   <div class="phase">
     <div class="phase-num">Phase 03</div>
-    <h2>Credential Harvesting — Working Smarter Before Working Harder</h2>
+    <h2>Credential Harvesting - Working Smarter Before Working Harder</h2>
   </div>
 
   <p>Before launching any brute-force, I want to minimise wasted compute. 858,160 attempts against a web form is slow and noisy. First step: deduplicate.</p>
@@ -520,17 +520,17 @@
 
   <div class="insight">
     <div class="insight-icon">💡</div>
-    <p class="insight-text">This is a 98.6% reduction in attack surface before sending a single request. <strong>Working methodically before working loudly</strong> is what separates a tester from a script kiddie. Fewer requests also means less log noise on the target — relevant on real engagements.</p>
+    <p class="insight-text">This is a 98.6% reduction in attack surface before sending a single request. <strong>Working methodically before working loudly</strong> is what separates a tester from a script kiddie. Fewer requests also means less log noise on the target - relevant on real engagements.</p>
   </div>
 
-  <p>Next, I need to understand how WordPress's login form communicates failures. I captured a failed login attempt with Burp Suite's Proxy. The POST body reveals the parameter names: <code>log</code> (username) and <code>pwd</code> (password). WordPress also helpfully differentiates error messages — <em>"Invalid username"</em> vs <em>"The password you entered for the username"</em> — which means I can enumerate usernames independently of passwords.</p>
+  <p>Next, I need to understand how WordPress's login form communicates failures. I captured a failed login attempt with Burp Suite's Proxy. The POST body reveals the parameter names: <code>log</code> (username) and <code>pwd</code> (password). WordPress also helpfully differentiates error messages - <em>"Invalid username"</em> vs <em>"The password you entered for the username"</em> - which means I can enumerate usernames independently of passwords.</p>
 
-  <p><strong>Step 1 — Find valid usernames:</strong></p>
+  <p><strong>Step 1 - Find valid usernames:</strong></p>
 
   <div class="terminal">
     <div class="terminal-bar">
       <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-      <span class="terminal-label">hydra — username enumeration</span>
+      <span class="terminal-label">hydra - username enumeration</span>
     </div>
     <div class="terminal-body">
 <span class="cmd">hydra -L fs-clean.txt -p placeholder &lt;TARGET_IP&gt; \</span><br>
@@ -544,12 +544,12 @@
     </div>
   </div>
 
-  <p><strong>Step 2 — Crack elliot's password:</strong></p>
+  <p><strong>Step 2 - Crack elliot's password:</strong></p>
 
   <div class="terminal">
     <div class="terminal-bar">
       <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-      <span class="terminal-label">hydra — password brute-force</span>
+      <span class="terminal-label">hydra - password brute-force</span>
     </div>
     <div class="terminal-body">
 <span class="cmd">hydra -l elliot -P fs-clean.txt &lt;TARGET_IP&gt; \</span><br>
@@ -564,16 +564,16 @@
 
   <div class="insight">
     <div class="insight-icon">💡</div>
-    <p class="insight-text">The two-stage approach — enumerate usernames first, then passwords — is far faster than a full credential matrix. It's also how real attackers operate: reduce unknowns one at a time. The <strong>case sensitivity</strong> in Hydra flags (<code>-L</code> vs <code>-l</code>, <code>-P</code> vs <code>-p</code>) is an easy mistake that silently breaks the attack.</p>
+    <p class="insight-text">The two-stage approach - enumerate usernames first, then passwords - is far faster than a full credential matrix. It's also how real attackers operate: reduce unknowns one at a time. The <strong>case sensitivity</strong> in Hydra flags (<code>-L</code> vs <code>-l</code>, <code>-P</code> vs <code>-p</code>) is an easy mistake that silently breaks the attack.</p>
   </div>
 
   <!-- PHASE 4 -->
   <div class="phase">
     <div class="phase-num">Phase 04</div>
-    <h2>Getting a Shell — WordPress as an Attack Vector</h2>
+    <h2>Getting a Shell - WordPress as an Attack Vector</h2>
   </div>
 
-  <p>Elliot is an administrator. That's significant — WordPress admins can edit theme PHP files directly from the dashboard. This is a legitimate CMS feature being weaponised: I'm not exploiting a vulnerability, I'm abusing trusted functionality with stolen credentials.</p>
+  <p>Elliot is an administrator. That's significant - WordPress admins can edit theme PHP files directly from the dashboard. This is a legitimate CMS feature being weaponised: I'm not exploiting a vulnerability, I'm abusing trusted functionality with stolen credentials.</p>
 
   <ul class="steps">
     <li>Navigate to <strong>Appearance → Editor</strong> in the WordPress dashboard</li>
@@ -602,13 +602,13 @@
 
   <div class="warning">
     <div class="insight-icon">⚠️</div>
-    <p class="insight-text"><strong>Shell spawned as daemon — not the user I need.</strong> I'm in, but with minimal privileges. The next step is lateral movement to a named user account.</p>
+    <p class="insight-text"><strong>Shell spawned as daemon - not the user I need.</strong> I'm in, but with minimal privileges. The next step is lateral movement to a named user account.</p>
   </div>
 
   <!-- PHASE 5 -->
   <div class="phase">
     <div class="phase-num">Phase 05</div>
-    <h2>Lateral Movement — Cracking Robot's Hash</h2>
+    <h2>Lateral Movement - Cracking Robot's Hash</h2>
   </div>
 
   <p>Poking around <code>/home</code>, the user <code>robot</code> has two files: the second key (owner-read only) and a file named <code>password.raw-md5</code>. The filename is practically a hint.</p>
@@ -643,10 +643,10 @@
 
   <div class="insight">
     <div class="insight-icon">💡</div>
-    <p class="insight-text"><strong>The password is the alphabet in order.</strong> This is a perfect illustration of why password policies matter — a 26-character password that passes length checks but is entirely predictable. MD5 was never designed for password storage; any password stored as raw MD5 is effectively plaintext to an attacker with a GPU.</p>
+    <p class="insight-text"><strong>The password is the alphabet in order.</strong> This is a perfect illustration of why password policies matter - a 26-character password that passes length checks but is entirely predictable. MD5 was never designed for password storage; any password stored as raw MD5 is effectively plaintext to an attacker with a GPU.</p>
   </div>
 
-  <p>Switching to robot requires an interactive TTY. The <code>daemon</code> shell I caught doesn't qualify — I need to upgrade it first:</p>
+  <p>Switching to robot requires an interactive TTY. The <code>daemon</code> shell I caught doesn't qualify - I need to upgrade it first:</p>
 
   <div class="terminal">
     <div class="terminal-bar">
@@ -665,7 +665,7 @@
   <div class="key-found">
     <div class="key-icon">🗝️</div>
     <div>
-      <div class="key-label">Key 2 of 3 — Retrieved</div>
+      <div class="key-label">Key 2 of 3 - Retrieved</div>
       <div class="key-text">Lateral movement complete. Now: root or nothing.</div>
     </div>
   </div>
@@ -673,10 +673,10 @@
   <!-- PHASE 6 -->
   <div class="phase">
     <div class="phase-num">Phase 06</div>
-    <h2>Privilege Escalation — SUID Abuse via nmap</h2>
+    <h2>Privilege Escalation - SUID Abuse via nmap</h2>
   </div>
 
-  <p>The final key is in <code>/root</code> — I need to escalate. My first check is always SUID binaries: executables that run with the file owner's permissions (often root) regardless of who executes them. A misconfigured SUID on an interactive binary is a classic privesc.</p>
+  <p>The final key is in <code>/root</code> - I need to escalate. My first check is always SUID binaries: executables that run with the file owner's permissions (often root) regardless of who executes them. A misconfigured SUID on an interactive binary is a classic privesc.</p>
 
   <div class="terminal">
     <div class="terminal-bar">
@@ -719,7 +719,7 @@
   <div class="key-found">
     <div class="key-icon">🗝️</div>
     <div>
-      <div class="key-label">Key 3 of 3 — Retrieved</div>
+      <div class="key-label">Key 3 of 3 - Retrieved</div>
       <div class="key-text">Root access achieved. Machine fully compromised. <span class="cursor"></span></div>
     </div>
   </div>
@@ -732,11 +732,11 @@
     <h2>What This Room Taught Me</h2>
   </div>
 
-  <p>The Mr. Robot room is a masterclass in <em>chaining</em>. No single step here is catastrophic in isolation — the real damage is each vulnerability unlocking the next. Robots.txt disclosure leads to a credential wordlist. WordPress admin access enables code execution. A misconfigured SUID turns a low-privilege shell into root.</p>
+  <p>The Mr. Robot room is a masterclass in <em>chaining</em>. No single step here is catastrophic in isolation - the real damage is each vulnerability unlocking the next. Robots.txt disclosure leads to a credential wordlist. WordPress admin access enables code execution. A misconfigured SUID turns a low-privilege shell into root.</p>
 
   <p>In a real-world context, any one of these issues would be a finding on a report. Together, they represent full system compromise from zero. This is why defence-in-depth matters: when you rely on a single control, you're one step away from an attacker who already bypassed it.</p>
 
-  <p>The two things I'll carry forward from this room: <strong>always deduplicate wordlists before brute-forcing</strong> (patience pays), and <strong>check GTFOBins for every unusual SUID binary</strong> — the community has done the research, and the results are humbling.</p>
+  <p>The two things I'll carry forward from this room: <strong>always deduplicate wordlists before brute-forcing</strong> (patience pays), and <strong>check GTFOBins for every unusual SUID binary</strong> - the community has done the research, and the results are humbling.</p>
 
   <footer>
     <div>Leona Kokerai · Cybersecurity Portfolio · <span>TryHackMe Top 3%</span></div>

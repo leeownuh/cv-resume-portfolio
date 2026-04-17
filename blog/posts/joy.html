@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digitalworld.local: JOY — Walkthrough by Ownuh</title>
+<title>Digitalworld.local: JOY - Walkthrough by Ownuh</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300&display=swap');
 
@@ -383,11 +383,11 @@
 
   <!-- ══════════ HERO ══════════ -->
   <header class="hero">
-    <p class="hero-label">VulnHub CTF — Boot2Root Walkthrough</p>
+    <p class="hero-label">VulnHub CTF - Boot2Root Walkthrough</p>
     <h1>Digitalworld.local: <span>JOY</span></h1>
     <p class="tagline">
       "Every open port is a question. Every misconfiguration is an answer.<br>
-      <em>I design systems assuming they will be attacked — and make sure they survive.</em>"
+      <em>I design systems assuming they will be attacked - and make sure they survive.</em>"
     </p>
     <div class="hero-meta">
       <div>Author <span>Ownuh (Leona Kokerai)</span></div>
@@ -407,7 +407,7 @@
     <div class="method-card">
       <div class="method-num">02</div>
       <div class="method-title">Enumeration</div>
-      <div class="method-detail">Anonymous FTP — directory leak</div>
+      <div class="method-detail">Anonymous FTP - directory leak</div>
     </div>
     <div class="method-card">
       <div class="method-num">03</div>
@@ -436,16 +436,16 @@
     </div>
 
     <p class="prose">
-      First thing I do on any target — map the surface. I'm not rushing toward exploitation; 
+      First thing I do on any target - map the surface. I'm not rushing toward exploitation; 
       I want a picture of what this machine is exposing before I touch anything.
       My mindset here: <strong>every open port is a decision someone made</strong>. 
-      Port 21 with anonymous login is not an accident — it's a gift.
+      Port 21 with anonymous login is not an accident - it's a gift.
     </p>
 
     <div class="terminal">
       <div class="terminal-bar">
         <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-        nmap — aggressive scan
+        nmap - aggressive scan
       </div>
       <div class="terminal-body">
         <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">nmap -A 192.168.1.104</span></div>
@@ -467,16 +467,16 @@
 
     <div class="insight">
       <div class="insight-label">⚡ Attacker Thinking</div>
-      With this many ports open, the attack surface is wide — but not all surfaces are equal. 
+      With this many ports open, the attack surface is wide - but not all surfaces are equal. 
       I'm immediately drawn to FTP on 21. Anonymous login is enabled, which means someone 
       configured this deliberately, or forgot to lock it down. Either way, I can read the 
       filesystem without credentials. That changes everything.
     </div>
 
     <div class="findings">
-      <span class="tag tag-open">PORT 21 — ANON LOGIN</span>
-      <span class="tag tag-open">PORT 80 — HTTP</span>
-      <span class="tag tag-open">PORT 22 — SSH</span>
+      <span class="tag tag-open">PORT 21 - ANON LOGIN</span>
+      <span class="tag tag-open">PORT 80 - HTTP</span>
+      <span class="tag tag-open">PORT 22 - SSH</span>
       <span class="tag tag-vuln">PROFTPD 1.3.5 IDENTIFIED</span>
     </div>
   </section>
@@ -491,16 +491,16 @@
     </div>
 
     <p class="prose">
-      Anonymous FTP access means I can browse the exposed filesystem — no credentials required.
+      Anonymous FTP access means I can browse the exposed filesystem - no credentials required.
       The layout immediately tells a story: <strong>/download</strong> is read-only, 
-      <strong>/upload</strong> is read-write. This asymmetry matters — it will become a 
+      <strong>/upload</strong> is read-write. This asymmetry matters - it will become a 
       pivot point later in the escalation chain.
     </p>
 
     <div class="terminal">
       <div class="terminal-bar">
         <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-        ftp — anonymous enumeration
+        ftp - anonymous enumeration
       </div>
       <div class="terminal-body">
         <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">ftp 192.168.1.104</span></div>
@@ -521,7 +521,7 @@
     </div>
 
     <p class="prose">
-      The file named <strong>directory</strong> is interesting. Not a script, not a binary — 
+      The file named <strong>directory</strong> is interesting. Not a script, not a binary - 
       just a plain text listing of the server's filesystem structure. Someone left a map.
       Reading it carefully, I find a reference to <em>Patrick's home directory</em> and a 
       file called <strong>version_control</strong>. That name is suspicious. Version control 
@@ -532,7 +532,7 @@
       <div class="insight-label">⚡ Attacker Thinking</div>
       I can't read <code>/home/patrick/version_control</code> directly from FTP since it's 
       outside the FTP root. But here's where I get creative: ProFTPD 1.3.5 supports 
-      <strong>SITE CPFR / SITE CPTO</strong> — server-side file copy commands. 
+      <strong>SITE CPFR / SITE CPTO</strong> - server-side file copy commands. 
       If I can copy Patrick's file into <code>/home/ftp/upload/</code> (which I can write to), 
       I can retrieve it via FTP. The server becomes my exfiltration tool against itself.
     </div>
@@ -540,7 +540,7 @@
     <div class="terminal">
       <div class="terminal-bar">
         <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-        telnet → ProFTPD SITE CPFR/CPTO — server-side file copy
+        telnet → ProFTPD SITE CPFR/CPTO - server-side file copy
       </div>
       <div class="terminal-body">
         <div><span class="prompt">ownuh@kali:~$</span> <span class="cmd">telnet 192.168.1.104 21</span></div>
@@ -557,7 +557,7 @@
     <p class="prose">
       Now I retrieve the copied file via FTP. The <strong>version_control</strong> file 
       reveals two critical pieces of intelligence: the exact ProFTPD version running, 
-      and the webroot path — <em>/var/www/tryingharderisjoy</em>. 
+      and the webroot path - <em>/var/www/tryingharderisjoy</em>. 
       That webroot path is my entry point for the exploit stage.
     </p>
 
@@ -580,7 +580,7 @@
 
     <p class="prose">
       ProFTPD 1.3.5 with mod_copy enabled is a well-documented vulnerability. 
-      The <strong>mod_copy module</strong> allows unauthenticated file copy operations —
+      The <strong>mod_copy module</strong> allows unauthenticated file copy operations  - 
       meaning I can write a PHP webshell anywhere the FTP user has access to, including 
       the webroot. Combined with the webroot path I extracted, this is a clean path to RCE.
     </p>
@@ -593,7 +593,7 @@
     <div class="terminal">
       <div class="terminal-bar">
         <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-        metasploit — proftpd_modcopy_exec
+        metasploit - proftpd_modcopy_exec
       </div>
       <div class="terminal-body">
         <div><span class="prompt">msf6&gt;</span> <span class="cmd">use exploit/unix/ftp/proftpd_modcopy_exec</span></div>
@@ -613,7 +613,7 @@
     </div>
 
     <p class="prose">
-      Shell as <strong>www-data</strong>. First thing I do is upgrade to a proper TTY — 
+      Shell as <strong>www-data</strong>. First thing I do is upgrade to a proper TTY - 
       raw shells are painful to work in and easy to lose.
     </p>
 
@@ -636,14 +636,14 @@
     <div class="insight">
       <div class="insight-label">⚡ Attacker Thinking</div>
       Credentials in plaintext inside an OSSEC directory is a notable finding. In a real 
-      engagement, this file path would be flagged immediately — OSSEC is a HIDS 
+      engagement, this file path would be flagged immediately - OSSEC is a HIDS 
       (Host-based Intrusion Detection System), so storing credentials inside it is 
       deeply ironic. We now have Patrick's password. Rather than using root directly, 
       I want to understand the privilege escalation surface first.
     </div>
 
     <div class="findings">
-      <span class="tag tag-win">SHELL OBTAINED — www-data</span>
+      <span class="tag tag-win">SHELL OBTAINED - www-data</span>
       <span class="tag tag-vuln">CREDENTIALS IN PLAINTEXT</span>
       <span class="tag tag-win">PATRICK'S PASSWORD KNOWN</span>
     </div>
@@ -660,7 +660,7 @@
 
     <p class="prose">
       I switch to Patrick and immediately check his <code>sudo</code> rights. 
-      This is always my first post-access check — sudo misconfigurations are one of the 
+      This is always my first post-access check - sudo misconfigurations are one of the 
       most common and most exploitable PrivEsc paths on Linux systems.
     </p>
 
@@ -682,9 +682,9 @@
     </div>
 
     <p class="prose">
-      Patrick can execute <code>/home/patrick/script/test</code> as root — no password required. 
+      Patrick can execute <code>/home/patrick/script/test</code> as root - no password required. 
       The script itself does nothing useful. But here's the critical question I ask: 
-      <strong>can I replace it?</strong>
+      <strong>can I replace it - </strong>
     </p>
 
     <div class="terminal">
@@ -697,7 +697,7 @@
         <div class="output">drwxr-xr-x  2 root root  4096 script/</div>
         <div class="output">-rwxr-xr-x  1 root root    22 test</div>
         <div>&nbsp;</div>
-        <div class="highlight">Directory owned by root — no direct write access.</div>
+        <div class="highlight">Directory owned by root - no direct write access.</div>
       </div>
     </div>
 
@@ -706,7 +706,7 @@
       Direct replacement is blocked. But I already know the FTP service allows 
       <strong>authenticated SITE CPFR/CPTO operations</strong>. Since the FTP server 
       runs with elevated privileges, I can use it to copy files anywhere on the 
-      filesystem — including into Patrick's script directory. 
+      filesystem - including into Patrick's script directory. 
       The FTP service becomes my privilege escalation primitive.
     </p>
 
@@ -737,7 +737,7 @@
     <div class="insight">
       <div class="insight-label">⚡ Attacker Thinking</div>
       This is the elegant part: I didn't need a kernel exploit or a 0-day. 
-      I leveraged the same misconfiguration twice — once to read files, once to write them. 
+      I leveraged the same misconfiguration twice - once to read files, once to write them. 
       The attacker's principle: <strong>find the one broken primitive and chain it 
       as far as it will take you.</strong> Here, SITE CPFR/CPTO was that primitive.
     </div>
@@ -782,18 +782,18 @@
     <p class="prose">
       This box teaches one important lesson clearly: <strong>a single misconfiguration, 
       chained creatively, can compromise an entire system.</strong> The ProFTPD mod_copy 
-      misconfiguration wasn't exploited once — it was the thread that ran through every 
+      misconfiguration wasn't exploited once - it was the thread that ran through every 
       phase: enumeration, lateral file access, exploitation, and privilege escalation.
     </p>
 
     <table class="kv-table">
       <tr>
         <td>Misconfiguration #1</td>
-        <td>Anonymous FTP — exposed filesystem readable without credentials</td>
+        <td>Anonymous FTP - exposed filesystem readable without credentials</td>
       </tr>
       <tr>
         <td>Misconfiguration #2</td>
-        <td>SITE CPFR/CPTO — unauthenticated server-side file copy (mod_copy)</td>
+        <td>SITE CPFR/CPTO - unauthenticated server-side file copy (mod_copy)</td>
       </tr>
       <tr>
         <td>Misconfiguration #3</td>
@@ -821,7 +821,7 @@
   <!-- ══════════ FOOTER ══════════ -->
   <footer class="footer">
     <div>
-      <div class="footer-sig">OWNUH — Leona Kokerai</div>
+      <div class="footer-sig">OWNUH - Leona Kokerai</div>
       <div class="footer-tagline">Find me before they find you.</div>
     </div>
     <div style="text-align:right;">

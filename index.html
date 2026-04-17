@@ -82,10 +82,10 @@
     .btn-primary:hover{background:var(--white);transform:translateY(-2px)}
     .btn-outline{border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;padding:.9rem 2rem;border-radius:6px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem}
     .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-    .hero-visual{position:relative}
-    .hero-avatar-frame{width:100%;max-width:420px;aspect-ratio:3/4;margin:0 auto;background:linear-gradient(135deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:flex-end;justify-content:center}
+    .hero-visual{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 clamp(14px,3vw,54px)}
+    .hero-avatar-frame{width:100%;max-width:420px;aspect-ratio:3/4;margin:0 auto;background:linear-gradient(135deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
     .hero-avatar-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.08) 0%,rgba(124,58,237,.08) 100%)}
-    .avatar-svg-art{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;position:relative}
+    .avatar-svg-art{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 34px 34px;position:relative;text-align:center}
     .avatar-photo-ring{width:176px;height:176px;border-radius:50%;position:relative;margin-bottom:1.5rem;display:grid;place-items:center;box-shadow:0 0 60px rgba(0,212,255,.3),0 0 120px rgba(124,58,237,.2)}
     .avatar-photo-ring::before{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--accent),var(--accent2)) border-box;animation:rotateBorder 4s linear infinite}
     .avatar-photo-ring::after{content:'';position:absolute;inset:12px;border-radius:50%;border:1px solid rgba(255,255,255,.08);pointer-events:none;z-index:2}
@@ -94,13 +94,14 @@
     .avatar-photo-ring.avatar-photo-missing .avatar-photo{display:none}
     .avatar-photo-ring.avatar-photo-missing .avatar-photo-fallback{display:flex}
     @keyframes rotateBorder{to{transform:rotate(360deg)}}
-    .avatar-name-tag{text-align:center}
+    .avatar-name-tag{display:flex;flex-direction:column;align-items:center;gap:.3rem;text-align:center}
     .avatar-name-tag h3{font-family:'Syne',sans-serif;font-weight:700;color:var(--white);font-size:1.3rem}
     .avatar-name-tag p{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:2px;margin-top:.3rem}
+    .hero-avatar-frame .lang-tags{justify-content:center;margin-top:.6rem}
     .floating-badge{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.6rem 1rem;display:flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,.4);white-space:nowrap}
-    .floating-badge.b1{top:60px;right:-20px;animation:floatBadge 3s ease-in-out infinite}
-    .floating-badge.b2{bottom:120px;left:-20px;animation:floatBadge 3s ease-in-out infinite 1s}
-    .floating-badge.b3{top:200px;right:-30px;animation:floatBadge 3s ease-in-out infinite .5s}
+    .floating-badge.b1{top:56px;right:0;transform:translateX(18%);animation:floatBadge 3s ease-in-out infinite}
+    .floating-badge.b2{bottom:124px;left:0;transform:translateX(-18%);animation:floatBadge 3s ease-in-out infinite 1s}
+    .floating-badge.b3{top:196px;right:0;transform:translateX(24%);animation:floatBadge 3s ease-in-out infinite .5s}
     .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);flex-shrink:0}
     .badge-dot.gold{background:var(--gold)}
     .badge-dot.purple{background:var(--accent2)}
@@ -154,7 +155,7 @@
     .tl-org{font-size:.9rem;color:var(--accent);margin-bottom:.8rem}
     .tl-bullets{list-style:none}
     .tl-bullets li{font-size:.88rem;color:var(--muted);line-height:1.7;padding-left:1rem;position:relative;margin-bottom:.3rem}
-    .tl-bullets li::before{content:'—';position:absolute;left:0;color:var(--accent);font-size:.7rem}
+    .tl-bullets li::before{content:'-';position:absolute;left:0;color:var(--accent);font-size:.7rem}
     #projects{background:var(--surface)}
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;margin-top:3rem}
     .project-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all .3s;position:relative;overflow:hidden}
@@ -231,8 +232,9 @@
       .hero-grid{grid-template-columns:1fr;gap:3rem}
       .hero-visual{order:-1}
       .hero-avatar-frame{max-width:280px}
-      .floating-badge.b1,.floating-badge.b3{right:-10px}
-      .floating-badge.b2{left:-10px}
+      .floating-badge.b1{right:0;transform:translateX(10%)}
+      .floating-badge.b3{right:0;transform:translateX(14%)}
+      .floating-badge.b2{left:0;transform:translateX(-10%)}
       #about .about-grid{grid-template-columns:1fr;gap:3rem}
       .blog-shell{grid-template-columns:1fr}
       .blog-panel{position:static}
@@ -253,7 +255,7 @@
   <div class="pre-tag">Initializing Portfolio</div>
   <div class="pre-name">Leona <span>Kokerai</span></div>
   <div class="pre-bar-wrap"><div class="pre-bar"></div></div>
-  <div class="pre-tag">Cybersecurity Specialist · 2026</div>
+  <div class="pre-tag">Cybersecurity  Engineer · 2026</div>
 </div>
 
 <nav id="navbar">
@@ -280,16 +282,14 @@
         <div class="available-dot"></div>
         Available for work · Open to relocation
       </div>
-      <div class="hero-eyebrow">Cybersecurity Specialist · Class of 2026</div>
+      <div class="hero-eyebrow">Cybersecurity  Engineer · Class of 2026</div>
       <h1 class="hero-name">Leona<br><span class="line2">Kokerai</span></h1>
       <div class="hero-roles">
-        <span class="hero-role-tag">SOC Analyst T1</span>
+        <span class="hero-role-tag">Cybrsecurity Engineer</span>
+        <span class="hero-role-tag">DevSecOps Engineer</span>
         <span class="hero-role-tag">Jr. Penetration Tester</span>
-        <span class="hero-role-tag">Cybersecurity Analyst</span>
         <span class="hero-role-tag">DFIR Analyst</span>
-        <span class="hero-role-tag">Security Engineer I</span>
       </div>
-      <p class="hero-desc"><strong>Top 3% globally on TryHackMe.</strong> Real black-box penetration test on a live production system. 9.22 CGPA &middot; First Class. Multiple industry certifications. I don't just study cybersecurity &mdash; I practise it.</p>
       <div class="hero-actions">
         <a href="#projects" class="btn-primary"><i class="fa-solid fa-shield-halved"></i> View Projects</a>
         <a href="mailto:leonakokerai@outlook.com" class="btn-outline"><i class="fa-solid fa-envelope"></i> Get In Touch</a>
@@ -316,16 +316,24 @@
           <div class="avatar-photo-ring avatar-photo-missing">
             <img class="avatar-photo" src="images/profile-photo.jpg" alt="Portrait of Leona Kokerai" onload="this.parentElement.classList.remove('avatar-photo-missing')" onerror="this.parentElement.classList.add('avatar-photo-missing')"/>
             <div class="avatar-photo-fallback" aria-hidden="true">LK</div>
-          </div>
+          </div>xsqsasw
           <div class="avatar-name-tag">
             <h3>Leona Kokerai</h3>
             <p>Find me before they find you.</p>
+            
+
           </div>
+          <div class="lang-tags">
+            <span class="lang-tag">🇬🇧 English</span><span class="lang-tag">🇿🇦 Afrikaans</span>
+            <span class="lang-tag">🇩🇪 German</span><span class="lang-tag">🇿🇼 Ndebele</span>
+            <span class="lang-tag">🇿🇼 Shona</span><span class="lang-tag">🇿🇦 sePedi</span>
+          </div>
+
         </div>
       </div>
       <div class="floating-badge b1"><div class="badge-dot"></div><span>TryHackMe · Top 3%</span></div>
-      <div class="floating-badge b3"><div class="badge-dot purple"></div><span>LPU · Top 1% in Cohort</span></div>
       <div class="floating-badge b2"><div class="badge-dot gold"></div><span>9.22 CGPA · First Class</span></div>
+      <div class="floating-badge b3"><div class="badge-dot purple"></div><span>LPU · Top 1% in Cohort</span></div>
     </div>
   </div>
   <div class="scroll-cue"><div class="scroll-line"></div><span class="scroll-text">scroll</span></div>
@@ -351,28 +359,22 @@
     <div>
       <div class="section-label">About Me</div>
       <div class="section-divider"></div>
-      <div class="about-quote">"You can't protect what you don't understand &mdash; and I make it my business to understand everything."</div>
-      <div class="about-body">
-        <p>I'm a <strong> BSc (Hons) Computer Science – Cyber Security</strong> graduate from Lovely Professional University, graduated in 2026 with an 9.22 CGPA (First Class), concurrently completing the Google Cybersecurity Professional Certificate.</p>
-        <p>I didn't just learn cybersecurity in a classroom. I ran a <strong>real black-box penetration test on a live production system</strong>, uncovered 12 critical vulnerabilities, and delivered a professional pentest report with remediation adopted by the client. I built and secured AWS infrastructure handling <strong>5,000+ concurrent users</strong>. I ranked <strong>Top 3% globally on TryHackMe</strong>.</p>
-        <p>Zimbabwean, raised across southern Africa and India, fluent in six languages. I bring rare technical depth combined with cross-cultural communication and an uncompromising drive to grow.</p>
-      </div>
-      <div class="lang-tags">
-        <span class="lang-tag">🇬🇧 English</span><span class="lang-tag">🇿🇦 Afrikaans</span>
-        <span class="lang-tag">🇩🇪 German</span><span class="lang-tag">🇿🇼 Ndebele</span>
-        <span class="lang-tag">🇿🇼 Shona</span><span class="lang-tag">🇿🇦 sePedi</span>
-      </div>
+       <div class="about-body">
+       <p>Zimbabwean, raised across southern Africa and India, fluent in six languages. I bring rare technical depth combined with cross-cultural communication and an uncompromising drive to grow.</p>
+    <p>I didn't just learn cybersecurity in a classroom. I ran a <strong>real black-box penetration test on a live production system</strong>, uncovered 12 critical vulnerabilities, and delivered a professional pentest report with remediation adopted by the client. I built and secured AWS infrastructure handling <strong>1000+ concurrent users</strong>.</p>
+          </div>
+             
     </div>
     <div class="about-facts">
-      <div class="fact-item"><div class="fact-label">Degree</div><div class="fact-val">BSc Hons CS – Cyber Security</div></div>
-      <div class="fact-item"><div class="fact-label">University</div><div class="fact-val">Lovely Professional University, India</div></div>
-      <div class="fact-item"><div class="fact-label">CGPA</div><div class="fact-val">9.22 / 10 · First Class</div></div>
+
+      <div class="fact-item"><div class="fact-label">Degree</div><div class="fact-val">BSc Hons CS – Cyber Security (First Class)</div></div>
       <div class="fact-item"><div class="fact-label">Cohort Rank</div><div class="fact-val">Top 1% – Cybersecurity Cohort</div></div>
       <div class="fact-item"><div class="fact-label">TryHackMe</div><div class="fact-val">Top 3% Global</div></div>
       <div class="fact-item"><div class="fact-label">Nationality</div><div class="fact-val">Zimbabwean · Open to Relocation</div></div>
       <div class="fact-item"><div class="fact-label">GitHub</div><div class="fact-val"><a href="https://github.com/leeownuh" style="color:var(--accent);text-decoration:none">github.com/leeownuh</a></div></div>
       <div class="fact-item"><div class="fact-label">Portfolio Live</div><div class="fact-val"><a href="https://leeownuh.github.io/cv-resume-portfolio/" style="color:var(--accent);text-decoration:none">leeownuh.github.io</a></div></div>
-    </div>
+    
+           </div>
   </div>
 </section>
 
@@ -418,7 +420,7 @@
     <div class="timeline fade-up">
       <div class="timeline-item">
         <div class="tl-meta">2024 – Present</div>
-        <div class="tl-title">Full-Stack Engineer & Cybersecurity Specialist</div>
+        <div class="tl-title">Full-Stack Engineer & Cybersecurity  Engineer</div>
         <div class="tl-org">The African Apostolic Church GBEAAA · Volunteer</div>
         <ul class="tl-bullets">
           <li>Developing full-stack React/Node.js provincial management platform</li>
@@ -432,7 +434,7 @@
         <div class="tl-org">Eduflex Academy</div>
         <ul class="tl-bullets">
           <li>Built entire school IT infrastructure (systems, network, software)</li>
-          <li>Conducted authorised black-box pentest &mdash; 12 critical vulnerabilities identified</li>
+          <li>Conducted authorised black-box pentest - 12 critical vulnerabilities identified</li>
           <li>Maintained secure digital records dashboard for 50+ users</li>
           <li>Drove 35% revenue growth in 3 months via digital transformation</li>
         </ul>
@@ -478,20 +480,20 @@
   <div class="projects-grid">
     <div class="project-card highlight fade-up">
       <div class="project-num">01 &middot; SECURITY PRODUCT &middot; PHP + AI</div>
-      <div class="project-title">Ownuh SAIPS &mdash; Secure Authentication & Intrusion Prevention System</div>
+      <div class="project-title">Ownuh SAIPS - Secure Authentication & Intrusion Prevention System</div>
       <div class="project-desc">Full-stack PHP/MySQL security administration platform built to feel like a compact SOC product, not just a login demo. Combines MFA, password recovery, audit logging, IPS controls, incident tracking, AI executive reporting, HTML and PDF exports, live alert emails, and a recruiter-safe Demo vs Production flow for polished public walkthroughs.</div>
       <div class="project-tags"><span class="project-tag g">Latest Build</span><span class="project-tag">PHP</span><span class="project-tag">MySQL</span><span class="project-tag">Redis Controls</span><span class="project-tag">MFA</span><span class="project-tag">IPS</span><span class="project-tag">AI Reporting</span><span class="project-tag">HTML/PDF Export</span></div>
     </div>
     <div class="project-card highlight fade-up">
       <div class="project-num">02 &middot; PENTEST &middot; LIVE PRODUCTION SYSTEM</div>
-      <div class="project-title">Eduflex Academy &mdash; Authorised Black Box Penetration Test</div>
+      <div class="project-title">Eduflex Academy - Authorised Black Box Penetration Test</div>
       <div class="project-desc">Authorised black-box pentest against a live Laravel/MySQL application serving 50+ active users. Zero prior knowledge. Identified 12 critical vulnerabilities across authentication, session management, and access control - posing direct risk to student and staff PII. Full professional report mapped to OWASP Top 10 and NIST SP 800-115. Remediation adopted by client.</div>
       <div class="project-tags"><span class="project-tag g">Live Production</span><span class="project-tag g">12 Critical Vulnerabilities</span><span class="project-tag">Burp Suite</span><span class="project-tag">Nmap</span><span class="project-tag">SQLMap</span><span class="project-tag">OWASP Top 10</span><span class="project-tag">NIST 800-115</span></div>
     </div>
     <div class="project-card fade-up">
       <div class="project-num">03 &middot; FULL-STACK + CLOUD</div>
-      <div class="project-title">GBEAAA Church &mdash; Secure Platform & AWS Infrastructure</div>
-      <div class="project-desc">Full-stack React/Node.js provincial management platform with NIST CSF-aligned incident response planning. AWS infrastructure optimised to handle 5,000+ concurrent users.</div>
+      <div class="project-title">GBEAAA Church - Secure Platform & AWS Infrastructure</div>
+      <div class="project-desc">Full-stack React/Node.js provincial management platform with NIST CSF-aligned incident response planning. AWS infrastructure optimised to handle 1,000+ concurrent users.</div>
       <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Node.js</span><span class="project-tag">AWS</span><span class="project-tag">NIST CSF</span><span class="project-tag">Incident Response</span></div>
     </div>
     <div class="project-card fade-up">
@@ -514,7 +516,7 @@
     </div>
     <div class="project-card fade-up">
       <div class="project-num">07 &middot; TRYHACKME &middot; TOP 3% GLOBAL</div>
-      <div class="project-title">TryHackMe &mdash; 5 Completed Learning Paths</div>
+      <div class="project-title">TryHackMe - 5 Completed Learning Paths</div>
       <div class="project-desc">Completed Pre-Security, Cyber Security 101, Jr. Penetration Tester, Web Fundamentals, and Web Application Pentesting. Ranked globally Top 3% from millions of practitioners worldwide.</div>
       <div class="project-tags"><span class="project-tag">Web App Pentesting</span><span class="project-tag">Jr. Pentest Path</span><span class="project-tag">SOC Fundamentals</span><span class="project-tag">Enumeration</span></div>
     </div>
@@ -559,7 +561,7 @@
     <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Cybersecurity Analyst Job Simulation</div><div class="cert-issuer">Tata · Forage</div></div></div>
     <div class="cert-item"><div class="cert-check"><i class="fa-solid fa-check"></i></div><div><div class="cert-name">Introduction to Ethical Hacking</div><div class="cert-issuer">CompTIA</div></div></div>
     <div class="cert-item"><div class="cert-check" style="background:rgba(245,158,11,.1);color:var(--gold)"><i class="fa-solid fa-graduation-cap"></i></div><div><div class="cert-name">BSc Hons CS – Cyber Security <br> (CompTIA tie-up) A+, Network+, Linux+, Security+, Pentest+</div><div class="cert-issuer">Lovely Professional University · 2026</div></div></div>
-    <div class="cert-item"><div class="cert-check" style="background:rgba(16,185,129,.1);color:var(--accent3)"><i class="fa-solid fa-flag"></i></div><div><div class="cert-name">TryHackMe &mdash; 5 Completed Learning Paths</div><div class="cert-issuer">Jr. Pentest &middot; Web App Pentesting &middot; CS 101 &middot; and more</div></div></div>
+    <div class="cert-item"><div class="cert-check" style="background:rgba(16,185,129,.1);color:var(--accent3)"><i class="fa-solid fa-flag"></i></div><div><div class="cert-name">TryHackMe - 5 Completed Learning Paths</div><div class="cert-issuer">Jr. Pentest &middot; Web App Pentesting &middot; CS 101 &middot; and more</div></div></div>
   </div>
 </section>
 
@@ -570,9 +572,9 @@
   <div class="section-divider"></div>
   <div class="achievements-grid fade-up">
     <div class="achievement-item"><div class="ach-icon">🥇</div><div><div class="ach-text">Top 1% of the Cybersecurity cohort at Lovely Professional University</div><div class="ach-year">2023 – 2026</div></div></div>
-    <div class="achievement-item"><div class="ach-icon">&#127919;</div><div><div class="ach-text">Ranked Top 3% globally on TryHackMe &mdash; millions of practitioners worldwide</div><div class="ach-year">2025</div></div></div>
-    <div class="achievement-item"><div class="ach-icon">&#128161;</div><div><div class="ach-text">12 critical vulnerabilities identified on a live production system &mdash; real pentest, not a simulation</div><div class="ach-year">2024 &ndash; 2025</div></div></div>
-    <div class="achievement-item"><div class="ach-icon">&#127942;</div><div><div class="ach-text">Best Information Technology Student &mdash; Ho&#235;rskool Ben Viljoen</div><div class="ach-year">2020 &ndash; 2022</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">&#127919;</div><div><div class="ach-text">Ranked Top 3% globally on TryHackMe - millions of practitioners worldwide</div><div class="ach-year">2025</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">&#128161;</div><div><div class="ach-text">12 critical vulnerabilities identified on a live production system - real pentest, not a simulation</div><div class="ach-year">2024 &ndash; 2025</div></div></div>
+    <div class="achievement-item"><div class="ach-icon">&#127942;</div><div><div class="ach-text">Best Information Technology Student - Ho&#235;rskool Ben Viljoen</div><div class="ach-year">2020 &ndash; 2022</div></div></div>
     <div class="achievement-item"><div class="ach-icon">📈</div><div><div class="ach-text">35% revenue growth in 3 months at Eduflex Academy through digital transformation</div><div class="ach-year">2024</div></div></div>
     <div class="achievement-item"><div class="ach-icon">🌍</div><div><div class="ach-text">Grade 11 Sekhukhune District Top 100 · Academic Top 10%</div><div class="ach-year">2021</div></div></div>
   </div>
@@ -625,7 +627,9 @@
   bindCursorTargets();
   // NAV SHADOW
   window.addEventListener('scroll',()=>{
-    document.getElementById('navbar').style.borderBottomColor=window.scrollY>50?'rgba(0,212,255,.15)':'var(--border)';
+    const navbar = document.getElementById('navbar');
+    if (!navbar) return;
+    navbar.style.borderBottomColor = window.scrollY > 50 ? 'rgba(0,212,255,.15)' : 'var(--border)';
   });
 </script>
 </body>

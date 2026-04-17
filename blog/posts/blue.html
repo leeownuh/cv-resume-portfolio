@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blue — EternalBlue MS17-010 Walkthrough by Ownuh</title>
+<title>Blue - EternalBlue MS17-010 Walkthrough by Ownuh</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Inconsolata:wght@300;400;600;700&display=swap');
 
@@ -670,7 +670,7 @@ main {
     <div class="hero-desc">
       This box teaches one of the most important lessons in offensive security:
       <strong>the gap between "patched" and "deployed"</strong> is where attackers live.
-      MS17-010 was fixed in March 2017. Blue ran unpatched. That's not a vulnerability —
+      MS17-010 was fixed in March 2017. Blue ran unpatched. That's not a vulnerability  - 
       that's a policy failure. I exploit the box. Then I explain what a defender would do.
     </div>
     <div class="meta-strip">
@@ -734,17 +734,17 @@ main {
     </div>
 
     <p class="prose">
-      Windows target. My first scan is always broad — I want everything, not just the 
+      Windows target. My first scan is always broad - I want everything, not just the 
       top 1000 ports. Then I layer a targeted SMB scan on top because port 445 tells me 
       far more than a generic <code>-sV</code> ever will. The key question I'm asking 
-      from the first scan: <strong>is SMBv1 running?</strong> Because if it is, on Windows 7, 
+      from the first scan: <strong>is SMBv1 running - </strong> Because if it is, on Windows 7, 
       the next question almost answers itself.
     </p>
 
     <div class="terminal">
       <div class="t-bar">
         <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
-        phase 1 — initial port scan
+        phase 1 - initial port scan
       </div>
       <div class="t-body">
         <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">nmap -sV -sC -T4 -p- 10.10.10.40 -oN blue_full.txt</span></div>
@@ -773,7 +773,7 @@ main {
       <p>
         <strong>Windows 7 SP1 + port 445 open + SMB signing disabled.</strong> 
         That combination is a red flag stack. SMBv1 on Windows 7 is the exact 
-        environment MS17-010 targets. I don't assume — I confirm. 
+        environment MS17-010 targets. I don't assume - I confirm. 
         But the direction is already clear. Now I run the vulnerability confirmation scan 
         before touching Metasploit so I have evidence, not just instinct.
       </p>
@@ -782,7 +782,7 @@ main {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
-        phase 2 — targeted smb vuln check
+        phase 2 - targeted smb vuln check
       </div>
       <div class="t-body">
         <div><span class="pr">ownuh@kali:~$</span> <span class="cmd">nmap -p 445 --script smb-vuln-ms17-010 10.10.10.40</span></div>
@@ -800,7 +800,7 @@ main {
     </div>
 
     <div class="tags">
-      <span class="tag t-open">PORT 445 — SMBv1 ACTIVE</span>
+      <span class="tag t-open">PORT 445 - SMBv1 ACTIVE</span>
       <span class="tag t-vuln">CVE-2017-0143 CONFIRMED</span>
       <span class="tag t-info">WINDOWS 7 SP1 x64</span>
       <span class="tag t-info">SMB SIGNING DISABLED</span>
@@ -834,14 +834,14 @@ main {
       requests over SMB, an integer overflow allows an attacker to write beyond the bounds 
       of a kernel pool buffer. Because the Windows kernel heap uses predictable pool 
       allocations, a carefully crafted payload can overwrite function pointers in adjacent 
-      memory — leading to <strong>arbitrary kernel-mode code execution</strong> without 
+      memory - leading to <strong>arbitrary kernel-mode code execution</strong> without 
       any authentication.
     </p>
 
     <p class="prose">
       This was originally developed by the NSA as part of their offensive toolkit, code-named 
       <em>EternalBlue</em>. It was leaked by the Shadow Brokers in April 2017. Within weeks, 
-      it was weaponised into <strong>WannaCry</strong> — which hit 230,000 machines across 
+      it was weaponised into <strong>WannaCry</strong> - which hit 230,000 machines across 
       150 countries in 24 hours. Microsoft had patched it in March 2017. Blue is running 
       without that patch.
     </p>
@@ -850,7 +850,7 @@ main {
       <tr><th>Property</th><th>Value</th></tr>
       <tr><td>CVE</td><td>CVE-2017-0143, CVE-2017-0144, CVE-2017-0145</td></tr>
       <tr><td>Patch Bulletin</td><td>MS17-010 (March 14, 2017)</td></tr>
-      <tr><td>Attack Vector</td><td>Network — no authentication required</td></tr>
+      <tr><td>Attack Vector</td><td>Network - no authentication required</td></tr>
       <tr><td>Access Gained</td><td>NT AUTHORITY\SYSTEM (kernel-level)</td></tr>
       <tr><td>Affected Protocol</td><td>SMBv1 (TCP 445)</td></tr>
       <tr><td>Real-World Damage</td><td>WannaCry, NotPetya, ~$10B+ global losses</td></tr>
@@ -860,7 +860,7 @@ main {
       <div class="defender-label">🛡 Blue Team Context</div>
       <p>
         This exploit bypasses all authentication. A firewall rule blocking inbound TCP/445 
-        from external networks prevents remote exploitation — but EternalBlue is often 
+        from external networks prevents remote exploitation - but EternalBlue is often 
         used <em>laterally</em> inside networks, where firewalls don't help. 
         The real fix is patching, disabling SMBv1, and network segmentation.
       </p>
@@ -872,7 +872,7 @@ main {
   <section class="section">
     <div class="sec-head">
       <div class="sec-num">03</div>
-      <div class="sec-title">Exploitation — Two Paths</div>
+      <div class="sec-title">Exploitation - Two Paths</div>
       <div class="sec-rule"></div>
     </div>
 
@@ -890,14 +890,14 @@ main {
       </div>
       <div class="approach-card">
         <div class="approach-badge badge-man">Approach B</div>
-        <div class="approach-title">Manual — AutoBlue Script</div>
+        <div class="approach-title">Manual - AutoBlue Script</div>
         <div class="approach-body">Community Python exploit using msfvenom shellcode. Requires understanding payload staging, listener setup, and architecture matching. Deeper learning value.</div>
       </div>
     </div>
 
     <!-- APPROACH A -->
     <p class="prose" style="margin-top:32px;">
-      <strong>Approach A — Metasploit</strong>
+      <strong>Approach A - Metasploit</strong>
     </p>
 
     <p class="prose">
@@ -908,7 +908,7 @@ main {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
-        metasploit — auxiliary scanner confirmation
+        metasploit - auxiliary scanner confirmation
       </div>
       <div class="t-body">
         <div><span class="pr">msf6&gt;</span> <span class="cmd">use auxiliary/scanner/smb/smb_ms17_010</span></div>
@@ -924,7 +924,7 @@ main {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
-        metasploit — ms17_010_eternalblue exploit
+        metasploit - ms17_010_eternalblue exploit
       </div>
       <div class="t-body">
         <div><span class="pr">msf6&gt;</span> <span class="cmd">use exploit/windows/smb/ms17_010_eternalblue</span></div>
@@ -954,18 +954,18 @@ main {
     <div class="insight">
       <div class="insight-label">⚡ Attacker Thinking</div>
       <p>
-        <strong>NT AUTHORITY\SYSTEM — no privilege escalation needed.</strong> 
+        <strong>NT AUTHORITY\SYSTEM - no privilege escalation needed.</strong> 
         EternalBlue gives you the highest privilege level on a Windows machine 
         directly, because the exploit runs in kernel space. There's no 
         "user → admin → SYSTEM" ladder to climb here. You come in at the top. 
-        This is exactly why this vulnerability was classified as CVSS 9.3 — 
+        This is exactly why this vulnerability was classified as CVSS 9.3 - 
         network access, no auth, full system compromise.
       </p>
     </div>
 
     <!-- APPROACH B -->
     <p class="prose" style="margin-top:40px;">
-      <strong>Approach B — Manual Exploit (AutoBlue)</strong>
+      <strong>Approach B - Manual Exploit (AutoBlue)</strong>
     </p>
 
     <p class="prose">
@@ -978,7 +978,7 @@ main {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
-        manual path — setup + shellcode generation
+        manual path - setup + shellcode generation
       </div>
       <div class="t-body">
         <div class="out"># Step 1: clone AutoBlue</div>
@@ -1001,7 +1001,7 @@ main {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
-        manual path — fire exploit + catch shell
+        manual path - fire exploit + catch shell
       </div>
       <div class="t-body">
         <div class="out"># In a new terminal tab</div>
@@ -1026,8 +1026,8 @@ main {
     </div>
 
     <div class="tags">
-      <span class="tag t-win">SYSTEM SHELL — APPROACH A</span>
-      <span class="tag t-win">SYSTEM SHELL — APPROACH B</span>
+      <span class="tag t-win">SYSTEM SHELL - APPROACH A</span>
+      <span class="tag t-win">SYSTEM SHELL - APPROACH B</span>
       <span class="tag t-info">KERNEL-LEVEL ACCESS</span>
       <span class="tag t-info">NO PRIVESC REQUIRED</span>
     </div>
@@ -1043,7 +1043,7 @@ main {
     </div>
 
     <p class="prose">
-      SYSTEM shell means the box is owned — but good post-exploitation is where you 
+      SYSTEM shell means the box is owned - but good post-exploitation is where you 
       demonstrate thoroughness. I extract hashes, capture flags, and enumerate the 
       machine to understand what a real attacker would do next.
     </p>
@@ -1051,7 +1051,7 @@ main {
     <div class="terminal">
       <div class="t-bar">
         <div class="t-bar-dots"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div></div>
-        meterpreter — sysinfo + hashdump + flags
+        meterpreter - sysinfo + hashdump + flags
       </div>
       <div class="t-body">
         <div><span class="pr">meterpreter&gt;</span> <span class="cmd">sysinfo</span></div>
@@ -1100,14 +1100,14 @@ main {
       <div class="postex-card">
         <div class="postex-icon">🎯</div>
         <div class="postex-title">Flags Captured</div>
-        <div class="postex-body">Both user.txt (haris desktop) and root.txt (Administrator desktop) retrieved. Box complete — but the real takeaway is the vulnerability class, not the flags.</div>
+        <div class="postex-body">Both user.txt (haris desktop) and root.txt (Administrator desktop) retrieved. Box complete - but the real takeaway is the vulnerability class, not the flags.</div>
       </div>
     </div>
 
     <div class="insight">
       <div class="insight-label">⚡ Attacker Thinking</div>
       <p>
-        In a real penetration test, the hashdump is critical — not just for this machine, but 
+        In a real penetration test, the hashdump is critical - not just for this machine, but 
         for the network. Organisations often reuse passwords across systems. One unpatched 
         Windows 7 endpoint with SMBv1 active can cascade into a full domain compromise via 
         <strong>pass-the-hash and lateral movement</strong>. 
@@ -1126,7 +1126,7 @@ main {
     </div>
 
     <p class="prose">
-      Blue isn't technically complex. The lesson here isn't about exploit development — 
+      Blue isn't technically complex. The lesson here isn't about exploit development - 
       it's about <strong>what unpatched infrastructure actually costs</strong>. 
       Every organisation running Windows 7 without MS17-010 applied after March 2017 
       is running this exact scenario. Real attackers know this. 
@@ -1138,7 +1138,7 @@ main {
         <div class="lesson-label ll-red">Root Cause</div>
         <div class="lesson-content">
           <strong>SMBv1 not disabled. MS17-010 patch not applied.</strong>
-          Windows 7 reached end-of-life in January 2020 — no further patches.
+          Windows 7 reached end-of-life in January 2020 - no further patches.
           Any Windows 7 system still internet-accessible is a ticking clock.
         </div>
       </div>
@@ -1151,7 +1151,7 @@ main {
         </div>
       </div>
       <div class="lesson-cell">
-        <div class="lesson-label ll-green">Defensive Fix #1 — Patch</div>
+        <div class="lesson-label ll-green">Defensive Fix #1 - Patch</div>
         <div class="lesson-content">
           Apply MS17-010. Patch Tuesday exists for a reason.
           <strong>Patch management policy with SLAs</strong> for critical vulns 
@@ -1159,7 +1159,7 @@ main {
         </div>
       </div>
       <div class="lesson-cell">
-        <div class="lesson-label ll-green">Defensive Fix #2 — Disable SMBv1</div>
+        <div class="lesson-label ll-green">Defensive Fix #2 - Disable SMBv1</div>
         <div class="lesson-content">
           SMBv1 is a 30-year-old protocol with no modern justification.
           Disable it via Group Policy: <code>Set-SmbServerConfiguration -EnableSMB1Protocol $false</code>.
@@ -1167,15 +1167,15 @@ main {
         </div>
       </div>
       <div class="lesson-cell">
-        <div class="lesson-label ll-blue">Defensive Fix #3 — Segment Networks</div>
+        <div class="lesson-label ll-blue">Defensive Fix #3 - Segment Networks</div>
         <div class="lesson-content">
           Block inbound TCP/445 and TCP/139 at perimeter <em>and</em> internal 
-          segment boundaries. EternalBlue spreads laterally — segmentation limits 
+          segment boundaries. EternalBlue spreads laterally - segmentation limits 
           blast radius even if one machine is compromised.
         </div>
       </div>
       <div class="lesson-cell">
-        <div class="lesson-label ll-blue">Defensive Fix #4 — Detect It</div>
+        <div class="lesson-label ll-blue">Defensive Fix #4 - Detect It</div>
         <div class="lesson-content">
           <strong>IDS/IPS signatures exist for EternalBlue.</strong>
           Suricata rule: <code>ET EXPLOIT MS17-010 EternalBlue</code>.
@@ -1188,10 +1188,10 @@ main {
         <div class="lesson-content">
           <strong>EternalBlue was patched in 2017. WannaCry hit in May 2017. NotPetya hit in June 2017.</strong>
           Two months. Hundreds of thousands of machines still unpatched. 
-          This is not a technical failure — it is an <em>operational security failure</em>. 
+          This is not a technical failure - it is an <em>operational security failure</em>. 
           Organisations don't get compromised because they lack talent. 
           They get compromised because patching is unglamorous and unscheduled downtime 
-          feels more painful than theoretical risk — until the ransomware hits at 3am on a Friday.
+          feels more painful than theoretical risk - until the ransomware hits at 3am on a Friday.
           This box is a reminder of what that gap costs.
         </div>
       </div>
@@ -1203,14 +1203,14 @@ main {
 <!-- ══════ FOOTER ══════ -->
 <footer class="site-footer">
   <div>
-    <div class="sig">OWNUH — Leona Kokerai</div>
+    <div class="sig">OWNUH - Leona Kokerai</div>
     <div class="sig-sub">Find me before they find you.</div>
   </div>
   <div class="footer-links">
     <div>github.com/leeownuh</div>
     <div>leeownuh.github.io/cv-resume-portfolio</div>
     <div style="margin-top:8px; color: var(--blue); font-size:10px; letter-spacing:1px;">
-      I design systems assuming they will be attacked — and make sure they survive.
+      I design systems assuming they will be attacked - and make sure they survive.
     </div>
   </div>
 </footer>
