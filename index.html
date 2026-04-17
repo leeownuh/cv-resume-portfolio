@@ -83,7 +83,7 @@
     .btn-outline{border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;padding:.9rem 2rem;border-radius:6px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem}
     .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
     .hero-visual{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 clamp(14px,3vw,54px)}
-    .hero-avatar-frame{width:100%;max-width:420px;aspect-ratio:3/4;margin:0 auto;background:linear-gradient(135deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+    .hero-avatar-frame{width:100%;max-width:420px;aspect-ratio:3/4;margin:0 auto;background:linear-gradient(135deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:16px;overflow:visible;position:relative;display:flex;align-items:center;justify-content:center}
     .hero-avatar-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.08) 0%,rgba(124,58,237,.08) 100%)}
     .avatar-svg-art{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 34px 34px;position:relative;text-align:center;isolation:isolate}
     .avatar-svg-art > svg{z-index:0}
@@ -101,9 +101,9 @@
     .hero-avatar-frame .lang-tags{justify-content:center;margin-top:.6rem}
     .floating-badge{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.6rem 1rem;display:flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,.4);white-space:nowrap;z-index:1;pointer-events:none}
     .avatar-svg-art > :not(svg):not(.floating-badge){position:relative;z-index:2}
-    .floating-badge.b1{top:56px;right:0;transform:translateX(18%);animation:floatBadge 3s ease-in-out infinite}
-    .floating-badge.b2{bottom:124px;left:0;transform:translateX(-18%);animation:floatBadge 3s ease-in-out infinite 1s}
-    .floating-badge.b3{top:196px;right:0;transform:translateX(24%);animation:floatBadge 3s ease-in-out infinite .5s}
+    .floating-badge.b1{top:56px;right:0;transform:translateX(65%);animation:floatBadge 3s ease-in-out infinite}
+    .floating-badge.b2{bottom:124px;left:0;transform:translateX(-65%);animation:floatBadge 3s ease-in-out infinite 1s}
+    .floating-badge.b3{top:196px;right:0;transform:translateX(70%);animation:floatBadge 3s ease-in-out infinite .5s}
     .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);flex-shrink:0}
     .badge-dot.gold{background:var(--gold)}
     .badge-dot.purple{background:var(--accent2)}
@@ -234,9 +234,7 @@
       .hero-grid{grid-template-columns:1fr;gap:3rem}
       .hero-visual{order:-1}
       .hero-avatar-frame{max-width:280px}
-      .floating-badge.b1{right:0;transform:translateX(10%)}
-      .floating-badge.b3{right:0;transform:translateX(14%)}
-      .floating-badge.b2{left:0;transform:translateX(-10%)}
+      .floating-badge{position:static;transform:none;animation:none;margin-top:.6rem;white-space:normal;max-width:100%;text-align:left}
       #about .about-grid{grid-template-columns:1fr;gap:3rem}
       .blog-shell{grid-template-columns:1fr}
       .blog-panel{position:static}
